@@ -1,3 +1,25 @@
+set :db_ip, ""
+# EC2のIPアドレス、ユーザ名、サーバのロール、使用するsshキーのPATHを記述
+server "#{fetch :db_ip}",
+  user: "ec2-user",
+  roles: %w{db},
+  ssh_options: {
+    keys: %w(~/my-key-3.pem),
+    auth_methods: %w(publickey)
+    # forward_agent: false,
+  }
+
+
+# デプロイ対象のサーバにログインする際のsshキーのPATHを記述
+
+#  set :ssh_options, {
+#    keys: %w(/home/user_name/.ssh/id_rsa),
+#    forward_agent: false,
+#    auth_methods: %w(password)
+#  }
+
+
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
