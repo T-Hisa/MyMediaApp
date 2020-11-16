@@ -1,6 +1,6 @@
 FROM ruby:2.7.1
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update -qq && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     build-essential \
     nodejs
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
