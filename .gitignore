@@ -34,3 +34,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# EC2用インスタンスキーはpush対象にしない。
+my-key-6.pem
