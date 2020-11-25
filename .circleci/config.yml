@@ -1,19 +1,32 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@1.1.2
+# orbs:
+#   ruby: circleci/ruby@1.1.2
 jobs:
   test:
-    executor: ruby/default
+    # executor: ruby/default
+    docker:
+      - image: circleci/ruby:2.7.1
     steps:
       - checkout
-      - ruby/install-deps
-      - ruby/rspec-test
+      # - ruby/install-deps
+      - run:
+          name: install Gemfile
+          command: bundle update && bundle install
+      - run:
+          name: sample-test
+          command: bundle exec rspec ./spec/
+      # - ruby/rspec-test
       # - ruby/rubocop-check
   deploy:
-    executor: ruby/default
+    # executor: ruby/default
     steps:
+      docker:
+        - image: circleci/ruby:2.7.1
       - checkout
-      - ruby/install-deps
+      # - ruby/install-deps
+      # - run:
+      #     name: install Gemfile
+      #     command: bundle update && bundle install
       - run:
           name: deploy by capistrano
           command: bundle exec cap production deploy
