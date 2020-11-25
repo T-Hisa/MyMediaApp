@@ -1,4 +1,4 @@
-FROM ruby:2.7.2
+FROM ruby:2.7.1
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y \
     build-essential \
