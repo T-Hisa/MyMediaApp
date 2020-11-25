@@ -3,20 +3,14 @@ executors:
   ruby-executor:
     docker:
       - image: circleci/ruby:2.7.1
-commands:
-  installGems:
-    description: "command bundle update & bundle install"
-    steps:
-      - run: bundle update && bundle install
 jobs:
   test:
     executor: ruby-executor
     steps:
       - checkout
-      - installGems
-      # - run:
-      #     name: install Gemfile
-      #     command: bundle update && bundle install
+      - run:
+          name: install Gemfile
+          command: bundle update && bundle install
       - run:
           name: sample-test
           command: bundle exec rspec ./spec/
@@ -24,10 +18,9 @@ jobs:
     executor: ruby-executor
     steps:
       - checkout
-      - installGems
-      # - run:
-      #     name: install Gemfile
-      #     command: bundle update && bundle install
+      - run:
+          name: install Gemfile
+          command: bundle update && bundle install
       - run:
           name: deploy by capistrano
           command: bundle exec cap production deploy
