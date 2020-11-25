@@ -22,7 +22,7 @@ set :pty, true
 # append :linked_files, "config/database.yml"
 # ln -s deploy_to/shared/config/database.yml と同義?
 # set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
-# set :linked_files, %w[ config/database.yml ]
+set :linked_files, %w[ config/database.yml config/master.key]
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
