@@ -26,8 +26,9 @@ task :deploy => :upload do
   applicationName = fetch :application
   on roles(:app) do
     # upload! database_path, shared_path
-    execute "cd #{applicationName}"
-    execute "docker-compose -f docker-compose_pro.yml run web"
+    # execute ""
+    execute "service docker start"
+    execute "cd #{applicationName}/current; docker-compose run web"
     # execute "cd #{upload_path}; tar -zxvf #{archive_name}"
     # execute "docker build -t rails-image ."
     # execute "docker run -p 3000:3000 --name production-rails rails-image puma -C config/puma.rb -e production"
