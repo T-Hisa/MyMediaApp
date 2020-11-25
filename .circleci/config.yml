@@ -1,29 +1,30 @@
 version: 2.1
-# orbs:
-#   ruby: circleci/ruby@1.1.2
-jobs:
-  test:
-    # executor: ruby/default
+executors:
+  ruby-executor:
     docker:
       - image: circleci/ruby:2.7.1
+commands:
+  installGems:
+    description: "command bundle update & bundle install"
+    steps:
+      - run: bundle update && bundle install
+jobs:
+  test:
+    executor: ruby-executor
     steps:
       - checkout
-      # - ruby/install-deps
-      - run:
-          name: install Gemfile
-          command: bundle update && bundle install
+      - installGems
+      # - run:
+      #     name: install Gemfile
+      #     command: bundle update && bundle install
       - run:
           name: sample-test
           command: bundle exec rspec ./spec/
-      # - ruby/rspec-test
-      # - ruby/rubocop-check
   deploy:
-    # executor: ruby/default
-    docker:
-      - image: circleci/ruby:2.7.1
+    executor: ruby-executor
     steps:
       - checkout
-      # - ruby/install-deps
+      - installGems
       # - run:
       #     name: install Gemfile
       #     command: bundle update && bundle install
