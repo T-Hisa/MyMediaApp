@@ -1,15 +1,30 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
-
+  ruby: circleci/ruby@1.1.2
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.7.1
+  test:
     executor: ruby/default
     steps:
       - checkout
+      - ruby/install-deps
+      - ruby/rspec-test
+      # - ruby/rubocop-check
+  deploy:
+    executor: ruby/default
+    steps:
+      - checkout
+      - ruby/install-deps
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: deploy by capistrano
+          command: bundle exec cap production deploy
+workflows:
+  version: 2.1
+  test-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
