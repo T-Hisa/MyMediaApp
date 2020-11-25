@@ -19,9 +19,9 @@ jobs:
       # - ruby/rubocop-check
   deploy:
     # executor: ruby/default
+    docker:
+      - image: circleci/ruby:2.7.1
     steps:
-      docker:
-        - image: circleci/ruby:2.7.1
       - checkout
       # - ruby/install-deps
       # - run:
