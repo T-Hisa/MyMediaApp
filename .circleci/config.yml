@@ -9,9 +9,9 @@ jobs:
     steps:
       - checkout
       # - ruby/install-deps
-      - run:
-          name: install Gemfile
-          command: bundle update && bundle install
+      # - run:
+      #     name: install Gemfile
+      #     command: bundle update && bundle install
       - run:
           name: sample-test
           command: bundle exec rspec ./spec/
