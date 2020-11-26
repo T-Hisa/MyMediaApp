@@ -10,7 +10,7 @@ server "#{fetch :ip}",
     # forward_agent: false,
   }
 
-task :deploy => :upload do
+task :deploy do
   appName = fetch :application
   on roles(:app) do
     upload! "config/master.key", "/home/ec2-user/#{appName}/current/config/"
@@ -23,13 +23,12 @@ task :deploy => :upload do
       execute "docker stop test-rails-container"
       execute "docker rm test-rails-container"
     end
-    # （ファイル構成が変わったなどで）イメージから削除したい場合は、このコメントアウトを外す。
     image = capture "docker image ls -q test-rails-image"
     if !image.empty?
       execute "docker rmi test-rails-image"
     end
 
-    execute "cd #{appName}/current; docker-compose -f docker-compose_pro.yml run --name test-rails-container -d -p 3000:3000 web"
+    execute "cd #{appName}/current; docker-compose -f docker-compose_pro.yml up -d"
   end
 end
 
