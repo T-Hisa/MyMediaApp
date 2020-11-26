@@ -15,6 +15,9 @@ task :deploy => :upload do
   on roles(:app) do
     upload! "config/master.key", "/home/ec2-user/#{appName}/current/config/"
     upload! "config/database.yml", "/home/ec2-user/#{appName}/current/config/"
+
+    execute "sudo service docker start"
+
     container = capture "docker container ls -q -f name=test-rails-container"
     if !container.empty?
       execute "docker stop test-rails-container"
