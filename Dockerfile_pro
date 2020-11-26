@@ -9,5 +9,5 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 WORKDIR /myFirstPortfolio
 COPY Gemfile /myFirstPortfolio/Gemfile
 COPY Gemfile.lock /myFirstPortfolio/Gemfile.lock
-RUN bundle install
+RUN bundle install --without test development
 COPY . /myFirstPortfolio
