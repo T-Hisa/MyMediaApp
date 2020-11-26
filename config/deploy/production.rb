@@ -10,28 +10,26 @@ server "#{fetch :ip}",
     # forward_agent: false,
   }
 
-task :upload do
-  applicationName = fetch :application
-  shared_path = "/home/ec2-user/#{applicationName}/shared"
-
-  on roles(:app) do
-    upload! "config/database.yml", "#{shared_path}/config"
-    upload! "config/master.key", "#{shared_path}/config"
-    # upload! "config/"
-  end
-end
-
-
 task :deploy => :upload do
-  applicationName = fetch :application
+  appName = fetch :application
   on roles(:app) do
-    # upload! database_path, shared_path
-    # execute ""
-    execute "service docker start"
-    execute "cd #{applicationName}/current; docker-compose run web"
-    # execute "cd #{upload_path}; tar -zxvf #{archive_name}"
-    # execute "docker build -t rails-image ."
-    # execute "docker run -p 3000:3000 --name production-rails rails-image puma -C config/puma.rb -e production"
+    upload! "config/master.key", "/home/ec2-user/#{appName}/current/config/"
+    upload! "config/database.yml", "/home/ec2-user/#{appName}/current/config/"
+
+    execute "sudo service docker start"
+
+    container = capture "docker container ls -q -f name=test-rails-container"
+    if !container.empty?
+      execute "docker stop test-rails-container"
+      execute "docker rm test-rails-container"
+    end
+    # （ファイル構成が変わったなどで）イメージから削除したい場合は、このコメントアウトを外す。
+    image = capture "docker image ls -q test-rails-image"
+    if !image.empty?
+      execute "docker rmi test-rails-image"
+    end
+
+    execute "cd #{appName}/current; docker-compose -f docker-compose_pro.yml run --name test-rails-container -d -p 3000:3000 web"
   end
 end
 
