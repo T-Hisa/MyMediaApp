@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_pro
+    image: test-rails-image
+    container_name: test-rails-container
     command: bundle exec rails s -p 3000 -b '0.0.0.0' -e production
     ports:
       - 3000:3000
