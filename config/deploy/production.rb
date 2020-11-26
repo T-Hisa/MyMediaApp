@@ -11,14 +11,14 @@ server "#{fetch :ip}",
   }
 
 task :deploy do
-  appName = fetch :application
+  release_path = fetch :release_path
   on roles(:app) do
-    upload! "config/master.key", "/home/ec2-user/#{appName}/current/config/"
-    upload! "config/database.yml", "/home/ec2-user/#{appName}/current/config/"
+    # upload! "config/master.key", "#{release_path}/config/"
+    # upload! "config/database.yml", "#{release_path}/config/"
 
     execute "sudo service docker start"
 
-    container = capture "docker container ls -q -f name=test-rails-container"
+    container = capture "docker container ls -a -q -f name=test-rails-container"
     if !container.empty?
       execute "docker stop test-rails-container"
       execute "docker rm test-rails-container"
@@ -28,7 +28,7 @@ task :deploy do
       execute "docker rmi test-rails-image"
     end
 
-    execute "cd #{appName}/current; docker-compose -f docker-compose_pro.yml up -d"
+    execute "docker-compose -f #{release_path}/docker-compose_pro.yml up -d"
   end
 end
 
