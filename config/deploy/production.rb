@@ -14,7 +14,6 @@ task :deploy do
   release_path = fetch :release_path
   on roles(:app) do
     upload! "config/master.key", "#{release_path}/config/"
-    upload! "config/database.yml", "#{release_path}/config/"
 
     execute "sudo service docker start"
 

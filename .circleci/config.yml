@@ -22,7 +22,7 @@ jobs:
           name: install Gemfile
           command: bundle update && bundle install
       - run:
-          name: deploy by capistrano
+          name: deploy app by capistrano
           command: bundle exec cap production deploy
 workflows:
   version: 2.1
