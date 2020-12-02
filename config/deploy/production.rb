@@ -23,7 +23,6 @@ task :deploy => :upload do
   release_path = fetch :release_path
   on roles(:app) do
     # upload! "config/master.key", "#{release_path}/config/"
-    debug "debug3"
     execute "sudo service docker start"
 
     container = capture "docker container ls -a -q -f name=test-rails-container"
