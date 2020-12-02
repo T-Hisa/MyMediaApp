@@ -1,37 +1,15 @@
 version: 2.1
-executors:
-  ruby-executor:
-    docker:
-      - image: circleci/ruby:2.7.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
 jobs:
-  test:
-    executor: ruby-executor
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
     steps:
       - checkout
       - run:
-          name: install Gemfile
-          command: bundle update && bundle install
-      - run:
-          name: sample-test
-          command: bundle exec rspec ./spec/
-  deploy:
-    executor: ruby-executor
-    steps:
-      - checkout
-      - run:
-          name: install Gemfile
-          command: bundle update && bundle install
-      - run:
-          name: deploy app by capistrano
-          command: bundle exec cap production deploy
-workflows:
-  version: 2.1
-  test-deploy:
-    jobs:
-      - test
-      - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
