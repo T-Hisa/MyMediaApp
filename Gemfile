@@ -24,6 +24,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 gem 'bootstrap', '~> 4.1.1'
+gem 'i18n', '~> 1.8', '>= 1.8.5'
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

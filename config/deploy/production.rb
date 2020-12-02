@@ -10,11 +10,19 @@ server "#{fetch :ip}",
     # forward_agent: false,
   }
 
-task :deploy do
+task :upload do
+  shared_path = fetch :shared_path
+  on roles(:app) do
+    unless test "[ -f .env ]"
+      upload! ".env", "#{shared_path}"
+    end
+  end
+end
+
+task :deploy => :upload do
   release_path = fetch :release_path
   on roles(:app) do
-    upload! "config/master.key", "#{release_path}/config/"
-
+    # upload! "config/master.key", "#{release_path}/config/"
     execute "sudo service docker start"
 
     container = capture "docker container ls -a -q -f name=test-rails-container"
