@@ -40,3 +40,5 @@ yarn-debug.log*
 my-key-4.pem
 my-key-5.pem
 my-key-10.pem
+
+.env

@@ -254,6 +254,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.14, >= 3.14.1)
   capybara (>= 2.15)
+  i18n (~> 1.8, >= 1.8.5)
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
