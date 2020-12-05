@@ -1,10 +1,4 @@
-@import '~bootstrap/scss/bootstrap';
-@import 'toastr/build/toastr.min';
-
-@import 'news/index';
-@import 'shared/header';
-
-
+@import 'components';
 
 
 $lightgreen: lightgreen;
@@ -22,4 +16,8 @@ ul {
 
 .flex-display {
   display: flex;
+}
+
+.text-center {
+  text-align: center;
 }
