@@ -1,5 +1,21 @@
 $light-green: #1abc9c;
 
-.test {
-  color: $light-green;
+.top-margin-sm {
+  margin-top: 10px;
+}
+.flex-news-index {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0px;
+  
+  >li {
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+}
+
+.card > .news-no-image {
+  width: 100%;
+  height: 180px;
+  padding: 0 30px;
 }

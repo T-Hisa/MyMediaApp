@@ -1,2 +1,99 @@
+<div class="d-flex align-items-center top-margin-sm">
+  <h2>記事一覧</h2>
+  <div class="ml-auto boards__linkBox">
+
+  </div>
+</div>
+<% if flash[:notice] %>
+  <div class="alert alert-danger"><%= flash[:notice] %></div>
+<% end %>
+
+<ul class="flex-display flex-news-index">
+  <!-- <% @news.each do |news| %> -->
+    <li>
+      <div class="card" style="width: 18rem;">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+        <div class="card-body">
+          <h5 class="card-title">aaa<%= news.title %></h5>
+          <p class="card-text">aaa<%= news.content %></p>
+        </div>
+      </div>
+    </li>
+  <!-- <% end %> -->
+  <li>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag 'noimage.jpg', class: 'news-no-image' %>
+      <div class="card-body">
+        <h5 class="card-title">Dummy-news</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag 'noimage.jpg', class: 'news-no-image' %>
+      <div class="card-body">
+        <h5 class="card-title">Dummy-news</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag 'noimage.jpg', class: 'news-no-image' %>
+      <div class="card-body">
+        <h5 class="card-title">Dummy-news</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag 'noimage.jpg', class: 'news-no-image' %>
+      <div class="card-body">
+        <h5 class="card-title">Dummy-news</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="card" style="width: 18rem;">
+      <%= image_tag 'noimage.jpg', class: 'news-no-image' %>
+      <div class="card-body">
+        <h5 class="card-title">Dummy-news</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<!-- <table class="table table-hover boards__table">
+  
+  <thead class="thead-light">
+    <tr>
+      <th>タイトル</th>
+      <th>画像</th>
+      <th>作成者</th>
+      <th>作成(更新)日時</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @news.each do |news| %>
+      <tr>
+        <td><%= news.title %></td>
+        <td><td><%= news.image %></td></td>
+        <td><%= news.user %></td>
+        <td><%= news.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> -->
 
 <!-- <%= javascript_pack_tag 'news/index', 'data-turbolinks-track': 'reload' %> -->

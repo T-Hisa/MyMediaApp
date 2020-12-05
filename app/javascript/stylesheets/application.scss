@@ -6,9 +6,20 @@
 
 
 
+
 $lightgreen: lightgreen;
 $blue: #0000ff;
 $deepskyblue: #00bfff;
 $brown: #a52a2a;
 $red: red;
 $yellow: yellow;
+
+
+
+ul {
+  list-style: none;
+}
+
+.flex-display {
+  display: flex;
+}
