@@ -19,7 +19,7 @@ task :upload do
   end
 end
 
-task :deploy => :upload do
+task deploy: :upload do
   release_path = fetch :release_path
   on roles(:app) do
     # upload! "config/master.key", "#{release_path}/config/"
