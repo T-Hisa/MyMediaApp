@@ -18,7 +18,7 @@ class ArticlesController< ApplicationController
     article = Article.new(article_params)
     if article.save
       flash[:success] = "#{article.title} の記事を作成しました"
-      redirect_to article_index_path
+      redirect_to article
     else
       flash[:error] = "#{article.errors.full_messages}"
       redirect_back fallback_location: root_path, flash: {
