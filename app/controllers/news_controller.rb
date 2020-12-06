@@ -4,6 +4,7 @@ class NewsController < ApplicationController
   end
 
   def show
+    @news = News.find(params[:id])
   end
 
   def new
@@ -19,6 +20,10 @@ class NewsController < ApplicationController
       redirect_back(fallback_location: root_path)
       flash[:error] = "#{news.errors.full_messages}"
     end
+  end
+
+  def edit
+    @news = News.find(params[:id])
   end
 
   def destroy
