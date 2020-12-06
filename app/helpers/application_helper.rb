@@ -2,6 +2,7 @@ module ApplicationHelper
 
   def header_link(text, path)
     class_name = 'nav-link'
+    # 開かれているページがリンク先の対象ページの場合、class名に追加する。
     class_name << ' disable active' if current_page?(path)
     
     link_to text, path, class: class_name
