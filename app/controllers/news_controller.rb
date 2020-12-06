@@ -10,7 +10,7 @@ class NewsController < ApplicationController
   end
 
   def new
-    @news = News
+    @news = News.new(flash[:news])
   end
 
   def create
@@ -20,21 +20,29 @@ class NewsController < ApplicationController
       redirect_to news_index_path
     else
       flash[:error] = "#{news.errors.full_messages}"
-      redirect_back(fallback_location: root_path)
+      redirect_back fallback_location: root_path, flash: {
+        error: "#{news.errors.full_messages}",
+        news: news_params
+      }
     end
   end
 
   def edit
+    @news.attributes = flash[:news] if flash[:news]
   end
 
   def destroy
   end
 
   def update
-    if News.update(news_params)
-      redirect_to @news
+    if @news.update(news_params)
+      redirect_to @news, flash: { success: "#{@news.title} の記事を更新しました" }
     else
-      redirect_back(fallback_location: root_path)
+      redirect_back fallback_location: root_path, flash: {
+        error: "#{@news.errors.full_messages}",
+        news: news_params
+      }
+      # render :edit, flash: { error: "#{@news.errors.full_messages}" }
     end
   end
 
