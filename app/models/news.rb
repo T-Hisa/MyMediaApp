@@ -12,4 +12,7 @@
 #  updated_at :datetime         not null
 #
 class News < ApplicationRecord
+  validates :title, presence: true, length: { maximum: 10 }
+  validates :summary, presence: true, length: { maximum: 50 }
+  validates :content, presence: true
 end
