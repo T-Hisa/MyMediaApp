@@ -10,6 +10,7 @@ class NewsController < ApplicationController
   end
 
   def new
+    # 新規作成(create)が失敗したとき、空白にならないように、初期値を flash[:news] で渡す。
     @news = News.new(flash[:news])
   end
 
