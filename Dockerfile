@@ -12,9 +12,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 # RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 #     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
 #     apt-get install -y yarn
-RUN yarn add jquery bootstrap popper.js toastr
 COPY ./my-key-10.pem ./my-key-4.pem ./my-key-5.pem /root/.ssh/
 WORKDIR /myFirstPortfolio
+RUN yarn add jquery bootstrap popper.js toastr
 COPY Gemfile /myFirstPortfolio/Gemfile
 COPY Gemfile.lock /myFirstPortfolio/Gemfile.lock
 RUN bundle install

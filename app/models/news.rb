@@ -6,6 +6,7 @@
 #  content    :text(65535)      not null
 #  isDeleted  :boolean          default(FALSE)
 #  isDraft    :boolean          default(FALSE)
+#  summary    :string(255)
 #  title      :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

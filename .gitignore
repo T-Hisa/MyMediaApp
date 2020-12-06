@@ -42,4 +42,4 @@ my-key-5.pem
 my-key-10.pem
 
 .env
-app/views/.DS_Store
+*.DS_Store
