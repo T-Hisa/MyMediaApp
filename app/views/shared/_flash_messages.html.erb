@@ -8,4 +8,9 @@
   <script>
     toastr["success"]("<%= flash[:success] %>");
   </script>
+<% elsif flash[:info].present? %>
+  <script>
+    toastr["info"]("<%= flash[:info] %>");
+  </script>
+  
 <% end %>

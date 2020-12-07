@@ -5,8 +5,7 @@
   <%= form_with model: @user do |f| %>
     <%= auto_email_field f %>
     <%= auto_name_field f %>
-    <%= auto_password_field f, :password %>
-    <%= auto_password_field f, :password_confirmation %>
+    <%= auto_password_field f %>
     <%= f.submit 'ユーザ登録', class: 'btn btn-primary' %>
   <% end %>
 </div>

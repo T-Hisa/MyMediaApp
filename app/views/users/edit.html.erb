@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center top-margin-sm">
+  <h1 class="">ユーザー情報編集</h1>
+</div>
+<div class="container bg-light">
+  <%= form_with model: @current_user, url: user_path(@current_user) do |f| %>
+    <%= auto_name_field f %>
+    <%= f.submit '更新', class: 'btn btn-primary user-edit-btn' %>
+    <%= link_to '戻る', mypage_path, class: 'btn btn-outline-dark user-edit-back-btn' %>
+  <% end %>
+</div>
