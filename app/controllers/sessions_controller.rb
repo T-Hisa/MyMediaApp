@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
-  def login
+  def create
+    
+    session[:user_id] = @user.id
   end
 
-  def logout
+  def destroy
   end
+
 end

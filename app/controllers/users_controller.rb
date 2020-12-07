@@ -7,13 +7,17 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      redirect_to root_path, flash: { "success": "ログインしました" }
+      session[:user_id] = user.id
+      redirect_to root_path, flash: { "success": "ようこそ#{user.name}さん" }
     else
-      redirect_to new_user_path, flash: {
+      redirect_back fallback_location: root_path, flash: {
         "error": user.errors.full_messages,
         "user_params": user_params
       }
     end
+  end
+
+  def login
   end
 
   private

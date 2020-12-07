@@ -10,5 +10,6 @@ module ApplicationHelper
 
   def error_text_include?(text)
     flash[:error].to_s.include?(text) if flash[:error].present?
+
   end
 end

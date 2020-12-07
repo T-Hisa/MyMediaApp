@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'login', to: 'users#login'
+  post 'login', to: 'sessions#create'
   root 'articles#index'
   resources :articles
   resources :users, only: %i[new create]
