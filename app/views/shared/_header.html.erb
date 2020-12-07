@@ -9,18 +9,30 @@
       <li class="nav-item">
         <%= header_link '記事一覧', articles_path %>
       </li>
-      <li class="nav-item">
-        <%= header_link '新規作成', new_article_path %>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ユーザ
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'サインアップ', new_user_path, class: "dropdown-item" %>
-          <%= link_to 'サインイン',  login_path, class: "dropdown-item" %>
-        </div>
-      </li>
+      <% if @current_user %>
+        <li class="nav-item">
+          <%= header_link '新規作成', new_article_path %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ユーザ
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'マイページ', new_user_path, class: "dropdown-item" %>
+            <%= link_to 'ログアウト',  login_path, class: "dropdown-item" %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ユーザ
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'サインアップ', new_user_path, class: "dropdown-item" %>
+            <%= link_to 'サインイン',  login_path, class: "dropdown-item" %>
+          </div>
+        </li>
+      <% end %>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
