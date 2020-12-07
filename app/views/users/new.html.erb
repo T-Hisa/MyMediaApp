@@ -1,21 +1,45 @@
-<h1>ユーザ登録</h1>
-<%= form_with model: @user do |f| %>
-  <div class="form-group">
-    <%= f.label :name, 'ユーザー名' %>
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :email, 'Eメール' %>
-    <%= f.email_field :email, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :password, 'パスワード' %>
-    <%= f.password_field :password, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :password_confirmation, 'パスワード（確認）' %>
-    <%= f.password_field :password_confirmation, class: 'form-control' %>
-  </div>
-
-  <%= f.submit '作成', class: 'btn btn-primary' %>
-<% end %>
+<div class="d-flex align-items-center top-margin-sm">
+  <h1 class="">ユーザ登録</h1>
+</div>
+<div class="container">
+  <%= form_with model: @user do |f| %>
+    <div class="form-group">
+      <% if error_text_include?("ユーザー") %>
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control border-danger' %>
+      <% else %>
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <% if error_text_include?("Eメール") %>
+        <%= f.label :email, 'Eメール' %>
+        <%= f.email_field :email, class: 'form-control border-danger' %>
+      <% else %>
+        <%= f.label :email, 'Eメール' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <% if error_text_include?("パスワード") %>
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control border-danger' %>
+      <% else %>
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      <% end %>
+    </div>
+    <div class="form-group">
+      <% if error_text_include?("が一致しません") %>
+        <%= f.label :password_confirmation, 'パスワード（確認）' %>
+        <%= f.password_field :password_confirmation, class: 'form-control border-danger' %>
+      <% else %>
+        <%= f.label :password_confirmation, 'パスワード（確認）' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <% end %>
+    </div>
+  
+    <%= f.submit '作成', class: 'btn btn-primary' %>
+  <% end %>
+</div>

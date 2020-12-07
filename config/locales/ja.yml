@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      article:
+        title: タイトル
+        content: 内容
+        summary: 要約
+        updated_ato: 更新日
+      user:
+        name: ユーザー名
+        email: Eメール
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        favorite_news: お気に入り

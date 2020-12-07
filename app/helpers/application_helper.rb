@@ -7,4 +7,8 @@ module ApplicationHelper
     
     link_to text, path, class: class_name
   end
+
+  def error_text_include?(text)
+    flash[:error].to_s.include?(text) if flash[:error].present?
+  end
 end

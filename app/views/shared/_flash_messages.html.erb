@@ -1,7 +1,9 @@
 <% if flash[:error].present? %>
-  <script>
-    toastr["error"]("<%= flash[:error] %>");
-  </script>
+  <% flash[:error].each do |error| %>
+    <script>
+      toastr["error"]("<%= error %>");
+    </script>
+  <% end %>
 <% elsif flash[:success].present? %>
   <script>
     toastr["success"]("<%= flash[:success] %>");

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def new
-    @user = User.new(user_params)
+    @user = User.new(flash[:user_params])
   end
 
   def create
@@ -10,9 +10,10 @@ class UsersController < ApplicationController
       redirect_to root_path, flash: { "success": "ログインしました" }
     else
       redirect_to new_user_path, flash: {
-        "error": "#{user.errors.full_messages}", 
+        "error": user.errors.full_messages,
         "user_params": user_params
       }
+    end
   end
 
   private
