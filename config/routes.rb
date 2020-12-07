@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'login', to: 'users#login'
   post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   root 'articles#index'
   resources :articles
   resources :users, only: %i[new create]
