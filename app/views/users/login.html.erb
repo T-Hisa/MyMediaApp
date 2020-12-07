@@ -3,7 +3,7 @@
 </div>
 <div class="container">
   <%= form_with scope: :session, url: login_path  do |f| %>
-    <%= email_field_with_default_value f %>
+    <%= auto_email_field f %>
     <%= auto_password_field f, :password %>
     <%= auto_password_field f, :password_confirmation %>
     <%= f.submit 'ログイン', class: 'btn btn-primary' %>
