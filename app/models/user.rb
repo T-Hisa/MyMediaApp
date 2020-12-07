@@ -23,7 +23,7 @@ class User < ApplicationRecord
     uniqueness: true,
     format: {
       with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
-      message: ': 正しい形式で入力してください'
+      message: 'を正しい形式で入力してください'
     }
 
   private

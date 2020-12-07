@@ -22,7 +22,7 @@ class ArticlesController< ApplicationController
     else
       flash[:error] = "#{article.errors.full_messages}"
       redirect_back fallback_location: root_path, flash: {
-        error: "#{article.errors.full_messages}",
+        error: article.errors.full_messages,
         article: article_params
       }
     end

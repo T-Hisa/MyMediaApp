@@ -37,7 +37,7 @@ module UsersHelper
     tag.div do
       2.times do |i|
         concat (tag.div class: 'form-group' do
-          label_text = i == 0 ? 'パスワ ード' : 'パスワード(確認)'
+          label_text = i == 0 ? 'パスワード' : 'パスワード(確認)'
           type = i == 0 ? :password : :password_confirmation
           class_name = 'form-control'
           class_name << ' border-danger' if error_text_include?(label_text)
@@ -50,7 +50,7 @@ module UsersHelper
 
   def auto_name_field(form)
     parent_class_name = 'form-group'
-    parent_class_name << ' user-edit-form' if current_page?(edit_user_path(@current_user))
+    parent_class_name << ' user-edit-form' if @current_user && current_page?(edit_user_path(@current_user))
     class_name = 'form-control'
     class_name << ' border-danger' if error_text_include?("ユーザー")
 

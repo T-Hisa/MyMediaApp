@@ -7,18 +7,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= header_link '記事一覧', articles_path %>
+        <%= header_link '記事一覧', articles_path, false %>
       </li>
       <% if @current_user %>
         <li class="nav-item">
-          <%= header_link '記事作成', new_article_path %>
+          <%= header_link '記事作成', new_article_path, false %>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             ユーザ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'マイページ', mypage_path, class: "dropdown-item" %>
+            <%= header_link 'マイページ', mypage_path, true %>
             <%= link_to 'ログアウト',  logout_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
