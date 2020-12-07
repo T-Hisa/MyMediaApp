@@ -22,6 +22,17 @@
   margin: 0 0 20px 20px;
 }
 
+.user-modal-button {
+
+}
+
+.modal-body-wrapper {
+  justify-content: center;
+  justify-content: space-around;;
+  width: 50%;
+  margin: 0 auto;
+}
+
 
 .user-edit-back-btn {
   float: right;
@@ -32,5 +43,4 @@
 .custom-dropdown.active {
   background: white;
   color: black;
-
 }

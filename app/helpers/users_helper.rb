@@ -47,19 +47,46 @@ module UsersHelper
       end
     end
   end
-
+  
   def auto_name_field(form)
     parent_class_name = 'form-group'
     parent_class_name << ' user-edit-form' if @current_user && current_page?(edit_user_path(@current_user))
     class_name = 'form-control'
     class_name << ' border-danger' if error_text_include?("ユーザー")
-
-    # default_value = @current_user.name if ? @current_user.present?
+    
     tag.div class: parent_class_name do
       concat form.label :name, 'ユーザー名'
       concat @current_user.present? ?
-        (form.text_field :name, value: @current_user.name, class: class_name) :
-        (form.text_field :name, class: class_name)
+      (form.text_field :name, value: @current_user.name, class: class_name, id: "name_field") :
+      (form.text_field :name, class: class_name)
+    end
+  end
+  
+  def auto_name_field_for_edit(form)
+    class_name = 'form-control'
+    class_name << ' border-danger' if error_text_include?("ユーザー")
+    
+    tag.div class: 'form-group user-edit-form' do
+      concat form.label :name, 'ユーザー名'
+      concat form.text_field :name, value: @current_user.name, class: class_name, id: "name"
+    end
+  end
+
+  def auto_password_field_for_edit(form)
+    tag.div do
+      2.times do |i|
+        concat (tag.div class: 'form-group' do
+
+          label_text, type, id_name = i == 0 ? 
+            ['パスワード', :password, 'password'] : ['パスワード(確認)', :password_confirmation, 'password_confirmation']
+          # type = i == 0 ? :password : :password_confirmation
+          # id_name = i == 0 ? 'password' : 'password_cofirmation'
+          class_name = 'form-control'
+          class_name << ' border-danger' if error_text_include?(label_text)
+          concat form.label type, label_text
+          concat form.password_field type, class: class_name, id: id_name
+        end)
+      end
     end
   end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   resources :articles
   get 'mypage', to: 'users#mypage'
+  patch 'update/password', to: 'users#password_update'
   resources :users, only: %i[new create edit update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

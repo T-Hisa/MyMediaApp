@@ -3,8 +3,72 @@
 </div>
 <div class="container bg-light">
   <%= form_with model: @current_user, url: user_path(@current_user) do |f| %>
-    <%= auto_name_field f %>
-    <%= f.submit '更新', class: 'btn btn-primary user-edit-btn' %>
+    <%= auto_name_field_for_edit f %>
+    <button type="button" class="btn btn-primary user-edit-btn" data-toggle="modal" data-target="#onlyNameModal">変更</button>
     <%= link_to '戻る', mypage_path, class: 'btn btn-outline-dark user-edit-back-btn' %>
   <% end %>
+  <%= form_with model: @current_user, url: update_password_path(@current_user) do |f| %>
+    <%= auto_password_field_for_edit f %>
+    <button type="button" class="btn btn-danger user-edit-btn" data-toggle="modal" data-target="#includePasswordModal">変更</button>
+  <% end %>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="onlyNameModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">ユーザ名のみ変更します。よろしいですか?</h5>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: @current_user, url: user_path(@current_user), class: 'flex-display modal-body-wrapper' do |f| %>
+          <%= f.hidden_field :name, id: "hidden_name_2" %>
+          <button type="button" class="btn btn-secondary user-modal-button" data-dismiss="modal">戻る</button>
+          <%= f.submit '更新', class: 'btn btn-primary user-modal-button' %>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="includePasswordModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">ユーザー名とパスワードを変更します。よろしいですか?</h5>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: @current_user, url: user_path(@current_user), class: 'flex-display modal-body-wrapper' do |f| %>
+          <%= f.hidden_field :name, id: "hidden_name_2" %>
+          <%= f.hidden_field :password, id: 'hidden_password' %>
+          <%= f.hidden_field :password_confirmation, id: 'hidden_password_confirmation' %>
+          <button type="button" class="btn btn-secondary user-modal-button" data-dismiss="modal">戻る</button>
+          <%= f.submit '更新', class: 'btn btn-primary user-modal-button' %>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var name_field = document.getElementById("name");
+  var hidden_name = document.getElementById("hidden_name");
+  var hidden_name_2 = document.getElementById("hidden_name_2");
+  name_field.onchange = (focus) => {
+    hidden_name.value = focus.target.value;
+    hidden_name_2.value = focus.target.value;
+  }
+  var password = document.getElementById('password');
+  var hidden_password = document.getElementById('hidden_password');
+  password.onchange = (focus) => {
+    hidden_password.value = focus.target.value;
+  }
+  var password_confirmation = document.getElementById('password_confirmation');
+  var hidden_password_confirmation = document.getElementById('hidden_password_confirmation');
+  password_confirmation.onchange = (focus) => {
+    hidden_password_confirmation.value = focus.target.value;
+  }
+</script>
