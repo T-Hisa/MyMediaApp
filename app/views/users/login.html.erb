@@ -2,35 +2,10 @@
   <h1 class="">ログイン</h1>
 </div>
 <div class="container">
-  <%= form_with scope: :session, method: :post, url: login_path  do |f| %>
-    <div class="form-group">
-      <% if error_text_include?("Eメール") %>
-        <%= f.label :email, 'Eメール' %>
-        <%= f.email_field :email, class: 'form-control border-danger' %>
-      <% else %>
-        <%= f.label :email, 'Eメール' %>
-        <%= f.email_field :email, class: 'form-control' %>
-      <% end %>
-    </div>
-    <div class="form-group">
-      <% if error_text_include?("パスワード") %>
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class: 'form-control border-danger' %>
-      <% else %>
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class: 'form-control' %>
-      <% end %>
-    </div>
-    <div class="form-group">
-      <% if error_text_include?("が一致しません") %>
-        <%= f.label :password_confirmation, 'パスワード（確認）' %>
-        <%= f.password_field :password_confirmation, class: 'form-control border-danger' %>
-      <% else %>
-        <%= f.label :password_confirmation, 'パスワード（確認）' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      <% end %>
-    </div>
-  
-    <%= f.submit '作成', class: 'btn btn-primary' %>
+  <%= form_with scope: :session, url: login_path  do |f| %>
+    <%= email_field_with_default_value f %>
+    <%= auto_password_field f, :password %>
+    <%= auto_password_field f, :password_confirmation %>
+    <%= f.submit 'ログイン', class: 'btn btn-primary' %>
   <% end %>
 </div>

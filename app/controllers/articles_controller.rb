@@ -40,7 +40,7 @@ class ArticlesController< ApplicationController
       redirect_to @article, flash: { success: "#{@article.title} の記事を更新しました" }
     else
       redirect_back fallback_location: root_path, flash: {
-        error: "#{@article.errors.full_messages}",
+        error: @article.errors.full_messages,
         article: article_params
       }
       # render :edit, flash: { error: "#{@article.errors.full_messages}" }
