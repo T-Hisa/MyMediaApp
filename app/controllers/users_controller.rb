@@ -24,27 +24,42 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @current_user.attributes = flash[:user_update_params] if flash[:user_update_params]
+    @current_user.attributes = flash[:user_update_name_params] if flash[:user_update_name_params]
   end
   
   def update
-    if @current_user.update(user_update_params)
+    if @current_user.update(user_update_name_params)
       redirect_to mypage_path, flash: { "success": "ユーザー情報を更新しました" }
     else
       redirect_back fallback_location: root_path, flash: {
-        "error": ["更新内容に誤りがあります。もう一度入力内容を確認してください"],
-        "user_update_params": user_update_params
+        "error": @current_user.errors.full_messages,
+        "user_update_name_params": user_update_name_params
       }
     end
   end
 
   def password_update
-    if @current_user.update(user_update_password_included_params)
-      redirect_to mypage_path, flash: { "success": "ユーザー情報を更新しました。パスワードが変更されたことにご注意ください" }
+    if @current_user &.authenticate(params[:user][:current_password])
+      if params[:user][:password].empty?
+        redirect_back fallback_location: root_path, flash: {
+          "error": ["新規パスワード欄に記入してください"],
+          "user_update_name_params": user_update_name_params,
+          "current_password": user_update_password_included_params[:current_password]
+        } and return
+      end
+      if user.update(user_update_params)
+        redirect_to mypage_path, flash: { "success": "ユーザー情報を更新しました。パスワードが変更されたことにご注意ください" }
+      else
+        redirect_back fallback_location: root_path, flash: {
+          "error": user.errors.full_messages,
+          "user_update_name_params": user_update_name_params,
+          "current_password": user_update_password_included_params[:current_password]
+        }
+      end
     else
       redirect_back fallback_location: root_path, flash: {
-        "error": ["更新内容に誤りがあります。もう一度入力内容を確認してください"],
-        "user_update_params": user_update_password_params
+        "error": ["現在のパスワードが間違っています。"],
+        "user_update_name_params": user_update_name_params
       }
     end
   end
@@ -56,10 +71,15 @@ class UsersController < ApplicationController
     end
 
     def user_update_params
+      params.require(:user).permit(:name, :password, :password_confirmation)
+    end
+
+
+    def user_update_name_params
       params.require(:user).permit(:name)
     end
 
     def user_update_password_included_params
-      params.require(:user).permit(:name, :password, :password_confirmation)
+      params.require(:user).permit(:name, :current_password, :password, :password_confirmation)
     end
 end

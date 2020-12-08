@@ -26,6 +26,12 @@ class User < ApplicationRecord
       message: 'を正しい形式で入力してください'
     }
 
+
+  def update_params(params)
+    return if params[:password].empty?
+    update(params)
+  end
+
   private
     def email_downcase
       self.email.downcase!
