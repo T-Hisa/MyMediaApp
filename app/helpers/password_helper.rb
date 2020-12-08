@@ -34,7 +34,7 @@ module PasswordHelper
         concat (tag.div class: 'form-group' do
 
           label_text, flag, type, id_name = i == 0 ? 
-            ['新規パスワード', /パスワード.+入/ , :password, 'password'] : ['パスワード(確認)', 'パスワード(確認)', :password_confirmation, 'password_confirmation']
+            ['新規パスワード', /パスワード.+入/ , :password, 'password'] : ['パスワード(確認)', /パスワード\(確認\)/, :password_confirmation, 'password_confirmation']
           class_name = 'form-control'
           class_name << ' border-danger' if error_text_include?(flag)
           concat form.label type, label_text

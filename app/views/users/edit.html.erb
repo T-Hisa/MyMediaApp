@@ -2,6 +2,7 @@
   <h1>ユーザー情報編集</h1>
 </div>
 <div class="container bg-light">
+
   <%= form_with model: @current_user, url: user_path(@current_user) do |f| %>
     <%= auto_name_field_for_edit f %>
     <button type="button" class="btn btn-primary user-edit-btn" data-toggle="modal" data-target="#onlyNameModal">変更</button>
