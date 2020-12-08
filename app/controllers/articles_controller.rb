@@ -10,7 +10,7 @@ class ArticlesController< ApplicationController
   end
 
   def new
-    # 新規作成(create)が失敗したとき、空白にならないように、初期値を flash[:article] で渡す。
+    # 新規作成(create)が失敗したとき、際表示されたページの入力欄が空白にならないように、初期値を flash[:article] で渡す。
     @article = Article.new(flash[:article])
   end
 
@@ -18,11 +18,11 @@ class ArticlesController< ApplicationController
     article = Article.new(article_params)
     if article.save
       flash[:success] = "#{article.title} の記事を作成しました"
-      redirect_to article_index_path
+      redirect_to article
     else
       flash[:error] = "#{article.errors.full_messages}"
       redirect_back fallback_location: root_path, flash: {
-        error: "#{article.errors.full_messages}",
+        error: article.errors.full_messages,
         article: article_params
       }
     end
@@ -40,7 +40,7 @@ class ArticlesController< ApplicationController
       redirect_to @article, flash: { success: "#{@article.title} の記事を更新しました" }
     else
       redirect_back fallback_location: root_path, flash: {
-        error: "#{@article.errors.full_messages}",
+        error: @article.errors.full_messages,
         article: article_params
       }
       # render :edit, flash: { error: "#{@article.errors.full_messages}" }

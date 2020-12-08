@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center top-margin-sm">
+  <h1>ユーザー情報</h1>
+  <%= link_to 'ユーザ情報編集', edit_user_path(@current_user), class: 'btn btn-outline-dark edit-link' %>
+</div>
+<div class="container user-info-container">
+  <div class="user-info-wrapper">Eメール<%= simple_format @current_user.email, class: "user-info bg-light" %></div>
+  <div class="user-info-wrapper">ユーザー名：<%= simple_format @current_user.name, class: "user-info bg-light" %></div>
+  <div class="user-info-wrapper">お気に入り記事：<%= simple_format @current_user.favorite_article_ids, class: "user-info bg-light" %></div>
+  <div class="user-info-wrapper">投稿した記事：<%= simple_format @current_user.favorite_article_ids, class: "user-info bg-light" %></div>
+  
+</div>

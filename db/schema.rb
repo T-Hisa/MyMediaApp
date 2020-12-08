@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_06_140755) do
+ActiveRecord::Schema.define(version: 2020_12_06_171853) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 2020_12_06_140755) do
     t.string "email", null: false
     t.string "name", null: false
     t.boolean "isAdmin", default: false
-    t.bigint "favorite_news_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["favorite_news_id"], name: "index_users_on_favorite_news_id"
+    t.string "password_digest"
+    t.integer "favorite_article_ids"
   end
 
 end

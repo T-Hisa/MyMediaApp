@@ -1,0 +1,46 @@
+.user-info-container {
+  padding: 30px;
+  background-color: whitesmoke;
+
+  .user-info-wrapper {
+    font-size: 1.2rem;
+
+    .user-info {
+      font-size: 1rem;
+      padding: 5px 5px 5px 20px;
+      margin-left: 30px;
+    }
+  }
+}
+
+.user-edit-form {
+  margin: 30px 0;
+  padding: 20px;  
+}
+
+.user-edit-btn {
+  margin: 0 0 20px 20px;
+}
+
+.user-modal-button {
+
+}
+
+.modal-body-wrapper {
+  justify-content: center;
+  justify-content: space-around;;
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+.user-edit-back-btn {
+  float: right;
+  margin-right: 20px;
+  min-width: 80px;
+}
+
+.custom-dropdown.active {
+  background: white;
+  color: black;
+}

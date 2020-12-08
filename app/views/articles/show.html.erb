@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center top-margin-sm article-title article-title-detail">
+  <h1>記事詳細</h1>
+  <%= link_to '編集', edit_article_path(@article), class:'btn btn-outline-dark edit-link' %>
+</div>
+<div class="container article-container-detail">
+  <h4 class="article-detail-header"><%= @article.title %></h4>
+  <div class="article-detail-content">
+    <div class="article-image-wrapper">
+      <%= image_tag 'noimage.jpg', class: "article-content-image"%>
+    </div>
+    <div class="article-content-text">
+      <%= simple_format(@article.content) %>
+    </div>
+  </div>
+</div>

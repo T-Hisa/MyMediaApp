@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center top-margin-sm">
+  <h1 class="">ユーザ登録</h1>
+</div>
+<div class="container">
+  <%= form_with model: @user do |f| %>
+    <%= auto_email_field f %>
+    <%= auto_name_field f %>
+    <%= auto_password_field f %>
+    <%= f.submit 'ユーザ登録', class: 'btn btn-primary' %>
+  <% end %>
+</div>

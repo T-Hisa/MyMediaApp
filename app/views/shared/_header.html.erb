@@ -3,24 +3,36 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= header_link '記事一覧', articles_index_path %>
+        <%= header_link '記事一覧', articles_path, false %>
       </li>
-      <li class="nav-item">
-        <%= header_link '新規作成', new_article_path %>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ユーザ
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">サインアップ</a>
-          <a class="dropdown-item" href="#">サインイン</a>
-        </div>
-      </li>
+      <% if @current_user %>
+        <li class="nav-item">
+          <%= header_link '記事作成', new_article_path, false %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ユーザ
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= header_link 'マイページ', mypage_path, true %>
+            <%= link_to 'ログアウト',  logout_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ユーザ
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'サインアップ', new_user_path, class: "dropdown-item" %>
+            <%= link_to 'サインイン',  login_path, class: "dropdown-item" %>
+          </div>
+        </li>
+      <% end %>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
