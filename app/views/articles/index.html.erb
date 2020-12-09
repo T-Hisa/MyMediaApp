@@ -7,17 +7,7 @@
 
 <ul class="flex-display flex-article-index">
   <% @articles.each do |article| %>
-    <li>
-      <div class="card article-link" style="width: 18rem;">
-        <%= link_to article, class: 'article-link' do %>
-          <%= image_tag 'noimage.jpg', class: 'article-no-image' %>
-          <div class="card-body">
-            <h3 class="card-title text-center article-content"><%= article.title %></h3>
-            <p class="card-text text-center article-content"><%= article.summary %></p>
-          </div>
-        <% end %>
-      </div>
-    </li>
+    <%= render article %>
   <% end %>
   <li>
     <div class="card article-link" style="width: 18rem;">
