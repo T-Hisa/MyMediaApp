@@ -22,6 +22,7 @@
 #
 class Article < ApplicationRecord
   belongs_to :user
+  has_many :registered_favorite_user, class_name: :User, through: :user_favorite_article
   validates :title, presence: true, length: { maximum: 10 }
   validates :summary, length: { maximum: 50 }
   validates :content, presence: true

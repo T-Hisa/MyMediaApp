@@ -15,7 +15,7 @@ class User < ApplicationRecord
   before_save :email_downcase
 
   has_many :articles
-  has_many :favorite_articles, class_name: :Article
+  has_many :favorite_articles, class_name: :Article, through: :user_favorite_article
   validates :name, presence: true, length: { maximum: 16 }
   validates :email,
     length: { maximum: 100 },
