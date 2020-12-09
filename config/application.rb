@@ -18,5 +18,20 @@ module App
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # rails generate コマンド時の挙動
+    # config.generators do |g|
+    #   g.test_framework :rspec, 
+    #     view_specs: false, 
+    #     helper_specs: false, 
+    #     controller_specs: false, 
+    #     routing_specs: false
+
+    #   # Railsジェネレータがfactory_bot用のファイルを生成するのを無効化
+    #   g.factory_bot false
+
+    #   # ファクトリファイルの置き場を変更
+    #   g.factory_bot dir: 'custom/dir/for/factories'
+    # end
   end
 end
