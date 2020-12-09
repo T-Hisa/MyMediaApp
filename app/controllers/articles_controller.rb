@@ -11,7 +11,8 @@ class ArticlesController< ApplicationController
 
   def new
     # 新規作成(create)が失敗したとき、際表示されたページの入力欄が空白にならないように、初期値を flash[:article] で渡す。
-    @article = Article.new(flash[:article])
+    @article = @current_user.articles.new(flash[:article])
+    # Article.new(flash[:article])
   end
 
   def create
