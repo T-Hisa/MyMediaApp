@@ -92,6 +92,11 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -254,6 +259,7 @@ DEPENDENCIES
   capistrano (~> 3.14, >= 3.14.1)
   capybara (>= 2.15)
   dotenv-rails (~> 2.7, >= 2.7.6)
+  factory_bot_rails (~> 6.1)
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
@@ -261,7 +267,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   rails-i18n
-  rspec-rails (~> 4.0.1)
+  rspec-rails (~> 4.0, >= 4.0.1)
   sass-rails (>= 6)
   selenium-webdriver
   spring
