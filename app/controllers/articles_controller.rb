@@ -20,7 +20,6 @@ class ArticlesController< ApplicationController
       flash[:success] = "#{article.title} の記事を作成しました"
       redirect_to article
     else
-      flash[:error] = "#{article.errors.full_messages}"
       redirect_back fallback_location: root_path, flash: {
         error: article.errors.full_messages,
         article: article_params
