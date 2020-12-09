@@ -17,6 +17,7 @@ class ArticlesController< ApplicationController
 
   def create
     article = Article.new(article_params)
+    article.image.attach(image_params[:image])
     if article.save
       flash[:success] = "#{article.title} の記事を作成しました"
       redirect_to article
@@ -50,6 +51,10 @@ class ArticlesController< ApplicationController
   private
     def article_params
       params.require(:article).permit(:title, :content, :summary, :user_id)
+    end
+
+    def image_params
+      params.require(:article).permit(:image)
     end
 
     def set_article

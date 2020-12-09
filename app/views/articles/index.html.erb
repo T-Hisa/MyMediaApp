@@ -7,73 +7,10 @@
 
 <ul class="flex-display flex-article-index">
   <% @articles.each do |article| %>
-    <%= render article %>
+    <li>
+      <%= render article %>
+    </li>
   <% end %>
-  <li>
-    <div class="card article-link" style="width: 18rem;">
-      <%= image_tag 'noimage.jpg', class: 'article-no-image' %>
-      <div class="card-body">
-        <h3 class="card-title text-center">Dummy-title</h3>
-        <p class="card-text text-center">Content summary here.</p>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="card article-link" style="width: 18rem;">
-      <%= image_tag 'noimage.jpg', class: 'article-no-image' %>
-      <div class="card-body">
-        <h5 class="card-title">Dummy-article</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="card article-link" style="width: 18rem;">
-      <%= image_tag 'noimage.jpg', class: 'article-no-image' %>
-      <div class="card-body">
-        <h5 class="card-title">Dummy-article</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="card article-link" style="width: 18rem;">
-      <%= image_tag 'noimage.jpg', class: 'article-no-image' %>
-      <div class="card-body">
-        <h5 class="card-title">Dummy-article</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="card article-link" style="width: 18rem;">
-      <%= image_tag 'noimage.jpg', class: 'article-no-image' %>
-      <div class="card-body">
-        <h5 class="card-title">Dummy-article</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-      </div>
-    </div>
-  </li>
 </ul>
-
-<!-- <table class="table table-hover boards__table">
-  
-  <thead class="thead-light">
-    <tr>
-      <th>タイトル</th>
-      <th>画像</th>
-      <th>作成者</th>
-      <th>作成(更新)日時</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table> -->
 
 <!-- <%= javascript_pack_tag 'articles/index', 'data-turbolinks-track': 'reload' %> -->
