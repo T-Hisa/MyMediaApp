@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def mypage
+    @pagy, @articles = pagy(@current_user.articles)
   end
 
   def edit

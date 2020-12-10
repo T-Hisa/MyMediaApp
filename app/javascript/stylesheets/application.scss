@@ -26,6 +26,10 @@ ul {
   margin-left: auto;
   min-width: 80px;
 }
+.delete-link {
+  margin-left: 20px;
+  min-width: 80px;
+}
 .custom-nav-bar-wrapper {
   @media (max-width: 991px) {
     padding: 0.5rem 0;

@@ -12,7 +12,7 @@
     </li>
   <% end %>
 </ul>
-<% if @pagy.vars[:count] > 0 %>
+<% if @pagy.vars[:count] > 6 %>
   <div class="d-flex justify-content-center mb-2">
     <%== pagy_bootstrap_nav(@pagy) %>
   </div>
