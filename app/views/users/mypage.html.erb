@@ -7,7 +7,7 @@
   <div class="user-info-wrapper">ユーザー名：<%= simple_format @current_user.name, class: "user-info bg-light" %></div>
   <div class="user-info-wrapper">投稿した記事：</div>
   <% @current_user.articles.limit(3).each do |article| %>
-  <ul class="flex-display mypage-articles">
+  <ul class="d-flex mypage-articles">
     <%= render partial: 'articles/article', object: article %>
   </ul>
   <% end %>

@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
 
   def header_link(text, path ,flag)
     class_name = flag ? 'dropdown-item custom-dropdown' : 'nav-link'
