@@ -1,6 +1,9 @@
 <div class="d-flex align-items-center top-margin-sm article-title article-title-detail">
   <h1>記事詳細</h1>
-  <%= link_to '編集', edit_article_path(@article), class:'btn btn-outline-dark edit-link' %>
+  <% if @article.user_id == @current_user.id %>
+    <%= link_to '編集', edit_article_path(@article), class: 'btn btn-outline-dark edit-link' %>
+    <%= link_to '削除', article_path(@article), method: :delete, class: 'btn btn-outline-dark delete-link', data: { confirm: '削除します' } %>
+  <% end %>
 </div>
 <div class="container article-container-detail">
   <h4 class="article-detail-header"><%= @article.title %></h4>

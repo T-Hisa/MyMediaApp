@@ -1,15 +1,11 @@
 class ArticlesController< ApplicationController
   include ApplicationControllerHelper
-  include Pagy::Backend
 
-  before_action :set_article, only: %i[show edit update]
+  before_action :set_article, only: %i[show edit update destroy]
   before_action :logged_in?, except: :index
 
   def index
-    # @pagy, @records = pagy(Product.some_scope)
-    # @articles = pagy(Article.all)
     @pagy, @articles = pagy(Article.all)
-    # @articles = Article.all
   end
 
   def show
@@ -39,6 +35,11 @@ class ArticlesController< ApplicationController
   end
 
   def destroy
+    binding.pry
+    @article.delete
+    redirect_to articles_path, flash: {
+      "info": "#{@article.title}の記事を削除しました"
+    }
   end
 
   def update

@@ -6,10 +6,17 @@
   <div class="user-info-wrapper">Eメール<%= simple_format @current_user.email, class: "user-info bg-light" %></div>
   <div class="user-info-wrapper">ユーザー名：<%= simple_format @current_user.name, class: "user-info bg-light" %></div>
   <div class="user-info-wrapper">投稿した記事：</div>
-  <% @current_user.articles.limit(3).each do |article| %>
   <ul class="d-flex mypage-articles">
-    <%= render partial: 'articles/article', object: article %>
+    <% @articles.each do |article| %>
+      <div class="mypage-article-wrapper">
+        <%= render partial: 'articles/article', object: article %>
+      </div>
+    <% end %>
   </ul>
+  <% if @pagy.vars[:count] > 6 %>
+    <div class="d-flex justify-content-center mb-2">
+      <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
   <% end %>
   <div class="user-info-wrapper">お気に入り記事：<%= simple_format "ユーザがお気に入り登録した記事", class: "user-info bg-light" %></div>
   

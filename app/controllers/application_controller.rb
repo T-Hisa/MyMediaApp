@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
-  # include Pagy::Backendd
+  include Pagy::Backend
   around_action :switch_locale
 
   def index
