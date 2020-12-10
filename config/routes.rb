@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: redirect("/#{I18n.locale}/articles")
   scope "/:locale" do
+    root "articles#index"
     get 'login', to: 'users#login'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'

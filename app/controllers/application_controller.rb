@@ -3,17 +3,19 @@ class ApplicationController < ActionController::Base
   # include Pagy::Backendd
   around_action :switch_locale
 
+  def index
+    redirect_to articles_path
+  end
+
   def switch_locale(&action)
-    # binding.pry
     locale = params[:locale] || I18n.default_locale
     I18n.locale = params[:locale]
     I18n.with_locale(locale, &action)
-    # binding.pry
   end
 
   def change_locale
     back = request.referrer || root_path
-    back.gsub!(/\/(ja|en)\//, "/#{params[:locale]}/")
+    back.gsub!(/\/(ja|en)/, "/#{params[:locale]}")
     redirect_to back
   end
 
