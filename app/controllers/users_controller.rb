@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include UsersControllerHelper
+  include ApplicationControllerHelper
   before_action :logged_in?, only: %i[ mypage edit update password_update ]
   def new
     @user = User.new(flash[:user_params])
