@@ -26,3 +26,18 @@ ul {
   margin-left: auto;
   min-width: 80px;
 }
+.custom-nav-bar-wrapper {
+  @media (max-width: 991px) {
+    padding: 0.5rem 0;
+  }
+
+  .custom-nav-bar {
+    color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem 0.5rem 0;
+  
+    &:hover {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
