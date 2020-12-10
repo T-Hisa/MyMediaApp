@@ -6,7 +6,11 @@
   <h4 class="article-detail-header"><%= @article.title %></h4>
   <div class="article-detail-content">
     <div class="article-image-wrapper">
-      <%= image_tag 'noimage.jpg', class: "article-content-image"%>
+      <% if @article.image.attached? %>
+        <%= image_tag @article.image, class: 'article-content-image' %>
+      <% else %>
+        <%= image_tag 'noimage.jpg', class: 'article-content-image' %>
+      <% end %>
     </div>
     <div class="article-content-text">
       <%= simple_format(@article.content) %>

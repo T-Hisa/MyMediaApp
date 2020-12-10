@@ -12,6 +12,7 @@
     <%= current_password_field_for_edit f %>
     <%= auto_password_field_for_edit f %>
     <button type="button" class="btn btn-danger user-edit-btn" data-toggle="modal" data-target="#includePasswordModal">変更</button>
+    <%= link_to '戻る', mypage_path, class: 'btn btn-outline-dark user-edit-back-btn' %>
   <% end %>
 </div>
 <%= render 'only_name_modal' %>

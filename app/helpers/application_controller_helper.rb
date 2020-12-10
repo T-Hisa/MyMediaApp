@@ -1,4 +1,4 @@
-module UsersControllerHelper
+module ApplicationControllerHelper
   @@error_messages = []
   def cause_some_error(message)
     # 空の配列が渡された時に、『[]』というエラーメッセージが含まれてしまう
