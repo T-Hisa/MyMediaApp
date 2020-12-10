@@ -5,12 +5,15 @@
   <div class="alert alert-danger"><%= flash[:notice] %></div>
 <% end %>
 
-<ul class="flex-display flex-article-index">
+<ul class="d-flex flex-article-index">
   <% @articles.each do |article| %>
     <li>
       <%= render article %>
     </li>
   <% end %>
 </ul>
-
-<!-- <%= javascript_pack_tag 'articles/index', 'data-turbolinks-track': 'reload' %> -->
+<% if @pagy.vars[:count] > 0 %>
+  <div class="d-flex justify-content-center mb-2">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+<% end %>

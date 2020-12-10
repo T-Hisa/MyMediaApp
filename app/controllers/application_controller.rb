@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
+  # include Pagy::Backend
 
   private
     def current_user

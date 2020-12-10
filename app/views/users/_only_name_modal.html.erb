@@ -5,7 +5,7 @@
         <h5 class="modal-title" id="exampleModalCenterTitle">ユーザ名のみ変更します。よろしいですか?</h5>
       </div>
       <div class="modal-body">
-        <%= form_with model: @current_user, url: user_path(@current_user), class: 'flex-display modal-body-wrapper' do |f| %>
+        <%= form_with model: @current_user, url: user_path(@current_user), class: 'd-flex modal-body-wrapper' do |f| %>
           <%= f.hidden_field :name, id: "hidden_name" %>
           <button type="button" class="btn btn-secondary user-modal-button" data-dismiss="modal">戻る</button>
           <%= f.submit '更新', class: 'btn btn-primary user-modal-button' %>

@@ -1,10 +1,15 @@
 class ArticlesController< ApplicationController
   include ApplicationControllerHelper
+  include Pagy::Backend
+
   before_action :set_article, only: %i[show edit update]
   before_action :logged_in?, except: :index
 
   def index
-    @articles = Article.all
+    # @pagy, @records = pagy(Product.some_scope)
+    # @articles = pagy(Article.all)
+    @pagy, @articles = pagy(Article.all)
+    # @articles = Article.all
   end
 
   def show
