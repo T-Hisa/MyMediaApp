@@ -34,6 +34,15 @@
         </li>
       <% end %>
     </ul>
+    <div class="custom-nav-bar-wrapper dropdown">
+      <a class="custom-nav-bar dropdown-toggle" href="#" id="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= "日本語" %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdown">
+        <%= link_to '英語', '/en/change_locale', method: :post, class:'dropdown-item' %>
+        <%= link_to '日本語',  '/ja/change_locale', method: :post, class: "dropdown-item" %>
+      </div>
+    </div>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

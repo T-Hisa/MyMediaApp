@@ -1,13 +1,15 @@
-<div class="card article-link" style="width: 18rem;">
-  <%= link_to article, class: 'article-link' do %>
-    <% if article.image.attached? %>
-      <%= image_tag article.image, class: 'article-image' %>
-    <% else %>
-      <%= image_tag 'noimage.jpg', class: 'article-image' %>
+<li>
+  <div class="card article-link" style="width: 18rem;">
+    <%= link_to article, class: 'article-link' do %>
+      <% if article.image.attached? %>
+        <%= image_tag article.image, class: 'article-image' %>
+      <% else %>
+        <%= image_tag 'noimage.jpg', class: 'article-image' %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title text-center article-content"><%= article.title %></h5>
+        <p class="card-text text-center article-content"><%= article.summary %></p>
+      </div>
     <% end %>
-    <div class="card-body">
-      <h5 class="card-title text-center article-content"><%= article.title %></h5>
-      <p class="card-text text-center article-content"><%= article.summary %></p>
-    </div>
-  <% end %>
-</div>
+  </div>
+</li>
