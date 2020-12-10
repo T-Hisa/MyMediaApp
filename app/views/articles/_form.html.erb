@@ -1,17 +1,17 @@
 <%= form_with model: article do |f| %>
   <%= f.hidden_field :user_id %>
   <div class="form-group">
-    <%= f.label :title, 'タイトル' %>
+    <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>
   </div>
   <!-- <div class=></div> -->
   <div class="form-group">
-    <%= f.label :content, '本文' %>
+    <%= f.label :content %>
     <!-- <label for="name">タイトル</label> -->
     <%= f.text_area :content, rows: 10, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :summary, '要約' %>
+    <%= f.label :summary %>
     <%= f.text_area :summary, rows:5, class: 'form-control' %>
   </div>
   <%= image_field f %>
@@ -26,7 +26,9 @@
       <%= image_tag "", id: "uploaded-image", class: "article-preview" %>
     </div>
   </div>
-  <%= f.submit '保存', id: 'submit-btn', class: 'btn btn-primary' %>
+  <button type="submit" id="submit-btn" class='btn btn-primary user-modal-button'>
+    <%= t('shared.save') %>
+  </button>
 <% end %>
 
 <%= javascript_pack_tag 'articles/form', 'data-turbolinks-track': 'reload' %>
