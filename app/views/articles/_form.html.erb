@@ -14,7 +14,19 @@
     <%= f.label :summary, '要約' %>
     <%= f.text_area :summary, rows:5, class: 'form-control' %>
   </div>
-  <%= f.file_field :image %>
-
-  <%= f.submit '保存', class: 'btn btn-primary' %>
+  <%= image_field f %>
+  <!-- <img alt="aaa" class="uploaded-image article-preview"> -->
+  <% if article.image.attached? %>
+    <div id='saved-image-wrapper' class="article-preview-container">
+      <%= image_tag article.image, id: 'saved-image', class: 'article-preview' %>
+    </div>
+  <% end %>
+  <div id="image-preview-wrapper">
+    <div class="article-preview-container">
+      <%= image_tag "", id: "uploaded-image", class: "article-preview" %>
+    </div>
+  </div>
+  <%= f.submit '保存', id: 'submit-btn', class: 'btn btn-primary' %>
 <% end %>
+
+<%= javascript_pack_tag 'articles/form', 'data-turbolinks-track': 'reload' %>
