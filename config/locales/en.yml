@@ -101,7 +101,6 @@ en:
     update: Update
     save: Save
     wrong-current-password: Input Current Password Was Wrong
-    empty-new-password: Please Enter New Password Field
     update-user-info: Updated User Information
     update-user-name-and-password: Updated User Information. Please Note Password Was Changed
     welcome: Welcom! %{name}
@@ -118,3 +117,4 @@ en:
     search_front: Prefix Match
     search_back: Backward Match
     search_partial: Partial Match
+    name_blank: User Name can't be blank

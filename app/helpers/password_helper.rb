@@ -25,12 +25,12 @@ module PasswordHelper
           class_name = 'form-control'
           case I18n.locale.to_s
             when "ja"
-              flag_text = i == 0 ? /パスワード.+入/ : /パスワード\(確認\)/
+              flag_text = i == 0 ? /パスワード.+入力/ : /パスワード\(確認\)/
               flag = error_text_include?(flag_text)
             when "en"
               # 英語の場合、new password の欄で判定できる条件ができないので、複数回に渡ってフラグ判定を行う。
               if i == 0 
-                flag_text_1 = /new\spassword/i
+                flag_text_1 = /password\sis/i
                 flag_text_2 = /match\spassword/i
                 flag = error_text_include?(flag_text_1) || error_text_include?(flag_text_2)
               else 
@@ -45,9 +45,6 @@ module PasswordHelper
       end
     end
   end
-  # Input Current Password Was Wrong
-  # Please Enter New Password Field
-  # Password Confirmation doesn't match password
 
   def current_password_field_for_edit(form)
     label_text = t('.current-password')

@@ -72,7 +72,6 @@ ja:
     update: 更新
     save: 保存
     wrong-current-password: 現在のパスワードが間違っています
-    empty-new-password: 新規パスワード欄に記入してください
     update-user-info: ユーザー情報を更新しました
     update-user-name-and-password: ユーザー情報を更新しました。パスワードが変更されたことにご注意ください
     welcome: ようこそ%{name}さん
@@ -89,3 +88,4 @@ ja:
     search_front: 前方一致
     search_back: 後方一致
     search_partial: 部分一致
+    name_blank: ユーザー名を入力してください

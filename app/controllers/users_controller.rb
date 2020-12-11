@@ -30,10 +30,18 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @current_user.update(user_update_name_params)
+    flag = true
+    # update_attribute で更新しようとすると、validationチェックが行われないので、
+    # 名前欄が空白の場合は、モデルのバリデーションと同等のエラーメッセージを手動で表示するようにする
+    if user_update_name_params[:name].empty?
+      flag = false
+      error_message = t('shared.name_blank')
+    end
+    # バリデーションチェックが行われない、update 等のメソッドを使用すると、password までバリデーションが行われてしまう。良い方法が見つからなかったので妥協。
+    if flag && @current_user.update_attribute(:name, user_update_name_params[:name])
       redirect_to mypage_path, flash: { "success": t('shared.update-user-info') }
     else
-      cause_some_error(@current_user.errors.full_messages)
+      cause_some_error(error_message)
       redirect_with_error("name": user_update_name_params)
     end
   end
@@ -50,11 +58,6 @@ class UsersController < ApplicationController
       password_flag = true
     else
       cause_some_error t('shared.wrong-current-password')
-      flag = false
-    end
-    # 新規パスワード欄が空白か。これを行わないと、password と password_confirmation が空白の時、name カラムのみ更新処理を行ってしまう
-    if user_update_params[:password].empty?
-      cause_some_error t('shared.empty-new-password')
       flag = false
     end
     @current_user.attributes = user_update_params
