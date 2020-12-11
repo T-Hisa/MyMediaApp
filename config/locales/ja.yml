@@ -42,6 +42,7 @@ ja:
       password: 新規パスワード
       current-password: 現在のパスワード
       password-confirmation: パスワード(確認)
+      password-confirmation-for-regex: /パスワード(確認)/
       update: 更新
     new:
       email: Eメール
@@ -58,6 +59,7 @@ ja:
     mypage: マイページ
     logout: ログアウト
     user: ユーザ
+    password: パスワード
     new-article: 記事作成
     article-list: 記事一覧
     sign-up: サインアップ
@@ -69,3 +71,13 @@ ja:
     back: 戻る
     update: 更新
     save: 保存
+    wrong-current-password: 現在のパスワードが間違っています
+    empty-new-password: 新規パスワード欄に記入してください
+    update-user-info: ユーザー情報を更新しました
+    update-user-name-and-password: ユーザー情報を更新しました。パスワードが変更されたことにご注意ください
+    welcome: ようこそ%{name}さん
+    save-false: 保存に失敗しました。
+    re-select-image: 画像を再度選択してください
+    created-article: "%{title}の記事を作成しました"
+    deleted-article: "%{title}の記事を削除しました"
+    updated-article: "%{title}の記事を更新しました"

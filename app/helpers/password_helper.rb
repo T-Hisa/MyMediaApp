@@ -20,16 +20,34 @@ module PasswordHelper
       2.times do |i|
         concat (tag.div class: 'form-group' do
 
-          label_text, flag, type, id_name = i == 0 ? 
-            [t('.password'), /パスワード.+入/ , :password, 'password'] : [t('.password-confirmation'), /パスワード\(確認\)/, :password_confirmation, 'password_confirmation']
+          label_text, type, id_name = i == 0 ? 
+            [t('.password'), :password, 'password'] : [t('.password-confirmation'), :password_confirmation, 'password_confirmation']
           class_name = 'form-control'
-          class_name << ' border-danger' if error_text_include?(flag)
+          case I18n.locale.to_s
+            when "ja"
+              flag_text = i == 0 ? /パスワード.+入/ : /パスワード\(確認\)/
+              flag = errror_text_include?(flag_text)
+            when "en"
+              # 英語の場合、new password の欄で判定できる条件ができないので、複数回に渡ってフラグ判定を行う。
+              if i == 0 
+                flag_text_1 = /new\spassword/i
+                flag_text_2 = /match\spassword/i
+                flag = error_text_include?(flag_text_1) || error_text_include?(flag_text_2)
+              else 
+                flag_text = /password\sconfirmation/i
+                flag = error_text_include?(flag_text)
+              end
+          end
+          class_name << ' border-danger' if flag
           concat form.label type, label_text
           concat form.password_field type, class: class_name, id: id_name
         end)
       end
     end
   end
+  # Input Current Password Was Wrong
+  # Please Enter New Password Field
+  # Password Confirmation doesn't match password
 
   def current_password_field_for_edit(form)
     label_text = t('.current-password')

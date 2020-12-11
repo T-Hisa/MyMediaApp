@@ -43,7 +43,7 @@ en:
         email: e-mail
         password: Password
         password_confirmation: Password Confirmation
-        favorite_articles: Favorite Articles
+        # favorite_articles: Favorite Articles
   articles:
     index:
       article-list: Article List
@@ -54,9 +54,9 @@ en:
       edit-article: Edit Article
       back: Back
     show:
-      detail-article: Article Detail
       edit-article: Edit Article
       delete-article: Delete Article
+      detail-article: Article Detail
   users:
     mypage:
       user-info: User Information
@@ -100,3 +100,13 @@ en:
     back: Back
     update: Update
     save: Save
+    wrong-current-password: Input Current Password Was Wrong
+    empty-new-password: Please Enter New Password Field
+    update-user-info: Updated User Information
+    update-user-name-and-password: Updated User Information. Please Note Password Was Changed
+    welcome: Welcom! %{name}
+    save-false: Failed Saving.
+    re-select-image: Please Reselect Uploading Image.
+    created-article: "Created Aricle 『%{title}』"
+    deleted-article: "Deleted Article 『%{title}』"
+    updated-article: "Updated Article 『%{title}』"
