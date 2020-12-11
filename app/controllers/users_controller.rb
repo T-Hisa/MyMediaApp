@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
-      redirect_to mypage_path, flash: { "success": "ようこそ#{user.name}さん" }
+      redirect_to mypage_path, flash: { "success": t('shared.welcome', name: user.name) }
     else
       # UsersControllerHelper で定義してあるメソッド
       cause_some_error(user.errors.full_messages)
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   
   def update
     if @current_user.update(user_update_name_params)
-      redirect_to mypage_path, flash: { "success": "ユーザー情報を更新しました" }
+      redirect_to mypage_path, flash: { "success": t('shared.update-user-info') }
     else
       cause_some_error(@current_user.errors.full_messages)
       redirect_with_error("name": user_update_name_params)
@@ -41,25 +41,25 @@ class UsersController < ApplicationController
     user = User.find_by(id: session[:user_id])
     flag = true
     @current_user.attributes = user_update_name_params
-    # ここで、error_messagesを取得してしまうと、下の処理で同じエラーが重複してしまうため、ここではフラグ追加
+    # ここで、error_messagesを取得してしまうと、下の処理により同じエラーが重複して表示されてしまうため、ここではフラグ追加
     flag = false unless @current_user.validate
     # 現在のパスワードが一致しているか
     if @current_user.authenticate(current_password_params[:current_password])
       # 現在のパスワードが一致していたら、次回以降入力の手間を省くためのフラグ
       password_flag = true
     else
-      cause_some_error "現在のパスワードが間違っています"
+      cause_some_error t('shared.wrong-current-password')
       flag = false
     end
     # 新規パスワード欄が空白か。これを行わないと、password と password_confirmation が空白の時、name カラムのみ更新処理を行ってしまう
     if user_update_params[:password].empty?
-      cause_some_error "新規パスワード欄に記入してください"
+      cause_some_error t('shared.empty-new-password')
       flag = false
     end
     @current_user.attributes = user_update_params
     if @current_user.validate && flag
       @current_user.save
-      redirect_to mypage_path, flash: { "success": "ユーザー情報を更新しました。パスワードが変更されたことにご注意ください" }
+      redirect_to mypage_path, flash: { "success": t('shared.update-user-name-and-password') }
     else
       cause_some_error @current_user.errors.full_messages
       flash = { "name": user_update_name_params }

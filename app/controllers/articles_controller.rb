@@ -21,10 +21,10 @@ class ArticlesController< ApplicationController
     article = Article.new(article_params)
     if article.save
       article.image.attach(image_params[:image])
-      flash[:success] = "#{article.title} の記事を作成しました"
+      flash[:success] = t('shared.created-article', title: article.title)
       redirect_to article
     else
-      cause_some_error("保存に失敗しました。画像を再度選択してください") if image_params[:image]
+      cause_some_error(t('shared.save-false')+t('shared.re-select-image')) if image_params[:image]
       cause_some_error(article.errors.full_messages)
       redirect_with_error({"article": article_params})
     end
@@ -35,19 +35,18 @@ class ArticlesController< ApplicationController
   end
 
   def destroy
-    binding.pry
     @article.delete
     redirect_to articles_path, flash: {
-      "info": "#{@article.title}の記事を削除しました"
+      "info": t('shared.deleted-article', title: @article.title)
     }
   end
 
   def update
     if @article.update(article_params)
       @article.image.attach(image_params[:image])
-      redirect_to @article, flash: { success: "#{@article.title} の記事を更新しました" }
+      redirect_to @article, flash: { success: t('shared.updated-article', title: @article.title) }
     else
-      cause_some_error("保存に失敗しました。画像を再度選択してください") if image_params[:image]
+      cause_some_error(t('shared.save-false')+t('shared.re-select-image')) if image_params[:image]
       cause_some_error(@article.errors.full_messages)
       redirect_with_error({"article": article_params})
     end

@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center top-margin-sm article-title">
-  <h1>記事編集</h1> 
-  <%= link_to '戻る', article_path(@article), class: 'btn btn-outline-dark article-edit-btn' %>
+  <h1><%= t('.edit-article') %></h1> 
+  <%= link_to t('.back'), article_path(@article), class: 'btn btn-outline-dark article-edit-btn' %>
 </div>
 <%= render partial: 'form', locals: { article: @article } %>

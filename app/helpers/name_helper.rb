@@ -6,7 +6,7 @@ module NameHelper
     class_name << ' border-danger' if error_text_include?("ユーザー")
     
     tag.div class: parent_class_name do
-      concat form.label :name, 'ユーザー名'
+      concat form.label :name, t('.user-name')
       concat @current_user.present? ?
       (form.text_field :name, value: @current_user.name, class: class_name, id: "name_field") :
       (form.text_field :name, class: class_name)
@@ -18,7 +18,7 @@ module NameHelper
     class_name << ' border-danger' if error_text_include?("ユーザー")
     
     tag.div class: 'form-group user-edit-form' do
-      concat form.label :name, 'ユーザー名'
+      concat form.label :name, t('.user-name')
       concat form.text_field :name, value: @current_user.name, class: class_name, id: "name"
     end
   end

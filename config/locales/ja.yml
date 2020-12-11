@@ -6,9 +6,78 @@ ja:
         content: 本文
         summary: 要約
         updated_ato: 更新日
+        image: 画像
       user:
         name: ユーザー名
         email: Eメール
         password: パスワード
         password_confirmation: パスワード(確認)
-        favorite_news: お気に入り
+        # favorite: お気に入り
+  articles:
+    index:
+      article-list: 記事一覧
+    new:
+      new-article: 記事作成
+      article-save: 保存
+    edit:
+      edit-article: 編集
+      back: 戻る
+    show:
+      edit-article: 編集
+      delete-article: 削除
+      detail-article: 記事詳細
+  users:
+    mypage:
+      user-info: ユーザー情報
+      edit-user: ユーザー情報編集
+      email: Eメール
+      name: 名前
+      user-article-list: 投稿した記事
+      favorite-articles: お気に入り記事
+    edit:
+      edit-user: ユーザー情報編集
+      change: 変更
+      back: 戻る
+      user-name: ユーザー名
+      password: 新規パスワード
+      current-password: 現在のパスワード
+      password-confirmation: パスワード(確認)
+      password-confirmation-for-regex: /パスワード(確認)/
+      update: 更新
+    new:
+      email: Eメール
+      user-name: ユーザー名
+      password: パスワード
+      password-confirmation: パスワード(確認)
+      register: ユーザー登録
+    login:
+      email: Eメール
+      login: ログイン
+      password: パスワード
+      password-confirmation: パスワード(確認)
+  shared:
+    mypage: マイページ
+    logout: ログアウト
+    user: ユーザ
+    password: パスワード
+    new-article: 記事作成
+    article-list: 記事一覧
+    sign-up: サインアップ
+    sign-in: サインイン
+    en: 英語
+    ja: 日本語
+    user-password-confirmation: ユーザー名とパスワードを変更します。よろしいですか？
+    only-user-name-confirmation: ユーザー名のみ変更します。よろしいですか？
+    back: 戻る
+    update: 更新
+    save: 保存
+    wrong-current-password: 現在のパスワードが間違っています
+    empty-new-password: 新規パスワード欄に記入してください
+    update-user-info: ユーザー情報を更新しました
+    update-user-name-and-password: ユーザー情報を更新しました。パスワードが変更されたことにご注意ください
+    welcome: ようこそ%{name}さん
+    save-false: 保存に失敗しました。
+    re-select-image: 画像を再度選択してください
+    created-article: "%{title}の記事を作成しました"
+    deleted-article: "%{title}の記事を削除しました"
+    updated-article: "%{title}の記事を更新しました"

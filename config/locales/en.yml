@@ -30,4 +30,83 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      article:
+        title: Title
+        content: Content
+        summary: Summary
+        updated_at: Update-date
+        image: Image
+      user:
+        name: User Name
+        email: e-mail
+        password: Password
+        password_confirmation: Password Confirmation
+        # favorite_articles: Favorite Articles
+  articles:
+    index:
+      article-list: Article List
+    new:
+      new-article: Create Article
+      article-save: Save
+    edit:
+      edit-article: Edit Article
+      back: Back
+    show:
+      edit-article: Edit Article
+      delete-article: Delete Article
+      detail-article: Article Detail
+  users:
+    mypage:
+      user-info: User Information
+      edit-user: Edit User Information
+      email: e-mail
+      name: User Name
+      user-article-list: Posted Articles
+      favorite-articles: Favorite Articles
+    edit:
+      edit-user: Edit User Information
+      change: Change
+      back: Back
+      user-name: User Name
+      password: New Password
+      current-password: Current Password
+      password-confirmation: Password Confirmation
+      update: Update
+    new:
+      email: e-mail
+      user-name: User Name
+      password: Password
+      password-confirmation: Password Confirmation
+      register: Register User
+    login:
+      email: e-mail
+      login: Login
+      password: Passworrd
+      password-confirmation: Password Confirmation
+  shared:
+    mypage: My Page
+    logout: Logout
+    user: User
+    new-article: Create Article
+    article-list: Article List
+    sign-up: Signup
+    sign-in: Signin
+    en: English
+    ja: Japanese
+    user-password-confirmation: You will change user-name and password. OK?
+    only-user-name-confirmation: You will change only user-name. OK?
+    back: Back
+    update: Update
+    save: Save
+    wrong-current-password: Input Current Password Was Wrong
+    empty-new-password: Please Enter New Password Field
+    update-user-info: Updated User Information
+    update-user-name-and-password: Updated User Information. Please Note Password Was Changed
+    welcome: Welcom! %{name}
+    save-false: Failed Saving.
+    re-select-image: Please Reselect Uploading Image.
+    created-article: "Created Aricle 『%{title}』"
+    deleted-article: "Deleted Article 『%{title}』"
+    updated-article: "Updated Article 『%{title}』"

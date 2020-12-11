@@ -1,8 +1,8 @@
 <div class="d-flex align-items-center top-margin-sm article-title article-title-detail">
-  <h1>記事詳細</h1>
+  <h1><%= t('.detail-article') %></h1>
   <% if @article.user_id == @current_user.id %>
-    <%= link_to '編集', edit_article_path(@article), class: 'btn btn-outline-dark edit-link' %>
-    <%= link_to '削除', article_path(@article), method: :delete, class: 'btn btn-outline-dark delete-link', data: { confirm: '削除します' } %>
+    <%= link_to t('.edit-article'), edit_article_path(@article), class: 'btn btn-outline-dark edit-link' %>
+    <%= link_to t('.delete-article'), article_path(@article), method: :delete, class: 'btn btn-outline-dark delete-link', data: { confirm: '削除します' } %>
   <% end %>
 </div>
 <div class="container article-container-detail">

@@ -1,10 +1,12 @@
 <div class="d-flex align-items-center top-margin-sm">
-  <h1 class="">ログイン</h1>
+  <h1><%= t('.login') %></h1>
 </div>
 <div class="container">
   <%= form_with scope: :session, url: login_path  do |f| %>
     <%= auto_email_field f %>
     <%= auto_password_field f %>
-    <%= f.submit 'ログイン', class: 'btn btn-primary' %>
+    <button type="submit" class='btn btn-primary'>
+      <%= t('.login') %>
+    </button>
   <% end %>
 </div>

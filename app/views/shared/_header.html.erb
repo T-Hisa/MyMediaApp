@@ -7,40 +7,40 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= header_link '記事一覧', articles_path, false %>
+        <%= header_link t('shared.article-list'), articles_path, false %>
       </li>
       <% if @current_user %>
         <li class="nav-item">
-          <%= header_link '記事作成', new_article_path, false %>
+          <%= header_link t('shared.new-article'), new_article_path, false %>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ユーザ
+            <%= t('shared.user') %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= header_link 'マイページ', mypage_path, true %>
-            <%= link_to 'ログアウト',  logout_path, method: :delete, class: "dropdown-item" %>
+            <%= header_link t('shared.mypage'), mypage_path, true %>
+            <%= link_to t('shared.logout'),  logout_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
       <% else %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ユーザ
+            <%= t('shared.user') %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'サインアップ', new_user_path, class: "dropdown-item" %>
-            <%= link_to 'サインイン',  login_path, class: "dropdown-item" %>
+            <%= link_to t('shared.sign-up'), new_user_path, class: "dropdown-item" %>
+            <%= link_to t('shared.sign-in'),  login_path, class: "dropdown-item" %>
           </div>
         </li>
       <% end %>
     </ul>
     <div class="custom-nav-bar-wrapper dropdown">
       <a class="custom-nav-bar dropdown-toggle" href="#" id="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <%= "日本語" %>
+        <%= t("shared.#{I18n.locale}") %>
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdown">
-        <%= link_to '英語', '/en/change_locale', method: :post, class:'dropdown-item' %>
-        <%= link_to '日本語',  '/ja/change_locale', method: :post, class: "dropdown-item" %>
+        <%= link_to t('shared.en'), '/en/change_locale', method: :post, class:'dropdown-item' %>
+        <%= link_to t('shared.ja'),  '/ja/change_locale', method: :post, class: "dropdown-item" %>
       </div>
     </div>
     <form class="form-inline my-2 my-lg-0">

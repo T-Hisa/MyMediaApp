@@ -12,7 +12,7 @@ module UsersHelper
     # サインアップ フォームでは、そのまま(失敗して再表示の際に)params[:user][:email]を取得しているので何もセットしない。
 
     tag.div class: 'form-group' do
-      concat form.label :email, 'Eメール'
+      concat form.label :email, t('.email')
       concat default_value.present? ?
          (form.email_field :email, value: default_value, class: class_name) :
          (form.email_field :email, class: class_name)
