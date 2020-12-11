@@ -1,10 +1,12 @@
 <div class="d-flex align-items-center top-margin-sm article-title">
-  <h1 class="article-title-index"><%= t('.article-list') %></h1>
+  <h1 class="article-title-index">
+    <% if @articles.count == 0 %>
+      対象の記事はありません
+    <% else %>
+      <%= t('.article-list') %>
+    <% end %>
+  </h1>
 </div>
-<% if flash[:notice] %>
-  <div class="alert alert-danger"><%= flash[:notice] %></div>
-<% end %>
-
 <ul class="d-flex flex-article-index">
   <% @articles.each do |article| %>
     <li>

@@ -26,7 +26,7 @@ module PasswordHelper
           case I18n.locale.to_s
             when "ja"
               flag_text = i == 0 ? /パスワード.+入/ : /パスワード\(確認\)/
-              flag = errror_text_include?(flag_text)
+              flag = error_text_include?(flag_text)
             when "en"
               # 英語の場合、new password の欄で判定できる条件ができないので、複数回に渡ってフラグ判定を行う。
               if i == 0 

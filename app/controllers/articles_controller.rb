@@ -1,7 +1,8 @@
 class ArticlesController< ApplicationController
   include ApplicationControllerHelper
 
-  before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_article, only: %i[show edit update destroy favorite]
+  # before_action :set_favorite_article, only: %i[show favorite]
   before_action :logged_in?, except: :index
 
   def index
@@ -28,6 +29,15 @@ class ArticlesController< ApplicationController
       cause_some_error(article.errors.full_messages)
       redirect_with_error({"article": article_params})
     end
+  end
+
+  def favorite
+    binding.pry
+    @current_user.favorite_articles.include?(@article) ?
+      @current_user.favorite_articles.delete(@article) :
+      @current_user.favorite_articles.push(@article)
+    binding.pry
+    render
   end
 
   def edit

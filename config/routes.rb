@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     post 'change_locale', to: 'application#change_locale'
+    post 'favorite', to: 'articles#favorite'
     resources :articles
     get 'mypage', to: 'users#mypage'
     patch 'update/password', to: 'users#password_update'

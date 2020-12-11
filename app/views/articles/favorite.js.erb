@@ -1,0 +1,7 @@
+var a = document.querySelector("#favorite-form");
+var iconElement = a.firstElementChild;
+<% if @current_user.favorite_articles.include?(@article) %>
+  iconElement.setAttribute('class', 'fas fa-2x fa-star text-warning')
+<% else %>
+  iconElement.setAttribute('class', 'far fa-2x fa-star text-warning')
+<% end %>

@@ -18,6 +18,22 @@
       <%== pagy_bootstrap_nav(@pagy) %>
     </div>
   <% end %>
-  <div class="user-info-wrapper"><%= t('.favorite-articles') %>：<%= simple_format "ユーザがお気に入り登録した記事", class: "user-info bg-light" %></div>
-  
+  <div class="user-info-wrapper"><%= t('.favorite-articles') %>：
+    <% if @favorite_articles %>
+      <ul class="d-flex mypage-articles">
+        <% @favorite_articles.each do |article| %>
+          <div class="mypage-article-wrapper">
+            <%= render partial: 'articles/article', object: article %>
+          </div>
+        <% end %>
+      </ul>
+      <% if @pagy_2.vars[:count] > 6 %>
+        <div class="d-flex justify-content-center mb-2">
+          <%== pagy_bootstrap_nav(@pagy_2) %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>お気に入りの記事はありません。</p>
+    <% end %>
+  </div>
 </div>
