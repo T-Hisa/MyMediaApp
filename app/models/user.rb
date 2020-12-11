@@ -24,6 +24,10 @@ class User < ApplicationRecord
       with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
       message: 'を正しい形式で入力してください'
     }
+  validates :password, length: { minimum: 8 }, 
+    format: {
+      with: /[\w]+/
+    }
 
   private
     def email_downcase

@@ -81,3 +81,6 @@ ja:
     created-article: "%{title}の記事を作成しました"
     deleted-article: "%{title}の記事を削除しました"
     updated-article: "%{title}の記事を更新しました"
+    login-success: "%{name}でログインしました"
+    login-error:  Eメールまたはパスワードが違います
+    logout-info: ログアウトしました

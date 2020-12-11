@@ -3,10 +3,10 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user &.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to mypage_path, flash: { "success": "#{user.name}でログインしました" }
+      redirect_to mypage_path, flash: { "success": t('shared.login-success', name: user.name) }
     else
       redirect_back fallback_location: root_path, flash: {
-        "error":  ["Eメールまたはパスワードが違います"],
+        "error": t('shared.login-error'),
         "email": params[:session][:email]
       }
     end
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    redirect_to root_path, flash: { "info": "ログアウトしました" }
+    redirect_to root_path, flash: { "info": t('shared.logout-info') }
   end
 
 end
