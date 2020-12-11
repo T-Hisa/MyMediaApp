@@ -22,9 +22,10 @@
 #
 class Article < ApplicationRecord
   belongs_to :user
-  has_many :registered_favorite_user, class_name: :User, through: :user_favorite_article
+  has_many :user_favorite_articles
+  has_many :registered_favorite_users, through: :user_favorite_articles, source: :user
   validates :title, presence: true, length: { maximum: 10 }
-  validates :summary, length: { maximum: 50 }
+  validates :summary, length: { maximum: 30 }
   validates :content, presence: true
   has_one_attached :image
 end

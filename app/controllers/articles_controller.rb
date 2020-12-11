@@ -1,11 +1,24 @@
 class ArticlesController< ApplicationController
   include ApplicationControllerHelper
-
-  before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_article, only: %i[show edit update destroy favorite]
   before_action :logged_in?, except: :index
 
   def index
-    @pagy, @articles = pagy(Article.all)
+    if search_params
+      case params[:search_type]
+        when "0"
+          search_text = "%#{search_params}%"
+        when "1"
+          search_text = "#{search_params}%"
+        when "2"
+          search_text = "%#{search_params}"
+        when "3"
+          search_text = "#{search_params}"
+      end
+      @pagy, @articles = pagy(Article.where("title LIKE ?", search_text))
+    else
+      @pagy, @articles = pagy(Article.all)
+    end
   end
 
   def show
@@ -28,6 +41,13 @@ class ArticlesController< ApplicationController
       cause_some_error(article.errors.full_messages)
       redirect_with_error({"article": article_params})
     end
+  end
+
+  def favorite
+    @current_user.favorite_articles.include?(@article) ?
+      @current_user.favorite_articles.delete(@article) :
+      @current_user.favorite_articles.push(@article)
+    render
   end
 
   def edit
@@ -63,5 +83,9 @@ class ArticlesController< ApplicationController
 
     def set_article
       @article = Article.find(params[:id])
+    end
+
+    def search_params
+      params[:title]
     end
 end

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def mypage
     @pagy, @articles = pagy(@current_user.articles)
+    @pagy_2, @favorite_articles = pagy(@current_user.favorite_articles) if @current_user.favorite_articles
   end
 
   def edit

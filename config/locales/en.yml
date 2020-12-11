@@ -110,3 +110,11 @@ en:
     created-article: "Created Aricle 『%{title}』"
     deleted-article: "Deleted Article 『%{title}』"
     updated-article: "Updated Article 『%{title}』"
+    login-success: logged in as %{name}
+    login-error:  Email or password is incorrect
+    logout-info: logged out successfully
+    placeholder: if you don't write down this field, it will display first 30 words of Content.
+    search_all: Perfect Match
+    search_front: Prefix Match
+    search_back: Backward Match
+    search_partial: Partial Match

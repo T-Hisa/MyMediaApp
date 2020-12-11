@@ -15,7 +15,8 @@ class User < ApplicationRecord
   before_save :email_downcase
 
   has_many :articles
-  has_many :favorite_articles, class_name: :Article, through: :user_favorite_article
+  has_many :user_favorite_articles
+  has_many :favorite_articles, through: :user_favorite_articles, source: :article
   validates :name, presence: true, length: { maximum: 16 }
   validates :email,
     length: { maximum: 100 },
@@ -23,6 +24,10 @@ class User < ApplicationRecord
     format: {
       with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
       message: 'を正しい形式で入力してください'
+    }
+  validates :password, length: { minimum: 6 }, 
+    format: {
+      with: /[\w]+/
     }
 
   private
