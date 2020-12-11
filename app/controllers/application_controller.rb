@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
+  before_action :set_search_value
   include Pagy::Backend
   around_action :switch_locale
+
 
   def index
     redirect_to articles_path
@@ -40,5 +42,9 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
       redirect_to login_path unless @current_user
+    end
+
+    def set_search_value
+      @search_value = [[t('shared.search_partial'), 0], [t('shared.search_front'), 1], [t('shared.search_back'), 2], [t('shared.search_all'), 3]]
     end
 end

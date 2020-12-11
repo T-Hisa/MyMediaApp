@@ -22,11 +22,6 @@
     padding-left: 30px;
   }
 
-  .all-nothing {
-    border: none;
-    background: none;
-  }
-  
   > h1 {
     margin: 10px 0;
   }
@@ -144,4 +139,9 @@
   .article-preview {
     width: 100%;
   }
+}
+.search_form {
+  margin: 10px;
+  padding: 2px;
+  background: cornsilk;
 }

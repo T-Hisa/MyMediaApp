@@ -84,3 +84,8 @@ ja:
     login-success: "%{name}でログインしました"
     login-error:  Eメールまたはパスワードが違います
     logout-info: ログアウトしました
+    placeholder: 入力しない場合は、本文の頭から30文字ほど抜粋して表示されます
+    search_all: 完全一致
+    search_front: 前方一致
+    search_back: 後方一致
+    search_partial: 部分一致

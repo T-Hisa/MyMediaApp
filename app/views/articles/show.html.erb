@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center top-margin-sm article-title article-title-detail">
   <h1><%= t('.detail-article') %></h1>
-  <%= form_with method: :post, url: favorite_path do |f| %>
+  <%= form_with url: favorite_path do |f| %>
   <%= hidden_field_tag :id, @article.id %>
     <%= button_tag type: "submit", class: "all-nothing", id: "favorite-form" do %>
       <% if @current_user.favorite_articles.include?(@article) %>

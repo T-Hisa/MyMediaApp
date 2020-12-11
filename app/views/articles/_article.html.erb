@@ -8,7 +8,11 @@
     <% end %>
     <div class="card-body">
       <h5 class="card-title text-center article-content"><%= article.title %></h5>
-      <p class="card-text text-center article-content"><%= article.summary %></p>
+      <% if article.summary.empty? %>
+        <%= simple_format article.content.slice(0, 30), class: 'card-text text-center article-content' %>
+      <% else %>
+        <%= simple_format article.summary, class: 'card-text text-center article-content' %>
+      <% end %>  
     </div>
   <% end %>
 </div>
