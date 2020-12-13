@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :current_user
-  before_action :set_search_value
+  before_action :set_search_value, if: :not_admin?
   include Pagy::Backend
-  around_action :switch_locale
+  around_action :switch_locale, if: :not_admin?
+
 
   def index
     redirect_to articles_path
@@ -33,18 +34,22 @@ class ApplicationController < ActionController::Base
     parsed_locale = request.subdomains.first
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
-
+  
   private
-
-  def current_user
-    @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
-  end
-
-  def logged_in?
-    redirect_to login_path unless @current_user
-  end
-
-  def set_search_value
-    @search_value = [[t('shared.search_partial'), 0], [t('shared.search_front'), 1], [t('shared.search_back'), 2], [t('shared.search_all'), 3]]
-  end
+    
+    def current_user
+      @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+    
+    def logged_in?
+      redirect_to login_path unless @current_user
+    end
+    
+    def set_search_value
+      @search_value = [[t('shared.search_partial'), 0], [t('shared.search_front'), 1], [t('shared.search_back'), 2], [t('shared.search_all'), 3]]
+    end
+    
+    def not_admin?
+      true
+    end
 end

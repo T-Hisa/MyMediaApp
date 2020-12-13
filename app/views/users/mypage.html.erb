@@ -6,12 +6,8 @@
   <div class="user-info-wrapper"><%=  t('.email') %>：<%= simple_format @current_user.email, class: "user-info bg-light" %></div>
   <div class="user-info-wrapper"><%= t('.name') %>：<%= simple_format @current_user.name, class: "user-info bg-light" %></div>
   <div class="user-info-wrapper"><%= t('.user-article-list' )%>：</div>
-  <ul class="d-flex mypage-articles">
-    <% @articles.each do |article| %>
-      <div class="mypage-article-wrapper">
-        <%= render partial: 'articles/article', object: article %>
-      </div>
-    <% end %>
+  <ul class="d-flex flex-article mypage-articles">
+    <%= render partial: 'articles/article', collection: @articles %>
   </ul>
   <% if @pagy.vars[:count] > 6 %>
     <div class="d-flex justify-content-center mb-2">
@@ -19,13 +15,9 @@
     </div>
   <% end %>
   <div class="user-info-wrapper"><%= t('.favorite-articles') %>：
-    <% if @favorite_articles %>
-      <ul class="d-flex mypage-articles">
-        <% @favorite_articles.each do |article| %>
-          <div class="mypage-article-wrapper">
-            <%= render partial: 'articles/article', object: article %>
-          </div>
-        <% end %>
+    <% if @favorite_articles.present? %>
+      <ul class="d-flex flex-article mypage-articles">
+        <%= render partial: 'articles/article', collection: @favorite_articles %>
       </ul>
       <% if @pagy_2.vars[:count] > 6 %>
         <div class="d-flex justify-content-center mb-2">
@@ -33,7 +25,9 @@
         </div>
       <% end %>
     <% else %>
-      <p>お気に入りの記事はありません。</p>
+    <ul class="d-flex flex-article mypage-articles">
+      <%= t('.no-favorite-article') %>
+    </ul>
     <% end %>
   </div>
 </div>

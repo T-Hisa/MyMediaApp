@@ -10,6 +10,7 @@ module App
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.time_zone = 'Tokyo'
     I18n.available_locales = [:ja, :en]
     config.i18n.fallbacks = [I18n.default_locale]
     config.i18n.default_locale = :ja

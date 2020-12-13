@@ -11,7 +11,6 @@ AllCops:
     - 'node_modules/*/*/*'
     - 'node_modules/*/*/*/*'
     - 'node_modules/*/*/*/*/*'
-
-
+    
 Style/AsciiComments:
   Enabled: false

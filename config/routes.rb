@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :articles, only: %i(index destroy)
+    # get '/articles', to: 'admin/articles#index'
+  end
   scope "/:locale" do
     root "articles#index"
     get 'login', to: 'users#login'
@@ -9,10 +13,7 @@ Rails.application.routes.draw do
     resources :articles
     get 'mypage', to: 'users#mypage'
     patch 'update/password', to: 'users#password_update'
-    resources :users, only: [:new, :create, :edit, :update]
-    namespace :admin do
-      resources :articles
-    end
+    resources :users, only: %i[new create edit update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
