@@ -1,11 +1,11 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  def header_link(text, path ,flag)
+  def header_link(text, path, flag)
     class_name = flag ? 'dropdown-item custom-dropdown' : 'nav-link'
     # 開かれているページがリンク先の対象ページの場合、class名に追加する。
     class_name << ' active' if current_page?(path)
-    
+
     link_to text, path, class: class_name
   end
 

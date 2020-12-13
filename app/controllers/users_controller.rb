@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include ApplicationControllerHelper
-  before_action :logged_in?, only: %i[ mypage edit update password_update ]
+  before_action :logged_in?, only: [:mypage, :edit, :update, :password_update]
   def new
     @user = User.new(flash[:user_params])
   end
@@ -17,8 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def login
-  end
+  def login; end
 
   def mypage
     @pagy, @articles = pagy(@current_user.articles)
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
   def edit
     @current_user.attributes = flash[:name] if flash[:name]
   end
-  
+
   def update
     # update_attribute で更新しようとすると、validationチェックが行われないので、
     # 名前欄が空白・長すぎる場合は、モデルのバリデーションと同等のエラーメッセージを手動で表示するようにする
@@ -45,7 +44,7 @@ class UsersController < ApplicationController
   def password_update
     password_flag = true
     # ここで、error_messagesを取得してしまうと、下の処理により同じエラーが重複して表示されてしまうため、ここではフラグ追加
-    flag, unuse = user_name_validation
+    flag, = user_name_validation
     # 現在のパスワードが一致しているか
     if @current_user.authenticate(current_password_params[:current_password])
       # 現在のパスワードが一致していたら、次回以降入力の手間を省くためのフラグ
@@ -65,37 +64,37 @@ class UsersController < ApplicationController
       redirect_with_error flash
     end
   end
-      
 
   private
-    def user_params
-      params.require(:user).permit(:email, :name, :password, :password_confirmation)
-    end
 
-    def user_update_params
-      params.require(:user).permit(:name, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:email, :name, :password, :password_confirmation)
+  end
 
+  def user_update_params
+    params.require(:user).permit(:name, :password, :password_confirmation)
+  end
 
-    def user_update_name_params
-      params.require(:user).permit(:name)
-    end
+  def user_update_name_params
+    params.require(:user).permit(:name)
+  end
 
-    def current_password_params
-      # params.require(:user).permit(:name, :current_password, :password, :password_confirmation)
-      params.require(:user).permit(:current_password)
-    end
+  def current_password_params
+    # params.require(:user).permit(:name, :current_password, :password, :password_confirmation)
+    params.require(:user).permit(:current_password)
+  end
 
-    # モデルを直接『update, validate』などで検証すると、『password』の検証もされてしまうので、ここで検証する
-    def user_name_validation
-      flag, error_message = true, ""
-      if user_update_name_params[:name].empty?
-        flag = false
-        error_message = t('shared.name_blank')
-      elsif user_update_name_params[:name].length > 16
-        flag = false
-        error_message = t('shared.name_too_long')
-      end
-      [flag, error_message]
+  # モデルを直接『update, validate』などで検証すると、『password』の検証もされてしまうので、ここで検証する
+  def user_name_validation
+    flag = true
+    error_message = ""
+    if user_update_name_params[:name].empty?
+      flag = false
+      error_message = t('shared.name_blank')
+    elsif user_update_name_params[:name].length > 16
+      flag = false
+      error_message = t('shared.name_too_long')
     end
+    [flag, error_message]
+  end
 end

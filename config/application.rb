@@ -23,10 +23,10 @@ module App
 
     # rails generate コマンド時の挙動
     # config.generators do |g|
-    #   g.test_framework :rspec, 
-    #     view_specs: false, 
-    #     helper_specs: false, 
-    #     controller_specs: false, 
+    #   g.test_framework :rspec,
+    #     view_specs: false,
+    #     helper_specs: false,
+    #     controller_specs: false,
     #     routing_specs: false
 
     #   # Railsジェネレータがfactory_bot用のファイルを生成するのを無効化

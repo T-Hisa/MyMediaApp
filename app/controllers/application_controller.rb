@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   around_action :switch_locale
 
-
   def index
     redirect_to articles_path
   end
@@ -17,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def change_locale
     back = request.referrer || root_path
-    back.gsub!(/\/(ja|en)/, "/#{params[:locale]}")
+    back.gsub!(%r{/(ja|en)}, "/#{params[:locale]}")
     redirect_to back
   end
 
@@ -36,15 +35,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def current_user
-      @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
-    end
 
-    def logged_in?
-      redirect_to login_path unless @current_user
-    end
+  def current_user
+    @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
+  end
 
-    def set_search_value
-      @search_value = [[t('shared.search_partial'), 0], [t('shared.search_front'), 1], [t('shared.search_back'), 2], [t('shared.search_all'), 3]]
-    end
+  def logged_in?
+    redirect_to login_path unless @current_user
+  end
+
+  def set_search_value
+    @search_value = [[t('shared.search_partial'), 0], [t('shared.search_front'), 1], [t('shared.search_back'), 2], [t('shared.search_all'), 3]]
+  end
 end
