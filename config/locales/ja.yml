@@ -91,5 +91,5 @@ ja:
     name_blank: ユーザー名を入力してください
     name_too_long: ユーザー名は16文字以内で入力してください
     invalid_email: を正しい形式で入力してください
-    search-form: 記事のタイトルを入力
+    search-form: 記事のタイトルで検索
     search: 検索
