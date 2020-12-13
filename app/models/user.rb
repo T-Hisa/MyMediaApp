@@ -18,20 +18,22 @@ class User < ApplicationRecord
   has_many :user_favorite_articles
   has_many :favorite_articles, through: :user_favorite_articles, source: :article
   validates :name, presence: true, length: { maximum: 16 }
+  invalid_message = I18n.t('shared.invalid_email')
   validates :email,
     length: { maximum: 100 },
     uniqueness: { case_sensitive: true },
     format: {
       with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
-      message: 'を正しい形式で入力してください'
+      message: invalid_message
     }
-  validates :password, length: { minimum: 6 }, 
-    format: {
-      with: /[\w]+/
-    }
+  validates :password, length: { minimum: 6 }
 
   private
     def email_downcase
       self.email.downcase!
+    end
+
+    def get_invalid
+      I18n.t('shared.invalid_email')
     end
 end

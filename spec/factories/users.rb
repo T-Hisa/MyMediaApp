@@ -11,18 +11,80 @@
 #  updated_at      :datetime         not null
 #
 FactoryBot.define do
-  factory :user do
-    name { "sample" }
-    email { "sample@sample.com" }
-    password {'sample' }
-    # time { "2020-12-08 13:34:34" }
+
+  factory :correct_user, class: User do
+    name { "correct_name" }
+    email { "correct@correct.com" }
+    password { "correct_password" }
+    password_confirmation { "correct_password" }
+
+    factory :empty_name_user do
+      name { "" }
+    end
+
+    factory :long_name_user do
+      name { "x" * 17 }
+    end
+
+    factory :invalid_email_user do
+      email { "wrong@wrong" }
+    end
+
+    factory :short_password_user do
+      password { "short" }
+      password_confirmation { "short" }
+    end
+
+    factory :not_match_password_user do
+      password { "password" }
+      password_confirmation { "confirmation" }
+    end
+
+  end
+  
+  factory :login_params, class: User do
+    email { "correct@correct.com" }
+    password { "correct_password" }
+    password_confirmation { "correct_password" }
+  end
+  
+  factory :update_name, class: User do
+    name { "update" }
+    
+    factory :update_empty_name do
+      name { "" }
+    end
+    
+    factory :update_long_name do
+      name { "a" * 17 }
+    end
+
+    factory :update_user do
+      name { "update_name" }
+      current_password { "correct_password" }
+      password { "update_password" }
+      password_confirmation { "update_password" }
+
+      factory :update_empty_name_with_password do
+        name { "" }
+      end
+
+      factory :update_with_wrong_password do
+        current_password { "sample" }
+      end
+
+      factory :update_with_invalid_password do
+        password { "testtest" }
+        password_confirmation { "password" }
+      end
+
+      factory :update_with_short_password do
+        password { "test" }
+        password_confirmation { "test" }
+      end
+    end
   end
 
-  # factory :sample_user, class: User do
-  #   name 'sample'
-  #   email 'sample@sample.com'
-  #   password_digest 'sample'
-  # end
   
   # # 基本テスト側のファイルで生成する
   #   # DB保存しない状態で生成(アソシエーションは保存)
@@ -60,6 +122,7 @@ FactoryBot.define do
   #     name: 'Sample'
   #     email: { "{name}".downcase } 
   #   end
+
 
   #   # アソシエーション定義
   #   # Userモデルの参照(author)を持つBookモデルの場合
