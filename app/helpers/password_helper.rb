@@ -2,7 +2,7 @@ module PasswordHelper
   def auto_password_field(form)
     tag.div do
       2.times do |i|
-        concat(tag.div class: 'form-group' do
+        concat (tag.div class: 'form-group' do
           label_text = i == 0 ? t('.password') : t('.password-confirmation')
           type = i == 0 ? :password : :password_confirmation
           class_name = 'form-control'
@@ -17,7 +17,7 @@ module PasswordHelper
   def auto_password_field_for_edit(form)
     tag.div do
       2.times do |i|
-        concat(tag.div class: 'form-group' do
+        concat (tag.div class: 'form-group' do
           label_text, type, id_name = if i == 0
             [t('.password'), :password, 'password']
           else
