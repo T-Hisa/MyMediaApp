@@ -4,19 +4,21 @@ module NameHelper
     parent_class_name << ' user-edit-form' if @current_user && current_page?(edit_user_path(@current_user))
     class_name = 'form-control'
     class_name << ' border-danger' if error_text_include?("ユーザー")
-    
+
     tag.div class: parent_class_name do
       concat form.label :name, t('.user-name')
-      concat @current_user.present? ?
-      (form.text_field :name, value: @current_user.name, class: class_name, id: "name_field") :
-      (form.text_field :name, class: class_name)
+      concat if @current_user.present?
+  (form.text_field :name, value: @current_user.name, class: class_name, id: "name_field")
+else
+  (form.text_field :name, class: class_name)
+end
     end
   end
-  
+
   def auto_name_field_for_edit(form)
     class_name = 'form-control'
     class_name << ' border-danger' if error_text_include?("ユーザー")
-    
+
     tag.div class: 'form-group user-edit-form' do
       concat form.label :name, t('.user-name')
       concat form.text_field :name, value: @current_user.name, class: class_name, id: "name"

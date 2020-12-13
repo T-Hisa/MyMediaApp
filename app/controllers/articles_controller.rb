@@ -1,19 +1,19 @@
-class ArticlesController< ApplicationController
+class ArticlesController < ApplicationController
   include ApplicationControllerHelper
-  before_action :set_article, only: %i[show edit update destroy favorite]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :favorite]
   before_action :logged_in?, except: :index
 
   def index
     if search_params
       case params[:search_type]
-        when "0"
-          search_text = "%#{search_params}%"
-        when "1"
-          search_text = "#{search_params}%"
-        when "2"
-          search_text = "%#{search_params}"
-        when "3"
-          search_text = "#{search_params}"
+      when "0"
+        search_text = "%#{search_params}%"
+      when "1"
+        search_text = "#{search_params}%"
+      when "2"
+        search_text = "%#{search_params}"
+      when "3"
+        search_text = search_params.to_s
       end
       @pagy, @articles = pagy(Article.where("title LIKE ?", search_text))
     else
@@ -21,8 +21,7 @@ class ArticlesController< ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     # 新規作成(create)が失敗したとき、際表示されたページの入力欄が空白にならないように、初期値を flash[:article] で渡す。
@@ -37,16 +36,18 @@ class ArticlesController< ApplicationController
       flash[:success] = t('shared.created-article', title: article.title)
       redirect_to article
     else
-      cause_some_error(t('shared.save-false')+t('shared.re-select-image')) if image_params[:image]
+      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
       cause_some_error(article.errors.full_messages)
-      redirect_with_error({"article": article_params})
+      redirect_with_error({ "article": article_params })
     end
   end
 
   def favorite
-    @current_user.favorite_articles.include?(@article) ?
-      @current_user.favorite_articles.delete(@article) :
+    if @current_user.favorite_articles.include?(@article)
+      @current_user.favorite_articles.delete(@article)
+    else
       @current_user.favorite_articles.push(@article)
+    end
     render
   end
 
@@ -66,26 +67,27 @@ class ArticlesController< ApplicationController
       @article.image.attach(image_params[:image])
       redirect_to @article, flash: { success: t('shared.updated-article', title: @article.title) }
     else
-      cause_some_error(t('shared.save-false')+t('shared.re-select-image')) if image_params[:image]
+      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
       cause_some_error(@article.errors.full_messages)
-      redirect_with_error({"article": article_params})
+      redirect_with_error({ "article": article_params })
     end
   end
 
   private
-    def article_params
-      params.require(:article).permit(:title, :content, :summary, :user_id)
-    end
 
-    def image_params
-      params.require(:article).permit(:image)
-    end
+  def article_params
+    params.require(:article).permit(:title, :content, :summary, :user_id)
+  end
 
-    def set_article
-      @article = Article.find(params[:id])
-    end
+  def image_params
+    params.require(:article).permit(:image)
+  end
 
-    def search_params
-      params[:title]
-    end
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def search_params
+    params[:title]
+  end
 end

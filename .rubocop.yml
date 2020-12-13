@@ -1,1 +1,17 @@
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'db/*'
+    - 'db/*/*'
+    - 'spec/*/*'
+    - 'node_modules/*'
+    - 'node_modules/*/*'
+    - 'node_modules/*/*/*'
+    - 'node_modules/*/*/*/*'
+    - 'node_modules/*/*/*/*/*'
+
+
+Style/AsciiComments:
+  Enabled: false

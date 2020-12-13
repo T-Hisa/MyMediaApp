@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :articles
     get 'mypage', to: 'users#mypage'
     patch 'update/password', to: 'users#password_update'
-    resources :users, only: %i[new create edit update]
+    resources :users, only: [:new, :create, :edit, :update]
     namespace :admin do
       resources :articles
     end

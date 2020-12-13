@@ -1,9 +1,8 @@
 module PasswordHelper
-
   def auto_password_field(form)
     tag.div do
       2.times do |i|
-        concat (tag.div class: 'form-group' do
+        concat(tag.div class: 'form-group' do
           label_text = i == 0 ? t('.password') : t('.password-confirmation')
           type = i == 0 ? :password : :password_confirmation
           class_name = 'form-control'
@@ -18,22 +17,24 @@ module PasswordHelper
   def auto_password_field_for_edit(form)
     tag.div do
       2.times do |i|
-        concat (tag.div class: 'form-group' do
-
-          label_text, type, id_name = i == 0 ? 
-            [t('.password'), :password, 'password'] : [t('.password-confirmation'), :password_confirmation, 'password_confirmation']
+        concat(tag.div class: 'form-group' do
+          label_text, type, id_name = if i == 0
+            [t('.password'), :password, 'password']
+          else
+           [t('.password-confirmation'), :password_confirmation, 'password_confirmation']
+          end
           class_name = 'form-control'
           case I18n.locale.to_s
-            when "ja"
+          when "ja"
               flag_text = i == 0 ? /パスワード.+入力/ : /パスワード\(確認\)/
               flag = error_text_include?(flag_text)
-            when "en"
+          when "en"
               # 英語の場合、new password の欄で判定できる条件ができないので、複数回に渡ってフラグ判定を行う。
-              if i == 0 
+              if i == 0
                 flag_text_1 = /password\sis/i
                 flag_text_2 = /match\spassword/i
                 flag = error_text_include?(flag_text_1) || error_text_include?(flag_text_2)
-              else 
+              else
                 flag_text = /password\sconfirmation/i
                 flag = error_text_include?(flag_text)
               end
