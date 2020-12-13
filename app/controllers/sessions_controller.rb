@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       redirect_to mypage_path, flash: { "success": t('shared.login-success', name: user.name) }
     else
       redirect_back fallback_location: root_path, flash: {
-        "error": t('shared.login-error'),
+        "error": [t('shared.login-error')],
         "email": params[:session][:email]
       }
     end

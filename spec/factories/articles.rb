@@ -21,8 +21,24 @@
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
-  factory :article do
-    name { "MyString" }
-    time { "2020-12-08 13:34:34" }
+  factory :correct_article, class: Article do
+    title { "correct" }
+    content { "correct" }
+    summary { "" }
+    association :user,
+      factory: :correct_user
+
+    factory :long_title_article do
+      title { "x" * 11 } 
+    end
+
+    factory :empty_title_article, class: Article do
+      title { "" }
+    end
+
+    factory :empty_content_article, class: Article do
+      content { "" }
+    end
+
   end
 end

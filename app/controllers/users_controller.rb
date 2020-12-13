@@ -32,10 +32,13 @@ class UsersController < ApplicationController
   def update
     flag = true
     # update_attribute で更新しようとすると、validationチェックが行われないので、
-    # 名前欄が空白の場合は、モデルのバリデーションと同等のエラーメッセージを手動で表示するようにする
+    # 名前欄が空白・長すぎる場合は、モデルのバリデーションと同等のエラーメッセージを手動で表示するようにする
     if user_update_name_params[:name].empty?
       flag = false
       error_message = t('shared.name_blank')
+    else user_update_name_params[:name].size >  16
+      flag = false
+      error_message = t('shared.name_too_long')
     end
     # バリデーションチェックが行われない、update 等のメソッドを使用すると、password までバリデーションが行われてしまう。良い方法が見つからなかったので妥協。
     if flag && @current_user.update_attribute(:name, user_update_name_params[:name])

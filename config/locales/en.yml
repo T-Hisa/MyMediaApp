@@ -118,3 +118,5 @@ en:
     search_back: Backward Match
     search_partial: Partial Match
     name_blank: User Name can't be blank
+    name_too_long: User Name is too long (maximum is 16 characters)
+    invalid_email: "field: please input correct format"

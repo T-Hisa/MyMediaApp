@@ -89,3 +89,5 @@ ja:
     search_back: 後方一致
     search_partial: 部分一致
     name_blank: ユーザー名を入力してください
+    name_too_long: ユーザー名は16文字以内で入力してください
+    invalid_email: を正しい形式で入力してください
