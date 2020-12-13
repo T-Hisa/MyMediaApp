@@ -1,27 +1,18 @@
 require 'rails_helper'
+require 'helpers/users_helper_spec'
+require 'helpers/articles_helper_spec'
 
 RSpec.describe "Articles", type: :request do
+  include UsersTestHelper
+  include ArticlesTestHelper
+
   describe "POST create" do
 
     # session[:user_id]に値を入れるか、login を済ましておかなければならない。
-    let(:user) do
-      user = create(:correct_user)
-      params = {
-        session: attributes_for(:login_params)
-      }
-      post '/ja/login', params: params
-      user
-    end
+    let(:user) { before_create_and_log_in }
 
     context "when correct parameter given" do
-
-      # FactoryBotのAPI にArticle と User を紐づけるような物がなかったので、直接user_idを指定している。
-      let (:correct_params) do
-        params = {}
-        params[:article] = attributes_for(:correct_article)
-        params[:article][:user_id] = user.id
-        params
-      end
+      let (:correct_params) { article_params(user.id, attributes_for(:correct_article)) }
 
       it "article model count increments by 1" do
         expect{ post '/ja/articles', params: correct_params}.to change{Article.count}
@@ -29,12 +20,7 @@ RSpec.describe "Articles", type: :request do
     end
     
     context "when long-title parameter given" do
-      let(:long_title_params) do
-        params = {}
-        params[:article] = attributes_for(:long_title_article)
-        params[:article][:user_id] = user.id
-        params
-      end
+      let(:long_title_params) { article_params(user.id, attributes_for(:long_title_article)) }
       
       it "article model count do not change" do
         expect{ post '/ja/articles', params: long_title_params}.not_to change{Article.count}
@@ -52,12 +38,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "when empty-title parameter given" do
-      let(:empty_title_params) do
-        params = {}
-        params[:article] = attributes_for(:empty_title_article)
-        params[:article][:user_id] = user.id
-        params
-      end
+      let(:empty_title_params) { article_params(user.id, attributes_for(:empty_title_article))}
 
       it "article model count do not change" do
         expect{ post '/ja/articles', params: empty_title_params}.not_to change{Article.count}
@@ -75,12 +56,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "when empty-content parameter given" do
-      let(:empty_content_params) do
-        params = {}
-        params[:article] = attributes_for(:empty_content_article)
-        params[:article][:user_id] = user.id
-        params
-      end
+      let(:empty_content_params) { article_params(user.id, attributes_for(:empty_content_article)) }
 
       it "article model count do not change" do
         expect{ post '/ja/articles', params: empty_content_params}.not_to change{Article.count}
@@ -103,21 +79,13 @@ RSpec.describe "Articles", type: :request do
     
     before do
       # テスト内で呼び出したら、全体のArticleの数が変更してしまうので、テスト前に作成しておく
+
       article
-      # 『factory :current_article do ... の association』 と同等のパラメータにする
-      params = {
-        session: attributes_for(:login_params)
-      }
-      post '/ja/login', params: params
+      before_log_in
     end
 
     context "when correct parameter given" do
-      let (:correct_params) do
-        params = {}
-        params[:article] = attributes_for(:correct_article)
-        params[:article][:user_id] = article.user_id
-        params
-      end
+      let (:correct_params) { article_params(article.user_id, attributes_for(:correct_article)) }
 
       it "article model count does not change" do
         expect{ patch "/ja/articles/#{article.id}", params: correct_params}.not_to change{Article.count}
@@ -125,12 +93,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "when long-title parameter given" do
-      let(:long_title_params) do
-        params = {}
-        params[:article] = attributes_for(:long_title_article)
-        params[:article][:user_id] = article.user_id
-        params
-      end
+      let(:long_title_params) { article_params(article.user_id, attributes_for(:long_title_article)) }
       
       it "article model count do not change" do
         expect{ patch "/ja/articles/#{article.id}", params: long_title_params}.not_to change{Article.count}
@@ -148,12 +111,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "when empty-title parameter given" do
-      let(:empty_title_params) do
-        params = {}
-        params[:article] = attributes_for(:empty_title_article)
-        params[:article][:user_id] = article.user_id
-        params
-      end
+      let(:empty_title_params) { article_params(article.user_id, attributes_for(:empty_title_article)) }
 
       it "article model count do not change" do
         expect{ patch "/ja/articles/#{article.id}", params: empty_title_params}.not_to change{Article.count}
@@ -171,12 +129,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "when empty-content parameter given" do
-      let(:empty_content_params) do
-        params = {}
-        params[:article] = attributes_for(:empty_content_article)
-        params[:article][:user_id] = article.user_id
-        params
-      end
+      let(:empty_content_params) { article_params(article.user_id, attributes_for(:empty_content_article)) }
 
       it "article model count do not change" do
         expect{ patch "/ja/articles/#{article.id}", params: empty_content_params}.not_to change{Article.count}

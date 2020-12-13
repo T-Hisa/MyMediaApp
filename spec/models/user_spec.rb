@@ -36,7 +36,7 @@ RSpec.describe User, type: :model do
 
       let(:invalid_email_user) { build(:invalid_email_user) }
       it 'wrong-email causes error' do
-        expect(wrong_email_user).to be_invalid
+        expect(invalid_email_user).to be_invalid
       end
 
       let(:short_password_user) { build(:short_password_user)}

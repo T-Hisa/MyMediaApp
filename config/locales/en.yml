@@ -83,7 +83,7 @@ en:
     login:
       email: e-mail
       login: Login
-      password: Passworrd
+      password: Password
       password-confirmation: Password Confirmation
   shared:
     mypage: My Page
@@ -120,3 +120,5 @@ en:
     name_blank: User Name can't be blank
     name_too_long: User Name is too long (maximum is 16 characters)
     invalid_email: "field: please input correct format"
+    search-form: Search by Article Title
+    search: Search

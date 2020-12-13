@@ -1,15 +1,18 @@
-require 'rails_helper'
+module UsersTestHelper
+  def before_create_and_log_in
+    user = create(:correct_user)
+    params = {
+      session: attributes_for(:login_params)
+    }
+    post '/ja/login', params: params
+    user
+  end
 
-# Specs in this file have access to a helper object that includes
-# the UsersHelper. For example:
-#
-# describe UsersHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe UsersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  def before_log_in
+    params = {
+      session: attributes_for(:login_params)
+    }
+    post '/ja/login', params: params
+  end
+  
 end

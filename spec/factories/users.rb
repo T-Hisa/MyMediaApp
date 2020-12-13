@@ -18,6 +18,13 @@ FactoryBot.define do
     password { "correct_password" }
     password_confirmation { "correct_password" }
 
+    factory :sample_user do
+      name { "sample" }
+      email { "sample@sample.com" }
+      password { "password" }
+      password_confirmation { "password" }
+    end
+
     factory :empty_name_user do
       name { "" }
     end
