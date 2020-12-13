@@ -1,6 +1,8 @@
 require 'rails_helper'
+require 'helpers/users_helper_spec'
 
 RSpec.describe "Users", type: :request do
+  include UsersTestHelper
   
   describe "POST create" do
     context "when given correct parameter" do
@@ -142,15 +144,9 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "PATCH update" do
-    let (:user) { create(:correct_user) }
-    before do 
-      # テスト内で呼び出したら、Userの総数が変更してしまうので、テスト前に呼び出しておく
-      user
-      params = {
-        session: attributes_for(:login_params)
-      }
-      post '/ja/login', params: params
-    end
+    let (:user) { before_create_and_log_in }
+    # テスト内で呼び出したら、Userの総数が変更してしまうので、テスト前に呼び出しておく
+    before { user }
 
     context "when correct name parameter given" do
       let (:update_params) {
@@ -159,6 +155,11 @@ RSpec.describe "Users", type: :request do
 
       it "user count does not change" do
         expect{patch "/ja/users/#{user.id}", params: update_params }.not_to change{ User.count }
+      end
+
+      it "user name change" do
+        patch "/ja/users/#{user.id}", params: update_params
+        expect(user.reload.name).to eq("update")
       end
     end
 
@@ -196,14 +197,8 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "PATCH password_update" do
-    let (:user) { create(:correct_user) }
-    before do
-      user
-      params = {
-        session: attributes_for(:login_params)
-      }
-      post '/ja/login', params: params
-    end
+    let (:user) { before_create_and_log_in }
+    before { user }
 
     
     context "update:: when empty-name parameters given" do

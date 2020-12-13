@@ -30,16 +30,9 @@ class UsersController < ApplicationController
   end
   
   def update
-    flag = true
     # update_attribute で更新しようとすると、validationチェックが行われないので、
     # 名前欄が空白・長すぎる場合は、モデルのバリデーションと同等のエラーメッセージを手動で表示するようにする
-    if user_update_name_params[:name].empty?
-      flag = false
-      error_message = t('shared.name_blank')
-    else user_update_name_params[:name].size >  16
-      flag = false
-      error_message = t('shared.name_too_long')
-    end
+    flag, error_message = user_name_validation
     # バリデーションチェックが行われない、update 等のメソッドを使用すると、password までバリデーションが行われてしまう。良い方法が見つからなかったので妥協。
     if flag && @current_user.update_attribute(:name, user_update_name_params[:name])
       redirect_to mypage_path, flash: { "success": t('shared.update-user-info') }
@@ -50,11 +43,9 @@ class UsersController < ApplicationController
   end
 
   def password_update
-    user = User.find_by(id: session[:user_id])
-    flag = true
-    @current_user.attributes = user_update_name_params
+    password_flag = true
     # ここで、error_messagesを取得してしまうと、下の処理により同じエラーが重複して表示されてしまうため、ここではフラグ追加
-    flag = false unless @current_user.validate
+    flag, unuse = user_name_validation
     # 現在のパスワードが一致しているか
     if @current_user.authenticate(current_password_params[:current_password])
       # 現在のパスワードが一致していたら、次回以降入力の手間を省くためのフラグ
@@ -93,5 +84,18 @@ class UsersController < ApplicationController
     def current_password_params
       # params.require(:user).permit(:name, :current_password, :password, :password_confirmation)
       params.require(:user).permit(:current_password)
+    end
+
+    # モデルを直接『update, validate』などで検証すると、『password』の検証もされてしまうので、ここで検証する
+    def user_name_validation
+      flag, error_message = true, ""
+      if user_update_name_params[:name].empty?
+        flag = false
+        error_message = t('shared.name_blank')
+      elsif user_update_name_params[:name].length > 16
+        flag = false
+        error_message = t('shared.name_too_long')
+      end
+      [flag, error_message]
     end
 end

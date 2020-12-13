@@ -4,7 +4,6 @@ class ArticlesController< ApplicationController
   before_action :logged_in?, except: :index
 
   def index
-    binding.pry
     if search_params
       case params[:search_type]
         when "0"

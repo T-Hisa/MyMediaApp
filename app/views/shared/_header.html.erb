@@ -44,10 +44,10 @@
       </div>
     </div>
     <%= form_with url: articles_path, method: :get, class: 'form-inline my-2 my-lg-0', local: true do |f| %>
-      <%= f.text_field :title, class: 'form-control mr-sm-2' %>
+      <%= f.text_field :title, placeholder: t('shared.search-form'), class: 'form-control mr-sm-2' %>
       <%= select_tag :search_type, options_for_select(@search_value, params[:search_type]), class: 'search_form' %>
       <%= button_tag type: 'submit', name: '', class: 'left-margin-5 btn btn-outline-success my-2 my-sm-0' do %>
-        検索
+        <%= t('shared.search') %>
       <% end %>
     <% end %>
   </div>

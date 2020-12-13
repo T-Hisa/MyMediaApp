@@ -1,15 +1,9 @@
-require 'rails_helper'
-
-# Specs in this file have access to a helper object that includes
-# the ArticlesHelper. For example:
-#
-# describe ArticlesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe ArticlesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+module ArticlesTestHelper
+  def article_params(user_id, article_params)
+    # FactoryBotのAPI にArticle と User を紐づけるような物がなかったので、直接user_idを指定している。
+    params = {}
+    params[:article] = article_params
+    params[:article][:user_id] = user_id
+    params
+  end
 end
