@@ -7,12 +7,8 @@
     <% end %>
   </h1>
 </div>
-<ul class="d-flex flex-article-index">
-  <% @articles.each do |article| %>
-    <li>
-      <%= render article %>
-    </li>
-  <% end %>
+<ul class="d-flex flex-article">
+  <%= render partial: 'article', collection: @articles %>
 </ul>
 <% if @pagy.vars[:count] > 6 %>
   <div class="d-flex justify-content-center mb-2">

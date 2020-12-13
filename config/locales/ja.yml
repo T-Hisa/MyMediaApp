@@ -34,6 +34,7 @@ ja:
       name: 名前
       user-article-list: 投稿した記事
       favorite-articles: お気に入り記事
+      no-favorite-article: お気に入りの記事はありません。
     edit:
       edit-user: ユーザー情報編集
       change: 変更

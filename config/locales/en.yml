@@ -65,6 +65,7 @@ en:
       name: User Name
       user-article-list: Posted Articles
       favorite-articles: Favorite Articles
+      no-favorite-article: There is no favorite article.
     edit:
       edit-user: Edit User Information
       change: Change
