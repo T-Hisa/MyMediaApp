@@ -145,3 +145,35 @@
   padding: 2px;
   background: cornsilk;
 }
+
+.comment-form-wrapper {
+  padding: 30px 10px;
+  background-color: floralwhite;
+  margin-top: 30px;
+  max-width: 1000px;
+
+  .comment-form-container {
+    text-align: right;
+
+  }
+}
+
+.comment-container {
+  padding: 15px 20px;
+  background-color: whitesmoke;
+  margin-top: 20px;
+
+  .comment-content {
+    margin: 0;
+  }
+
+  .comment-user-container {
+    background-color: floralwhite;
+    width: fit-content;
+    padding: 0 20px;
+
+    .comment-user-name {
+      margin-left: 10px;
+    }
+  }
+}

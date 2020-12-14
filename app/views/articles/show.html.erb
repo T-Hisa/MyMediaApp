@@ -31,3 +31,10 @@
   </div>
 </div>
 
+<div class="container comment-form-wrapper">
+  <%= render partial: 'comments/comment_form' %>
+</div>
+  <% if @article.comments.any? %>
+    <%= render partial: 'comments/comment', collection: @article.comments %>
+  <% end %>
+

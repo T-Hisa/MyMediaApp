@@ -1,0 +1,11 @@
+<div class="container article-comments-wrapper">
+  <h3>コメント</h3>
+  <%= form_with model: @comment, class: 'comment-form-container' do |f| %>
+    <%= f.hidden_field :article_id %>
+    <div class="form-group">
+      <%= f.text_field :content, class: 'form-control mr-sm-2' %>
+    </div>
+    <%= f.submit '送信', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+

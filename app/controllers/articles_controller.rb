@@ -21,7 +21,9 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @comment = @article.comments.new
+  end
 
   def new
     # 新規作成(create)が失敗したとき、際表示されたページの入力欄が空白にならないように、初期値を flash[:article] で渡す。

@@ -1,0 +1,10 @@
+<div class="comment-container">
+  <div class="comment-user-containner">
+    <p>
+      <small>コメントユーザ：</small>
+      <span class="comment-user-name"><%= comment.user.name if comment.user%></span>
+    </p>
+  </div>
+
+  <%= simple_format comment.content, class: "comment-content" %>
+</div>

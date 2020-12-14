@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'comments', to: 'comments#create'
   namespace :admin do
     resources :articles, only: %i(index destroy)
     # get '/articles', to: 'admin/articles#index'
@@ -10,7 +11,9 @@ Rails.application.routes.draw do
     delete 'logout', to: 'sessions#destroy'
     post 'change_locale', to: 'application#change_locale'
     post 'favorite', to: 'articles#favorite'
-    resources :articles
+    resources :articles do
+      resources :commments, only: %i(create destroy)
+    end
     get 'mypage', to: 'users#mypage'
     patch 'update/password', to: 'users#password_update'
     resources :users, only: %i[new create edit update]
