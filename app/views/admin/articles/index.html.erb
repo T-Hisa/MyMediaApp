@@ -11,6 +11,7 @@
       <th>作成者</th>
       <th>作成日</th>
       <th>更新日</th>
+      <th><span>下書き</span></th>
       <th>画像</th>
       <th>削除</th>
     </tr>
@@ -23,6 +24,13 @@
         <td><%= article.user.name %></td>
         <td><%= article.created_at.to_s(:datetime_jp) %></td>
         <td><%= article.updated_at.to_s(:datetime_jp) %></td>
+        <td>
+          <% if article.isDraft? %>
+            <i class="far fa-circle"></i>
+          <% else %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        </td>
         <% if article.image.attached? %>
           <td><%= image_tag article.image, class: 'admin-article-image' %></td>
         <% else %>
