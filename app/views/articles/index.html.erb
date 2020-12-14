@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center top-margin-sm article-title">
   <h1 class="article-title-index">
     <% if @articles.count == 0 %>
-      対象の記事はありません
+      <%= t('.no-article-list') %>
     <% else %>
       <%= t('.article-list') %>
     <% end %>

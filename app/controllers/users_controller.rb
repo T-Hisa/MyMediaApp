@@ -20,8 +20,9 @@ class UsersController < ApplicationController
   def login; end
 
   def mypage
-    @pagy, @articles = pagy(@current_user.articles)
-    @pagy_2, @favorite_articles = pagy(@current_user.favorite_articles) if @current_user.favorite_articles
+    @pagy, @articles = pagy(@current_user.articles.where(isDraft: false))
+    @pagy_for_favorite, @favorite_articles = pagy(@current_user.favorite_articles) if @current_user.favorite_articles
+    @pagy_for_draft, @draft_articles = pagy(@current_user.articles.where(isDraft: true))
   end
 
   def edit

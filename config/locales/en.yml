@@ -47,6 +47,7 @@ en:
   articles:
     index:
       article-list: Article List
+      no-article-list: There is no target article.
     new:
       new-article: Create Article
       article-save: Save
@@ -54,18 +55,22 @@ en:
       edit-article: Edit Article
       back: Back
     show:
-      edit-article: Edit Article
-      delete-article: Delete Article
+      edit-article: Edit
+      delete-article: Delete
       detail-article: Article Detail
+      draft-article: Draft
   users:
     mypage:
       user-info: User Information
       edit-user: Edit User Information
       email: e-mail
       name: User Name
-      user-article-list: Posted Articles
+      user-article-list: Post Articles
+      no-user-article: There is no article you've posted.
       favorite-articles: Favorite Articles
       no-favorite-article: There is no favorite article.
+      draft-articles: Draft Articles
+      no-draft-article: There is no draft article.
     edit:
       edit-user: Edit User Information
       change: Change
@@ -100,7 +105,8 @@ en:
     only-user-name-confirmation: You will change only user-name. OK?
     back: Back
     update: Update
-    save: Save
+    post: Post
+    save-draft: Save Draft
     wrong-current-password: Input Current Password Was Wrong
     update-user-info: Updated User Information
     update-user-name-and-password: Updated User Information. Please Note Password Was Changed

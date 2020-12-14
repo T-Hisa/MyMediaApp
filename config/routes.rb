@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   end
   scope "/:locale" do
     root "articles#index"
+    post 'favorite', to: 'articles#favorite'
+    post 'articles/draft', to: 'articles#create'
+    patch 'articles/draft', to: 'articles#update'
     get 'login', to: 'users#login'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     post 'change_locale', to: 'application#change_locale'
-    post 'favorite', to: 'articles#favorite'
     resources :articles
     get 'mypage', to: 'users#mypage'
     patch 'update/password', to: 'users#password_update'

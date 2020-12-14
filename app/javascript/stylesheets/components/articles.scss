@@ -20,6 +20,11 @@
     max-width: 900px;
     margin: 0 auto;
     padding-left: 30px;
+
+    .draft-badge {
+      margin-left: 10px;
+      font-size: 1rem;
+    }
   }
 
   > h1 {
@@ -133,15 +138,23 @@
   max-height: 800px;
   padding: 30px;
   background-color: whitesmoke;
-  margin: 10px;
+  margin: 10px auto;
 
   
   .article-preview {
     width: 100%;
   }
 }
+
 .search_form {
   margin: 10px;
   padding: 2px;
   background: cornsilk;
+}
+
+.btn-wrapper {
+  margin: 40px auto;
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
 }

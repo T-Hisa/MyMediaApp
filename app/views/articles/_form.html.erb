@@ -26,9 +26,18 @@
       <%= image_tag "", id: "uploaded-image", class: "article-preview" %>
     </div>
   </div>
-  <button type="submit" id="submit-btn" class='btn btn-primary user-modal-button'>
-    <%= t('shared.save') %>
-  </button>
+  <div class="btn-wrapper">
+    <button type="submit" id="submit-btn" class='btn btn-primary user-modal-button'>
+      <%= t('shared.post') %>
+    </button>
+    <% if @article.isDraft || @article.created_at.nil? %>
+      <%= form_with url: articles_draft_path do %>
+        <button type="submit" id="submit-btn" class='btn btn-success user-modal-button'>
+          <%= t('shared.save-draft') %>
+        </button>
+      <% end %> 
+    <% end %>
+  </div>
 <% end %>
 
 <%= javascript_pack_tag 'articles/form', 'data-turbolinks-track': 'reload' %>
