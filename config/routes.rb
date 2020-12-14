@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post 'comments', to: 'comments#create'
+  delete 'comments', to: 'comments#destory'
   namespace :admin do
     resources :articles, only: %i(index destroy)
     # get '/articles', to: 'admin/articles#index'

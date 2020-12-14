@@ -1,10 +1,13 @@
 <div class="comment-container">
   <div class="comment-user-containner">
     <p>
-      <small>コメントユーザ：</small>
+      <small>ユーザ：</small>
       <span class="comment-user-name"><%= comment.user.name if comment.user%></span>
+      <% if comment.user == @current_user %>
+        <%= link_to '削除', comments_path, method: :delete, class: 'comment-delete-btn btn btn-outline-dark' %>
+      <% end %>
     </p>
   </div>
 
-  <%= simple_format comment.content, class: "comment-content" %>
+  <%= simple_format comment.content, class: "comment-content bg-white" %>
 </div>

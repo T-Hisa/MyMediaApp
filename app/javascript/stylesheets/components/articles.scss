@@ -165,6 +165,8 @@
 
   .comment-content {
     margin: 0;
+    margin-left: 30px;
+    padding: 10px;
   }
 
   .comment-user-container {
@@ -172,8 +174,21 @@
     width: fit-content;
     padding: 0 20px;
 
-    .comment-user-name {
-      margin-left: 10px;
+    p {
+      display: flex;
+
+      small {
+        line-height: 2.3;
+      }
+      
+      .comment-user-name {
+        margin-left: 10px;
+      }
+  
+      .comment-delete-btn {
+        margin-left: auto;
+      }
     }
+
   }
 }
