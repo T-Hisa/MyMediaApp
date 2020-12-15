@@ -51,9 +51,11 @@ class ApplicationController < ActionController::Base
     end
 
     def already_login?
-      redirect_to root_path, flash: {
-        info: t('shared.already-login')
-      }
+      if @current_user
+        redirect_to root_path, flash: {
+          info: t('shared.already-login')
+        }
+      end
     end
     
     def set_search_value
