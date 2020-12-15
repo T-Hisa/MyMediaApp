@@ -26,9 +26,22 @@
       <%= image_tag "", id: "uploaded-image", class: "article-preview" %>
     </div>
   </div>
-  <button type="submit" id="submit-btn" class='btn btn-primary user-modal-button'>
-    <%= t('shared.save') %>
-  </button>
-<% end %>
+  <div class="btn-wrapper">
+    <button type="submit" id="submit-btn" class='btn btn-primary user-modal-button'>
+      <%= t('shared.post') %>
+    </button>
+    <% end %>
+    <% if @article.isDraft || @article.created_at.nil? %>
+      <%= form_with scope: :article, url: articles_draft_path do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :title %>
+        <%= f.hidden_field :content %>
+        <%= f.hidden_field :summary %>
+        <button type="submit" id="submit-btn" class='btn btn-success user-modal-button'>
+          <%= t('shared.save-draft') %>
+        </button>
+      <% end %> 
+    <% end %>
+  </div>
 
 <%= javascript_pack_tag 'articles/form', 'data-turbolinks-track': 'reload' %>

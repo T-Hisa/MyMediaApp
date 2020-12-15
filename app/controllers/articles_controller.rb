@@ -4,21 +4,7 @@ class ArticlesController < ApplicationController
   before_action :logged_in?, except: :index
 
   def index
-    if search_params
-      case params[:search_type]
-      when "0"
-        search_text = "%#{search_params}%"
-      when "1"
-        search_text = "#{search_params}%"
-      when "2"
-        search_text = "%#{search_params}"
-      when "3"
-        search_text = search_params.to_s
-      end
-      @pagy, @articles = pagy(Article.where("title LIKE ?", search_text))
-    else
-      @pagy, @articles = pagy(Article.all)
-    end
+    decide_search_text
   end
 
   def show; end
@@ -30,16 +16,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article = Article.new(article_params)
-    if article.save
-      article.image.attach(image_params[:image])
-      flash[:success] = t('shared.created-article', title: article.title)
-      redirect_to article
-    else
-      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
-      cause_some_error(article.errors.full_messages)
-      redirect_with_error({ "article": article_params })
-    end
+    @article = Article.new(article_params)
+    create_article
+  end
+
+  def draft_create
+    @article = Article.new(article_params)
+    @article.isDraft = true
+    create_article
   end
 
   def favorite
@@ -63,6 +47,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @article.isDraft = url_for.include?('draft') ? true : false
     if @article.update(article_params)
       @article.image.attach(image_params[:image])
       redirect_to @article, flash: { success: t('shared.updated-article', title: @article.title) }
@@ -89,5 +74,35 @@ class ArticlesController < ApplicationController
 
   def search_params
     params[:title]
+  end
+
+  def decide_search_text
+    if search_params
+      case params[:search_type]
+      when "0"
+        search_text = "%#{search_params}%"
+      when "1"
+        search_text = "#{search_params}%"
+      when "2"
+        search_text = "%#{search_params}"
+      when "3"
+        search_text = search_params.to_s
+      end
+      @pagy, @articles = pagy(Article.where("isDraft = false AND title LIKE ?", search_text))
+    else
+      @pagy, @articles = pagy(Article.where('isDraft = false'))
+    end
+  end
+
+  def create_article
+    if @article.save
+      @article.image.attach(image_params[:image])
+      flash[:success] = t('shared.created-article', title: @article.title)
+      redirect_to @article
+    else
+      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
+      cause_some_error(@article.errors.full_messages)
+      redirect_with_error({ "article": article_params })
+    end
   end
 end

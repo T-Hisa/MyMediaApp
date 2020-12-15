@@ -1,32 +1,55 @@
 <div class="d-flex align-items-center top-margin-sm">
   <h1><%= t('.user-info') %></h1>
-  <%= link_to t('.edit-user'), edit_user_path(@current_user), class: 'btn btn-outline-dark edit-link' %>
+  <%= link_to t('.edit-user'), edit_user_path(@current_user), class: 'btn btn-outline-dark user-edit-link' %>
 </div>
 <div class="container user-info-container">
   <div class="user-info-wrapper"><%=  t('.email') %>：<%= simple_format @current_user.email, class: "user-info bg-light" %></div>
   <div class="user-info-wrapper"><%= t('.name') %>：<%= simple_format @current_user.name, class: "user-info bg-light" %></div>
-  <div class="user-info-wrapper"><%= t('.user-article-list' )%>：</div>
-  <ul class="d-flex flex-article mypage-articles">
-    <%= render partial: 'articles/article', collection: @articles %>
-  </ul>
-  <% if @pagy.vars[:count] > 6 %>
-    <div class="d-flex justify-content-center mb-2">
-      <%== pagy_bootstrap_nav(@pagy) %>
-    </div>
-  <% end %>
+  <div class="user-info-wrapper"><%= t('.user-article-list' )%>：
+    <% if @articles.present? %>
+      <ul class="d-flex flex-article mypage-articles">
+        <%= render partial: 'articles/article', collection: @articles %>
+      </ul>
+      <% if @pagy.vars[:count] > 6 %>
+        <div class="d-flex justify-content-center mb-2">
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
+    <% else %>
+      <ul class="d-flex flex-article mypage-articles">
+        <%= t('.no-user-article') %>
+      </ul>
+    <% end %>
+  </div>
   <div class="user-info-wrapper"><%= t('.favorite-articles') %>：
     <% if @favorite_articles.present? %>
       <ul class="d-flex flex-article mypage-articles">
         <%= render partial: 'articles/article', collection: @favorite_articles %>
       </ul>
-      <% if @pagy_2.vars[:count] > 6 %>
+      <% if @pagy_for_favorite.vars[:count] > 6 %>
         <div class="d-flex justify-content-center mb-2">
-          <%== pagy_bootstrap_nav(@pagy_2) %>
+          <%== pagy_bootstrap_nav(@pagy_for_favorite) %>
         </div>
       <% end %>
     <% else %>
     <ul class="d-flex flex-article mypage-articles">
       <%= t('.no-favorite-article') %>
+    </ul>
+    <% end %>
+  </div>
+  <div class="user-info-wrapper"><%= t('.draft-articles') %>：
+    <% if @draft_articles.present? %>
+      <ul class="d-flex flex-article mypage-articles">
+        <%= render partial: 'articles/article', collection: @draft_articles %>
+      </ul>
+      <% if @pagy_for_draft.vars[:count] > 6 %>
+        <div class="d-flex justify-content-center mb-2">
+          <%== pagy_bootstrap_nav(@pagy_for_draft) %>
+        </div>
+      <% end %>
+    <% else %>
+    <ul class="d-flex flex-article mypage-articles">
+      <%= t('.no-draft-article') %>
     </ul>
     <% end %>
   </div>

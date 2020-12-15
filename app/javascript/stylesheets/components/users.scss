@@ -18,6 +18,11 @@
   padding: 20px;  
 }
 
+.user-edit-link {
+  margin-left: auto;
+  min-width: 80px;
+}
+
 .user-edit-btn {
   margin: 0 0 20px 20px;
 }
@@ -31,13 +36,6 @@
   justify-content: space-around;;
   width: 50%;
   margin: 0 auto;
-}
-
-
-.user-edit-back-btn {
-  float: right;
-  margin-right: 20px;
-  min-width: 80px;
 }
 
 .custom-dropdown.active {

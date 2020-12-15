@@ -10,7 +10,7 @@ RSpec.describe "Users", type: :request do
         { user: attributes_for(:correct_user) }
       }
 
-      it "user count increments by 1 when Japanese" do
+      it "ユーザーモデルの数が1増えていること" do
         expect{ post '/ja/users/', params: params }.to change(User, :count).by(1)
       end
 
@@ -28,7 +28,7 @@ RSpec.describe "Users", type: :request do
         expect{ post '/ja/users', params: empty_name_params }.not_to change{ User.count }
       end
 
-      it 'error_message includes "ユーザー名を入力してください" when Japanese' do
+      it 'エラーメッセージに "ユーザー名を入力してください" が含まれていること' do
         post '/ja/users', params: empty_name_params
         expect(flash[:error]).to include 'ユーザー名を入力してください'
       end
@@ -48,7 +48,7 @@ RSpec.describe "Users", type: :request do
         expect{ post '/ja/users', params: long_name_params }.not_to change{ User.count }
       end
 
-      it 'error_message includes "ユーザー名は16文字以内で入力してください" when Japanese' do
+      it 'エラーメッセージに "ユーザー名は16文字以内で入力してください" が含まれていること' do
         post '/ja/users', params: long_name_params
         expect(flash[:error]).to include 'ユーザー名は16文字以内で入力してください'
       end
@@ -68,8 +68,8 @@ RSpec.describe "Users", type: :request do
         expect{ post '/ja/users', params: invalid_email_params }.not_to change{ User.count }
       end
 
-      it 'error_message includes "Eメールを正しい形式で入力してください" when Japanese' do
-        skip 'なぜか言語を切り替えても出力されるメッセージは初期言語に依存するのでペンディング'
+      it 'エラーメッセージに "Eメールを正しい形式で入力してください" が含まれていること' do
+        skip 'なぜか言語を切り替えても出力されるメッセージは初期言語状態に依存するのでペンディング'
         post '/ja/users', params: invalid_email_params
         expect(flash[:error]).to include "Eメールを正しい形式で入力してください"
       end
@@ -90,7 +90,7 @@ RSpec.describe "Users", type: :request do
         expect{ post '/ja/users', params: short_password_params }.not_to change{ User.count }
       end
 
-      it 'error_message includes "パスワードは6文字以上で入力してください" when Japanese' do
+      it 'エラーメッセージに "パスワードは6文字以上で入力してください" が含まれていること' do
         post '/ja/users', params: short_password_params
         expect(flash[:error]).to include "パスワードは6文字以上で入力してください"
       end
@@ -110,7 +110,7 @@ RSpec.describe "Users", type: :request do
         expect{ post '/ja/users', params: not_match_password_params }.not_to change{ User.count }
       end
 
-      it 'error_message includes "パスワード(確認)とパスワードの入力が一致しません" when Japanese' do
+      it 'エラーメッセージに "パスワード(確認)とパスワードの入力が一致しません" が含まれていること' do
         post '/ja/users', params: not_match_password_params
         expect(flash[:error]).to include "パスワード(確認)とパスワードの入力が一致しません"
       end
@@ -131,12 +131,12 @@ RSpec.describe "Users", type: :request do
         expect{post '/ja/users/', params: correct_params }.not_to change{ User.count }
       end
 
-      it 'error_message includes "Eメールはすでに存在します" when Japanese' do
+      it 'エラーメッセージに "Eメールはすでに存在します" が含まれていること' do
         post '/ja/users', params: correct_params
         expect(flash[:error]).to include "Eメールはすでに存在します"
       end
 
-      it "error_message includes 'e-mail has already been taken' when Japanese" do
+      it "error_message includes 'e-mail has already been taken' が含まれていること" do
         post '/en/users', params: correct_params
         expect(flash[:error]).to include "e-mail has already been taken"
       end
@@ -157,7 +157,7 @@ RSpec.describe "Users", type: :request do
         expect{patch "/ja/users/#{user.id}", params: update_params }.not_to change{ User.count }
       end
 
-      it "user name change" do
+      it "user name update" do
         patch "/ja/users/#{user.id}", params: update_params
         expect(user.reload.name).to eq("update")
       end
@@ -168,7 +168,7 @@ RSpec.describe "Users", type: :request do
         { user: attributes_for(:update_empty_name) }
       }
 
-      it 'error_message includes "ユーザー名を入力してください" when Japanese' do
+      it 'エラーメッセージに "ユーザー名を入力してください" が含まれていること' do
         patch "/ja/users/#{user.id}", params: update_empty_name
         expect(flash[:error]).to include 'ユーザー名を入力してください'
       end
@@ -184,7 +184,7 @@ RSpec.describe "Users", type: :request do
         { user: attributes_for(:update_long_name) }
       }
 
-      it 'error_message includes "ユーザー名は16文字以内で入力してください" when Japanese' do
+      it 'エラーメッセージに "ユーザー名は16文字以内で入力してください" が含まれていること' do
         patch "/ja/users/#{user.id}", params: update_long_name
         expect(flash[:error]).to include 'ユーザー名は16文字以内で入力してください'
       end
@@ -206,7 +206,7 @@ RSpec.describe "Users", type: :request do
         { user: attributes_for(:update_empty_name_with_password) }
       }
 
-      it 'error_message includes "ユーザー名を入力してください" when Japanese' do
+      it 'エラーメッセージに "ユーザー名を入力してください" が含まれていること' do
         patch "/ja/update/password", params: update_empty_name_with_password
         expect(flash[:error]).to include 'ユーザー名を入力してください'
       end
@@ -238,7 +238,7 @@ RSpec.describe "Users", type: :request do
         { user: attributes_for(:update_with_invalid_password) }
       }
 
-      it 'error_message includes "パスワード(確認)とパスワードの入力が一致しません" when Japanese' do
+      it 'エラーメッセージに "パスワード(確認)とパスワードの入力が一致しません" が含まれていること' do
         patch "/ja/update/password", params: update_with_invalid_password
         expect(flash[:error]).to include "パスワード(確認)とパスワードの入力が一致しません"
       end
@@ -254,7 +254,7 @@ RSpec.describe "Users", type: :request do
         { user: attributes_for(:update_with_short_password) }
       }
 
-      it 'error_message includes "パスワードは6文字以上で入力してください" when Japanese' do
+      it 'エラーメッセージに "パスワードは6文字以上で入力してください" が含まれていること' do
         patch "/ja/update/password", params: update_with_short_password
         expect(flash[:error]).to include "パスワードは6文字以上で入力してください"
       end

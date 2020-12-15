@@ -1,17 +1,22 @@
 <div class="d-flex align-items-center top-margin-sm article-title article-title-detail">
   <h1><%= t('.detail-article') %></h1>
-  <%= form_with url: favorite_path do |f| %>
-  <%= hidden_field_tag :id, @article.id %>
-    <%= button_tag type: "submit", class: "all-nothing", id: "favorite-form" do %>
-      <% if @current_user.favorite_articles.include?(@article) %>
-        <i class="fas fa-2x fa-star text-warning"></i>
+  <% if @article.isDraft %>
+    <span class="badge badge-info draft-badge"><%= t('.draft-article') %></span>
+  <% else %>
+    <%= form_with url: favorite_path do |f| %>
+      <%= hidden_field_tag :id, @article.id %>
+      <%= button_tag type: "submit", class: "all-nothing", id: "favorite-form" do %>
+        <% if @current_user.favorite_articles.include?(@article) %>
+          <i class="fas fa-2x fa-star text-warning"></i>
         <% else %>
-        <i class="far fa-2x fa-star text-warning"></i>
+          <i class="far fa-2x fa-star text-warning"></i>
         <% end %>
+      <% end %>
     <% end %>
   <% end %>
+  <%= link_to t('.back'), request.referrer, class: 'btn btn-outline-dark back-btn' %>
   <% if @article.user_id == @current_user.id %>
-    <%= link_to t('.edit-article'), edit_article_path(@article), class: 'btn btn-outline-dark edit-link' %>
+    <%= link_to t('.edit-article'), edit_article_path(@article), class: 'btn btn-outline-dark article-edit-link' %>
     <%= link_to t('.delete-article'), article_path(@article), method: :delete, class: 'btn btn-outline-dark delete-link', data: { confirm: '削除します' } %>
   <% end %>
 </div>

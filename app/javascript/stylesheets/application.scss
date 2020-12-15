@@ -22,12 +22,13 @@ ul {
   text-align: center;
 }
 
-.edit-link {
-  margin-left: auto;
-  min-width: 80px;
-}
 .delete-link {
   margin-left: 20px;
+  min-width: 80px;
+}
+.back-btn {
+  float: right;
+  margin-left: auto;
   min-width: 80px;
 }
 .custom-nav-bar-wrapper {

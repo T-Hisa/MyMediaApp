@@ -26,7 +26,7 @@ RSpec.describe "Articles", type: :request do
         expect{ post '/ja/articles', params: long_title_params}.not_to change{Article.count}
       end
       
-      it "error_message includes 'タイトルは10文字以内で入力してください' when Japanese" do
+      it "エラーメッセージに 'タイトルは10文字以内で入力してください' が含まれていること" do
         post '/ja/articles', params: long_title_params
         expect(flash[:error]).to include 'タイトルは10文字以内で入力してください'
       end
@@ -44,7 +44,7 @@ RSpec.describe "Articles", type: :request do
         expect{ post '/ja/articles', params: empty_title_params}.not_to change{Article.count}
       end
       
-      it "error_message includes 'タイトルを入力してください' when Japanese" do
+      it "エラーメッセージに 'タイトルを入力してください' が含まれていること" do
         post '/ja/articles', params: empty_title_params
         expect(flash[:error]).to include 'タイトルを入力してください'
       end
@@ -62,7 +62,7 @@ RSpec.describe "Articles", type: :request do
         expect{ post '/ja/articles', params: empty_content_params}.not_to change{Article.count}
       end
       
-      it "error_message includes '本文を入力してください' when Japanese" do
+      it "エラーメッセージに '本文を入力してください' が含まれていること" do
         post '/ja/articles', params: empty_content_params
         expect(flash[:error]).to include '本文を入力してください'
       end
@@ -99,7 +99,7 @@ RSpec.describe "Articles", type: :request do
         expect{ patch "/ja/articles/#{article.id}", params: long_title_params}.not_to change{Article.count}
       end
       
-      it "error_message includes 'タイトルは10文字以内で入力してください' when Japanese" do
+      it "エラーメッセージに 'タイトルは10文字以内で入力してください' が含まれていること" do
         patch "/ja/articles/#{article.id}", params: long_title_params
         expect(flash[:error]).to include 'タイトルは10文字以内で入力してください'
       end
@@ -117,7 +117,7 @@ RSpec.describe "Articles", type: :request do
         expect{ patch "/ja/articles/#{article.id}", params: empty_title_params}.not_to change{Article.count}
       end
       
-      it "error_message includes 'タイトルを入力してください' when Japanese" do
+      it "エラーメッセージに 'タイトルを入力してください'が含まれていること" do
         patch "/ja/articles/#{article.id}", params: empty_title_params
         expect(flash[:error]).to include 'タイトルを入力してください'
       end
@@ -135,12 +135,12 @@ RSpec.describe "Articles", type: :request do
         expect{ patch "/ja/articles/#{article.id}", params: empty_content_params}.not_to change{Article.count}
       end
       
-      it "error_message includes '本文を入力してください' when Japanese" do
+      it "エラーメッセージに '本文を入力してください'が含まれていること" do
         patch "/ja/articles/#{article.id}", params: empty_content_params
         expect(flash[:error]).to include '本文を入力してください'
       end
       
-      it "error_message includes 'Content can't be blank' when English" do
+      it "error_message includes 'Content can't be blank'" do
         patch "/en/articles/#{article.id}", params: empty_content_params
         expect(flash[:error]).to include "Content can't be blank"
       end

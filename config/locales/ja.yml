@@ -16,6 +16,7 @@ ja:
   articles:
     index:
       article-list: 記事一覧
+      no-article-list: 対象の記事はありません
     new:
       new-article: 記事作成
       article-save: 保存
@@ -26,6 +27,8 @@ ja:
       edit-article: 編集
       delete-article: 削除
       detail-article: 記事詳細
+      draft-article: 下書き
+      back: 戻る
   users:
     mypage:
       user-info: ユーザー情報
@@ -33,8 +36,11 @@ ja:
       email: Eメール
       name: 名前
       user-article-list: 投稿した記事
+      no-user-article: 投稿した記事はありません
       favorite-articles: お気に入り記事
       no-favorite-article: お気に入りの記事はありません。
+      draft-articles: 下書き記事
+      no-draft-article: 下書き記事はありません
     edit:
       edit-user: ユーザー情報編集
       change: 変更
@@ -71,7 +77,8 @@ ja:
     only-user-name-confirmation: ユーザー名のみ変更します。よろしいですか？
     back: 戻る
     update: 更新
-    save: 保存
+    post: 投稿
+    save-draft: 下書き保存
     wrong-current-password: 現在のパスワードが間違っています
     update-user-info: ユーザー情報を更新しました
     update-user-name-and-password: ユーザー情報を更新しました。パスワードが変更されたことにご注意ください

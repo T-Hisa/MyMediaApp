@@ -8,7 +8,7 @@
     <button type="button" class="btn btn-primary user-edit-btn" data-toggle="modal" data-target="#onlyNameModal">
       <%= t('.change') %>
     </button>
-    <%= link_to t('.back'), mypage_path, class: 'btn btn-outline-dark user-edit-back-btn' %>
+    <%= link_to t('.back'), mypage_path, class: 'btn btn-outline-dark back-btn' %>
   <% end %>
   <%= form_with model: @current_user, url: update_password_path(@current_user) do |f| %>
     <%= current_password_field_for_edit f %>
@@ -16,7 +16,7 @@
     <button type="button" class="btn btn-danger user-edit-btn" data-toggle="modal" data-target="#includePasswordModal">
       <%= t('.change') %>
     </button>
-    <%= link_to t('.back'), mypage_path, class: 'btn btn-outline-dark user-edit-back-btn' %>
+    <%= link_to t('.back'), mypage_path, class: 'btn btn-outline-dark back-btn' %>
   <% end %>
 </div>
 <%= render 'only_name_modal' %>
