@@ -87,11 +87,13 @@ en:
       password: Password
       password-confirmation: Password Confirmation
       register: Register User
+      auto-login: Log in automatically from next time
     login:
       email: e-mail
       login: Login
       password: Password
       password-confirmation: Password Confirmation
+      auto-login: Log in automatically from next time
   shared:
     mypage: My Page
     logout: Logout
