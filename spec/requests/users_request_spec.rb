@@ -265,4 +265,19 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "POST logout" do
+    let (:user) { before_create_and_log_in }
+    before { user }
+
+    context "post logout request double" do
+      it "logout successfully" do
+        delete '/en/logout'
+        delete '/en/logout'
+        # ログアウトリクエストがきちんと動作しているかの検証のため、このテストは何でも良い。
+        # because validate logout request successfully, any test is fine.
+        expect(response).to be_truthy
+      end
+    end
+  end
 end

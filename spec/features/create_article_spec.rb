@@ -5,6 +5,7 @@ RSpec.feature "記事作成・編集周り", type: :feature do
   include TestHelper
   before do
     before_login
+    visit "/ja/logout"
   end
   scenario "きちんと下書きとして保存されていること" do
     pending "きちんとテキストフィールドに値が入力されていることは確認できるが、コントローラ側でなぜかパラメータが渡ってきておらず失敗するのでpending"
