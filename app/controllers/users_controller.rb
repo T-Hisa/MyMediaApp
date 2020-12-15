@@ -20,14 +20,12 @@ class UsersController < ApplicationController
   def login; end
 
   def mypage
-    # ページネーションが行われている かつ
-    # その値が、記事数を6で割った商より大きければ、いつも通りページネーションする。でなければその差分デクリメントする
     articles = @current_user.articles.where(isDraft: false)
     favorite_articles = @current_user.favorite_articles
     draft_articles = @current_user.articles.where(isDraft: true)
-    @pagy, @articles = generate_pagy(articles)
-    @pagy_for_favorite, @favorite_articles = generate_pagy(favorite_articles)
-    @pagy_for_draft, @draft_articles = generate_pagy(draft_articles)
+    @pagy, @articles = generate_pagy(articles, 1)
+    @pagy_for_favorite, @favorite_articles = generate_pagy(favorite_articles, 2)
+    @pagy_for_draft, @draft_articles = generate_pagy(draft_articles, 3)
   end
 
   def edit
@@ -72,7 +70,6 @@ class UsersController < ApplicationController
   end
 
   private
-
     def user_params
       params.require(:user).permit(:email, :name, :password, :password_confirmation)
     end
@@ -105,19 +102,31 @@ class UsersController < ApplicationController
     end
 
     def calculate_page_count(count)
+      # 対象の記事がなかった場合に、params[:page]が0となってしまいエラーが発生するので、1を代入
       count == 0 ? 1 : (count - 1) / 6 + 1
     end
 
-    def generate_pagy(articles)
-      if params[:page]
-        # params[:page]が処理の中で変更されてしまうかもしれないので、page_params 変数に初期値を保持しておく。
-        page_params = params[:page].to_i
-        # 変数subに、記事の6で割った値とparams[:page]の差分を保持しておく
-        sub = page_params - calculate_page_count(articles.count)
-        if sub < 0
+    def generate_pagy(articles, flag)
+      # ページネーションが行われている かつ
+      # その値が、記事数を6で割った商より大きければ、いつも通りページネーションする。でなければその差分デクリメントする
+      case flag
+      # 渡された値(flag)によってページング対象のパラメータを動的に設定する
+      when 1
+        Pagy::VARS[:page_param] = :page_1
+        param_flag = :page_1
+      when 2
+        Pagy::VARS[:page_param] = :page_2
+        param_flag = :page_2
+      when 3
+        Pagy::VARS[:page_param] = :page_3
+        param_flag = :page_3
+      end
+      if params[param_flag]
+        page_params = params[:page_1].to_i
+        if (sub = page_params - calculate_page_count(articles.count)) < 0
           pagy(articles)
         else
-          params[:page] = page_params - sub
+          params[:page_1] = page_params - sub
           pagy(articles)
         end
       else
