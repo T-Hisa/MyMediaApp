@@ -28,6 +28,7 @@ ja:
       delete-article: 削除
       detail-article: 記事詳細
       draft-article: 下書き
+      back: 戻る
   users:
     mypage:
       user-info: ユーザー情報

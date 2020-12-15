@@ -14,8 +14,9 @@
       <% end %>
     <% end %>
   <% end %>
+  <%= link_to t('.back'), request.referrer, class: 'btn btn-outline-dark back-btn' %>
   <% if @article.user_id == @current_user.id %>
-    <%= link_to t('.edit-article'), edit_article_path(@article), class: 'btn btn-outline-dark edit-link' %>
+    <%= link_to t('.edit-article'), edit_article_path(@article), class: 'btn btn-outline-dark article-edit-link' %>
     <%= link_to t('.delete-article'), article_path(@article), method: :delete, class: 'btn btn-outline-dark delete-link', data: { confirm: '削除します' } %>
   <% end %>
 </div>

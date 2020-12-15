@@ -59,6 +59,7 @@ en:
       delete-article: Delete
       detail-article: Article Detail
       draft-article: Draft
+      back: Back
   users:
     mypage:
       user-info: User Information

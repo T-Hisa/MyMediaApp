@@ -20,9 +20,14 @@ class UsersController < ApplicationController
   def login; end
 
   def mypage
-    @pagy, @articles = pagy(@current_user.articles.where(isDraft: false))
-    @pagy_for_favorite, @favorite_articles = pagy(@current_user.favorite_articles) if @current_user.favorite_articles
-    @pagy_for_draft, @draft_articles = pagy(@current_user.articles.where(isDraft: true))
+    # ページネーションが行われている かつ
+    # その値が、記事数を6で割った商より大きければ、いつも通りページネーションする。でなければその差分デクリメントする
+    articles = @current_user.articles.where(isDraft: false)
+    favorite_articles = @current_user.favorite_articles
+    draft_articles = @current_user.articles.where(isDraft: true)
+    @pagy, @articles = generate_pagy(articles)
+    @pagy_for_favorite, @favorite_articles = generate_pagy(favorite_articles)
+    @pagy_for_draft, @draft_articles = generate_pagy(draft_articles)
   end
 
   def edit
@@ -68,34 +73,55 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
-  end
-
-  def user_update_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
-  end
-
-  def user_update_name_params
-    params.require(:user).permit(:name)
-  end
-
-  def current_password_params
-    # params.require(:user).permit(:name, :current_password, :password, :password_confirmation)
-    params.require(:user).permit(:current_password)
-  end
-
-  # モデルを直接『update, validate』などで検証すると、『password』の検証もされてしまうので、ここで検証する
-  def user_name_validation
-    flag = true
-    error_message = ""
-    if user_update_name_params[:name].empty?
-      flag = false
-      error_message = t('shared.name_blank')
-    elsif user_update_name_params[:name].length > 16
-      flag = false
-      error_message = t('shared.name_too_long')
+    def user_params
+      params.require(:user).permit(:email, :name, :password, :password_confirmation)
     end
-    [flag, error_message]
-  end
+
+    def user_update_params
+      params.require(:user).permit(:name, :password, :password_confirmation)
+    end
+
+    def user_update_name_params
+      params.require(:user).permit(:name)
+    end
+
+    def current_password_params
+      # params.require(:user).permit(:name, :current_password, :password, :password_confirmation)
+      params.require(:user).permit(:current_password)
+    end
+
+    # モデルを直接『update, validate』などで検証すると、『password』の検証もされてしまうので、ここで検証する
+    def user_name_validation
+      flag = true
+      error_message = ""
+      if user_update_name_params[:name].empty?
+        flag = false
+        error_message = t('shared.name_blank')
+      elsif user_update_name_params[:name].length > 16
+        flag = false
+        error_message = t('shared.name_too_long')
+      end
+      [flag, error_message]
+    end
+
+    def calculate_page_count(count)
+      count == 0 ? 1 : (count - 1) / 6 + 1
+    end
+
+    def generate_pagy(articles)
+      if params[:page]
+        # params[:page]が処理の中で変更されてしまうかもしれないので、page_params 変数に初期値を保持しておく。
+        page_params = params[:page].to_i
+        # 変数subに、記事の6で割った値とparams[:page]の差分を保持しておく
+        sub = page_params - calculate_page_count(articles.count)
+        if sub < 0
+          pagy(articles)
+        else
+          params[:page] = page_params - sub
+          pagy(articles)
+        end
+      else
+        pagy(articles)
+      end
+    end
 end

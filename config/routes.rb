@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   scope "/:locale" do
     root "articles#index"
     post 'favorite', to: 'articles#favorite'
-    post 'articles/draft', to: 'articles#create'
-    patch 'articles/draft', to: 'articles#update'
+    post 'articles/draft', to: 'articles#draft_create'
+    patch 'articles/draft', to: 'articles#draft_update'
     get 'login', to: 'users#login'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'

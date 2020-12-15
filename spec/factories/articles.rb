@@ -40,5 +40,8 @@ FactoryBot.define do
       content { "" }
     end
 
+    factory :draft_article do
+      isDraft { true }
+    end
   end
 end

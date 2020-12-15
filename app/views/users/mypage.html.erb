@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center top-margin-sm">
   <h1><%= t('.user-info') %></h1>
-  <%= link_to t('.edit-user'), edit_user_path(@current_user), class: 'btn btn-outline-dark edit-link' %>
+  <%= link_to t('.edit-user'), edit_user_path(@current_user), class: 'btn btn-outline-dark user-edit-link' %>
 </div>
 <div class="container user-info-container">
   <div class="user-info-wrapper"><%=  t('.email') %>：<%= simple_format @current_user.email, class: "user-info bg-light" %></div>

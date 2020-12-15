@@ -16,17 +16,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article = Article.new(article_params)
-    article.isDraft = true if url_for.include?('draft')
-    if article.save
-      article.image.attach(image_params[:image])
-      flash[:success] = t('shared.created-article', title: article.title)
-      redirect_to article
-    else
-      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
-      cause_some_error(article.errors.full_messages)
-      redirect_with_error({ "article": article_params })
-    end
+    @article = Article.new(article_params)
+    create_article
+  end
+
+  def draft_create
+    @article = Article.new(article_params)
+    @article.isDraft = true
+    create_article
   end
 
   def favorite
@@ -94,6 +91,18 @@ class ArticlesController < ApplicationController
       @pagy, @articles = pagy(Article.where("isDraft = false AND title LIKE ?", search_text))
     else
       @pagy, @articles = pagy(Article.where('isDraft = false'))
+    end
+  end
+
+  def create_article
+    if @article.save
+      @article.image.attach(image_params[:image])
+      flash[:success] = t('shared.created-article', title: @article.title)
+      redirect_to @article
+    else
+      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
+      cause_some_error(@article.errors.full_messages)
+      redirect_with_error({ "article": article_params })
     end
   end
 end

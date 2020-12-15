@@ -1,4 +1,6 @@
 const { $ } = require("@rails/ujs");
+
+// 画像アップロード周り
 let files = [];
 let uploadingImageElement = $('#uploading-image')[0];
 uploadingImageElement.oninput = (e) => {
@@ -18,7 +20,7 @@ uploadingImageElement.oninput = (e) => {
   }
 }
 
-// 表示用に作成した画像専用のURLを解放する。必要かどうか分からない。
+// 表示用に作成した一時的な画像専用のURLを解放する。必要かどうか分からないから念のため。
 let submitEl = $('#submit-btn')[0];
 submitEl.addEventListener('click', () => {
   if (files) {
@@ -27,3 +29,20 @@ submitEl.addEventListener('click', () => {
     }) 
   }
 })
+
+// 下書き保存用
+let titleEl = $('#article_title')[0];
+titleEl.onchange = (e) => {
+  let titleDraftEl = $('#article_title')[1];
+  titleDraftEl.value = e.target.value;
+}
+let contentEl = $('#article_content')[0];
+contentEl.onchange = (e) => {
+  let contentDraftEl = $('#article_content')[1];
+  contentDraftEl.value = e.target.value;
+}
+let summaryEl = $('#article_summary')[0];
+summaryEl.onchange = (e) => {
+  let summaryDraftEl = $('#article_summary')[1];
+  summaryDraftEl.value = e.target.value;
+}
