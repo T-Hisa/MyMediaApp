@@ -6,6 +6,10 @@
     <%= auto_email_field f %>
     <%= auto_name_field f %>
     <%= auto_password_field f %>
+    <div class="remember-check-wrapper">
+      <%= f.label :remember_me, t('.auto-login') %>
+      <%= f.check_box :remember_me %>
+    </div>
     <button type="submit" class='btn btn-primary'>
       <%= t('.register') %>
     </button>

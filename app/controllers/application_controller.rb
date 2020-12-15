@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :current_user
+  before_action :current_user, :create_session
   before_action :set_search_value, if: :not_admin?
   include Pagy::Backend
   around_action :switch_locale, if: :not_admin?
@@ -35,10 +35,12 @@ class ApplicationController < ActionController::Base
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
-  # def pagy_get_vars(collection, vars)
-  #   vars
   # end
   private
+
+    def create_session
+      session[:user_id] ||= cookies[:user_id]
+    end
     
     def current_user
       @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
@@ -46,6 +48,12 @@ class ApplicationController < ActionController::Base
     
     def logged_in?
       redirect_to login_path unless @current_user
+    end
+
+    def already_login?
+      redirect_to root_path, flash: {
+        info: t('shared.already-login')
+      }
     end
     
     def set_search_value

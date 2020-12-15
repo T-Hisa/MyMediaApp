@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   include ApplicationControllerHelper
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :set_article, only: %i(show edit update destroy favorite)
   before_action :logged_in?, except: :index
 
   def index

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   include ApplicationControllerHelper
+  include SessionCreateHelper
+  before_action :already_login?, only: %i(new login)
   before_action :logged_in?, only: [:mypage, :edit, :update, :password_update]
   def new
     @user = User.new(flash[:user_params])
@@ -9,6 +11,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
+      params[:user][:remember_me] == "1" ? remember(user) : forget(user)
       redirect_to mypage_path, flash: { "success": t('shared.welcome', name: user.name) }
     else
       # UsersControllerHelper で定義してあるメソッド

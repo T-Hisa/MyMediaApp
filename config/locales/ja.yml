@@ -57,11 +57,13 @@ ja:
       password: パスワード
       password-confirmation: パスワード(確認)
       register: ユーザー登録
+      auto-login: 次回以降自動でログインする
     login:
       email: Eメール
       login: ログイン
       password: パスワード
       password-confirmation: パスワード(確認)
+      auto-login: 次回以降自動でログインする
   shared:
     mypage: マイページ
     logout: ログアウト
@@ -101,3 +103,4 @@ ja:
     invalid_email: を正しい形式で入力してください
     search-form: 記事のタイトルで検索
     search: 検索
+    already-login: 既にログインしています

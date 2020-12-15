@@ -13,6 +13,7 @@
 class User < ApplicationRecord
   has_secure_password
   before_save :email_downcase
+  attr_accessor :remember_token
 
   has_many :articles
   has_many :user_favorite_articles
@@ -28,9 +29,31 @@ class User < ApplicationRecord
             }
   validates :password, length: { minimum: 6 }
 
-  private
 
-  def email_downcase
-    email.downcase!
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
   end
+
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember
+    remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
+  def authenticated?(remember_token)
+    remember_digest.prensent? ? BCrypt::Password.new(remember_digest).is_password?(remember_token) : false
+  end
+
+  private
+    def email_downcase
+      email.downcase!
+    end
 end
