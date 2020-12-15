@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :current_user, :create_session
+  before_action :current_user
   before_action :set_search_value, if: :not_admin?
   include Pagy::Backend
   around_action :switch_locale, if: :not_admin?
@@ -37,13 +37,18 @@ class ApplicationController < ActionController::Base
 
   # end
   private
-
-    def create_session
-      session[:user_id] ||= cookies[:user_id]
-    end
-    
     def current_user
-      @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
+      binding.pry
+      unless @current_user
+        if session[:user_id]
+          @current_user = User.find_by(id: session[:user_id])
+        elsif cookies[:user_id]
+          @current_user = User.find_by(id: cookies.signed[:user_id])
+          @current_user = nil unless @current_user.authenticated?(cookies[:remember_token])
+          # 必要ないけど一応
+          session[:user_id] = cookies[:user_id]
+        end
+      end
     end
     
     def logged_in?

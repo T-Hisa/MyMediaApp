@@ -1,4 +1,4 @@
-module SessionCreateHelper
+module CookieCreateHelper
   def remember(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
@@ -10,6 +10,4 @@ module SessionCreateHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
-
-  module_function :remember, :forget
 end
