@@ -108,7 +108,7 @@ Pagy::VARS[:items] = 6 # default
 # Other Variables
 # See https://ddnexus.github.io/pagy/api/pagy#other-variables
 # Pagy::VARS[:size]       = [1,4,4,1]                       # default
-# Pagy::VARS[:page_param] = :page                           # default
+# Pagy::VARS[:page_param] = :sample                           # default
 # Pagy::VARS[:params]     = {}                              # default
 # Pagy::VARS[:anchor]     = '#anchor'                       # example
 # Pagy::VARS[:link_extra] = 'data-remote="true"'            # example
@@ -155,7 +155,7 @@ Pagy::VARS[:items] = 6 # default
 # require 'pagy/extras/i18n'
 
 # Default i18n key
-# Pagy::VARS[:i18n_key] = 'pagy.item_name'   # default
+Pagy::VARS[:i18n_key] = 'activerecord.attributes.article'   # default
 
 require 'pagy/extras/bootstrap'
 require 'pagy/extras/i18n'

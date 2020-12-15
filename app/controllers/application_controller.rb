@@ -34,7 +34,10 @@ class ApplicationController < ActionController::Base
     parsed_locale = request.subdomains.first
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
-  
+
+  # def pagy_get_vars(collection, vars)
+  #   vars
+  # end
   private
     
     def current_user

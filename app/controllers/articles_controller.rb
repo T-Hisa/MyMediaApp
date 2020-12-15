@@ -77,6 +77,7 @@ class ArticlesController < ApplicationController
   end
 
   def decide_search_text
+    Pagy::VARS[:page_param] = :page
     if search_params
       case params[:search_type]
       when "0"
@@ -90,6 +91,7 @@ class ArticlesController < ApplicationController
       end
       @pagy, @articles = pagy(Article.where("isDraft = false AND title LIKE ?", search_text))
     else
+      # デフォルト
       @pagy, @articles = pagy(Article.where('isDraft = false'))
     end
   end
