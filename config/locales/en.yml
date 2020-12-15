@@ -132,3 +132,4 @@ en:
     invalid_email: "field: please input correct format"
     search-form: Search by Article Title
     search: Search
+    already-login: Already Login

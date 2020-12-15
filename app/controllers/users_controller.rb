@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   include ApplicationControllerHelper
   include SessionCreateHelper
+  before_action :already_login?, only: %i(new login)
   before_action :logged_in?, only: [:mypage, :edit, :update, :password_update]
   def new
     @user = User.new(flash[:user_params])

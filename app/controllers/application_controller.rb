@@ -35,8 +35,6 @@ class ApplicationController < ActionController::Base
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
-  # def pagy_get_vars(collection, vars)
-  #   vars
   # end
   private
 
@@ -50,6 +48,12 @@ class ApplicationController < ActionController::Base
     
     def logged_in?
       redirect_to login_path unless @current_user
+    end
+
+    def already_login?
+      redirect_to root_path, flash: {
+        info: t('shared.already-login')
+      }
     end
     
     def set_search_value

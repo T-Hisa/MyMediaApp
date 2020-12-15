@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     resources :articles, only: %i(index destroy)
     # get '/articles', to: 'admin/articles#index'
   end
+  root "application#index"
   scope "/:locale" do
-    root "articles#index"
     post 'favorite', to: 'articles#favorite'
     post 'articles/draft', to: 'articles#draft_create'
     patch 'articles/draft', to: 'articles#draft_update'
