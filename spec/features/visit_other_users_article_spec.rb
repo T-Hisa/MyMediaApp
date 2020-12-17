@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'helpers/test_helper_spec'
 
-RSpec.feature "ユーザー情報編集", type: :feature do
+RSpec.feature "他ユーザのページに訪れた時", type: :feature do
   include TestHelper
 
   background do

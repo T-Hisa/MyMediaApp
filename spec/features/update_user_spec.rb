@@ -8,7 +8,7 @@ RSpec.feature "ユーザー情報編集", type: :feature do
     before_login
   end
   scenario "ユーザー名がきちんと編集できること" do
-    pending "入力値は確認できたが、なぜかコントローラ側にその値が渡って来ないのでpending"
+    pending "フィールドに入力されていることは確認できたが、なぜかコントローラ側にその値が渡って来ないのでpending"
     user = User.first
     visit "/ja/users/#{user.id}/edit"
     fill_in "name", with: "update"
