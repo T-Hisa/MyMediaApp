@@ -6,6 +6,8 @@
   Firstly, please execute the following command for access database.
   
   `cp .env.copy .env`
+  
+  But when deloying, please contact [T-Hisa](https://github.com/T-Hisa).
 
 # Database creation
   Next, execute the following command.
@@ -20,7 +22,7 @@
 # How to start developing
   By executing the following command, the server for developing starts.
     
-    `docker-compose up`
+  `docker-compose up`
 
 # How to run the test suite
   Execute the following command.
@@ -46,15 +48,15 @@ There are two ways to acquire articles type of json.
    
   When using query, enter http request as below.
   
-        `http://aaaaa.monster/api/articles?target=title&order_target=created_at`
+   `http://aaaaa.monster/api/articles?target=title&order_target=created_at`
         
   2. For getting special article(knowing the `id`), visit following url.
   
-      `http://aaaaa.monster/api/article/#{id}`
+   `http://aaaaa.monster/api/article/#{id}`
    
   
 # Deployment instructions
   In this repository, using Capistrano and CircleCI.
   But, when deploying firstly, we must deploy from local by following command.
   
-    `docker-compose run web bundle exec cap production deploy`
+  `docker-compose run web bundle exec cap production deploy`
