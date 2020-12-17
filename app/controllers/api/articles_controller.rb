@@ -11,7 +11,13 @@ class Api::ArticlesController < ApplicationController
     render json: { status: 'SUCCESS', message: 'Loaded posts', data: articles }
   end
 
-  def current_user;end
+  # 特定の記事のIDがわかっている場合はこっち
+  def show
+    article = Article.find_by(id: params[:id])
+    render json: { status: 'SUCCESS', message: 'Loaded posts', data: article }
+  end
+
+  def current_user; end
   def not_admin?
     false
   end
