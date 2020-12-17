@@ -17,7 +17,7 @@ class Api::ArticlesController < ApplicationController
     render json: { status: 'SUCCESS', message: 'Loaded posts', data: article }
   end
 
-  def current_user;end
+  def current_user; end
   def not_admin?
     false
   end
