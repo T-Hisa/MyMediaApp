@@ -49,7 +49,7 @@ There are two ways to acquire articles type of json.
   
    `http://aaaaa.monster/api/articles?target=title&order_target=created_at`
         
-  2. For getting special article(knowing the `id`), visit following url.
+  2. For getting specified article(knowing the `id`), visit following url.
   
    `http://aaaaa.monster/api/article/#{id}`
    
