@@ -35,6 +35,7 @@ There are two ways to acquire articles type of json.
       `http://aaaaa.monster/api/articles`
   
   And when you manipulating sql query, below params is valid for sql query.
+  
   ・ The Sql Query is
   
       `SELECT {target} FROM article ORDER BY {order_target} {order_type}`
