@@ -13,8 +13,8 @@ server "#{fetch :ip}",
 task :upload do
   shared_path = fetch :shared_path
   on roles(:app) do
-    unless test "[ -f .env ]"
-      upload! ".env", "#{shared_path}"
+    unless test "[ -f #{shared_path}/.env-pro ]"
+      upload! ".env", "#{shared_path}/.env-pro"
     end
   end
 end
@@ -24,6 +24,7 @@ task deploy: :upload do
   on roles(:app) do
     # upload! "config/master.key", "#{release_path}/config/"
     execute "sudo service docker start"
+    execute "cp #{release_path}/.env-pro #{release_path}/.env;"
 
     container = capture "docker container ls -a -q -f name=test-rails-container"
     if !container.empty?

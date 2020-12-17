@@ -26,7 +26,7 @@ set :shared_path, "/home/ec2-user/#{fetch :application}/shared/"
 # ln -s deploy_to/shared/config/database.yml と同義?
 # set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
 # set :linked_files, %w[config/master.key]
-set :linked_files, %w[.env]
+set :linked_files, %w[.env-pro]
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
