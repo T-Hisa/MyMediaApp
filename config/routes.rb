@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  root "application#index"
   namespace :admin do
-    resources :articles, only: %i(index destroy)
+    resources :articles, only: %i[index destroy]
     # get '/articles', to: 'admin/articles#index'
   end
-  root "application#index"
+  namespace "api" do
+    resources :articles, only: %i[index]
+  end
   scope "/:locale" do
     post 'favorite', to: 'articles#favorite'
     post 'articles/draft', to: 'articles#draft_create'
