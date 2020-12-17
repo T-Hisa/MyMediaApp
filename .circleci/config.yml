@@ -5,13 +5,13 @@ executors:
       - image: circleci/ruby:2.7.1
 jobs:
   test:
-    executor: ruby-executor
     docker:
       - image: circleci/mysql:5.7.22
         environment:
           MYSQL_DATABASE: db
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: root
+    executor: ruby-executor
     steps:
       - checkout
       - run:
