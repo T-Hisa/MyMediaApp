@@ -56,4 +56,5 @@ There are two ways to acquire articles type of json.
 # Deployment instructions
   In this repository, using Capistrano and CircleCI.
   But, when deploying firstly, we must deploy from local by following command.
+  
     `docker-compose run web bundle exec cap production deploy`
