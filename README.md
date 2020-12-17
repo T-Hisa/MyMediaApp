@@ -6,15 +6,13 @@
   Firstly, please execute the following command for access database.
   
   `cp .env.copy .env`
-  
-  But when deloying, please contact [T-Hisa](https://github.com/T-Hisa).
 
 # Database creation
   Next, execute the following command.
    
   `docker-compose run web rails db:migrate`
   
-# Database initialization
+# ~Database initialization~
   ~Next, execute the foolowing command to generate databases for developing.~
   
   ~`docker-compose run web rails db:seed`~
