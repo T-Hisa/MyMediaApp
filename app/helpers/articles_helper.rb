@@ -3,7 +3,7 @@ module ArticlesHelper
     tag.div class: "form-group" do
       concat form.label :image
       concat (tag.div class: "file-field-container"  do
-        form.file_field :image, id:'uploading-image', class: 'image-field'
+        form.file_field :image, accept: ".jpeg,.jpg,.png,.gif", id:'uploading-image', class: 'image-field'
       end)
     end
   end

@@ -87,6 +87,8 @@ ja:
     welcome: ようこそ%{name}さん
     save-false: 保存に失敗しました。
     re-select-image: 画像を再度選択してください
+    draft-not-image: 下書きでは画像を保存されません。
+    draft-not-image-caution: 下書きでは画像を保存できません。ご注意ください。
     created-article: "%{title}の記事を作成しました"
     deleted-article: "%{title}の記事を削除しました"
     updated-article: "%{title}の記事を更新しました"
