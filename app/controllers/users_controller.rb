@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include ApplicationControllerHelper
-  include SessionCreateHelper
+  include CookieCreateHelper
   before_action :already_login?, only: %i(new login)
   before_action :logged_in?, only: [:mypage, :edit, :update, :password_update]
   def new
@@ -8,15 +8,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      session[:user_id] = user.id
-      params[:user][:remember_me] == "1" ? remember(user) : forget(user)
-      redirect_to mypage_path, flash: { "success": t('shared.welcome', name: user.name) }
+    if @current_user
+      redirect_back fallback_location: root_path, falsh: {
+        info: t('shared.already-login')
+      }
     else
-      # UsersControllerHelper で定義してあるメソッド
-      cause_some_error(user.errors.full_messages)
-      redirect_with_error("user_params": user_params)
+      user = User.new(user_params)
+      if user.save
+        session[:user_id] = user.id
+        params[:user][:remember_me] == "1" ? remember(user) : forget(user)
+        redirect_to mypage_path, flash: { "success": t('shared.welcome', name: user.name) }
+      else
+        # UsersControllerHelper で定義してあるメソッド
+        cause_some_error(user.errors.full_messages)
+        redirect_with_error("user_params": user_params)
+      end
     end
   end
 

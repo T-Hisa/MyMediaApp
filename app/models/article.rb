@@ -4,7 +4,6 @@
 #
 #  id         :bigint           not null, primary key
 #  content    :text(65535)      not null
-#  isDeleted  :boolean          default(FALSE)
 #  isDraft    :boolean          default(FALSE)
 #  summary    :string(255)
 #  title      :string(255)      not null
@@ -14,6 +13,7 @@
 #
 # Indexes
 #
+#  index_articles_on_title    (title)
 #  index_articles_on_user_id  (user_id)
 #
 # Foreign Keys

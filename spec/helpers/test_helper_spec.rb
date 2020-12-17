@@ -7,4 +7,9 @@ module TestHelper
     fill_in 'パスワード(確認)', with: 'password'
     click_on 'ログイン'
   end
+
+  def before_create
+    create(:correct_user)
+    create(:correct_article)
+  end
 end

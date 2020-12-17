@@ -13,7 +13,6 @@ RSpec.feature "記事作成・編集周り", type: :feature do
     fill_in "article_title", with: "sample"
     fill_in "article_content", with: "sample"
     click_on "下書き保存"
-    binding.pry
     expect(page).to have_selector 'span', text: "下書き"
     visit "/ja/articles"
     expect(page).not_to have_selctor 'div.card', text: 'sample'

@@ -7,6 +7,7 @@
 #  isAdmin         :boolean          default(FALSE)
 #  name            :string(255)      not null
 #  password_digest :string(255)
+#  remember_digest :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -40,16 +41,16 @@ class User < ApplicationRecord
   end
 
   def remember
-    remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(self.remember_token))
   end
 
   def forget
     update_attribute(:remember_digest, nil)
   end
 
-  def authenticated?(remember_token)
-    remember_digest.prensent? ? BCrypt::Password.new(remember_digest).is_password?(remember_token) : false
+  def authenticated?(token)
+    remember_digest.present? ? BCrypt::Password.new(remember_digest).is_password?(token) : false
   end
 
   private

@@ -7,7 +7,6 @@ RSpec.describe "Articles", type: :request do
   include ArticlesTestHelper
 
   describe "POST create" do
-
     # session[:user_id]に値を入れるか、login を済ましておかなければならない。
     let(:user) { before_create_and_log_in }
 
@@ -143,6 +142,19 @@ RSpec.describe "Articles", type: :request do
       it "error_message includes 'Content can't be blank'" do
         patch "/en/articles/#{article.id}", params: empty_content_params
         expect(flash[:error]).to include "Content can't be blank"
+      end
+    end
+  end
+
+  describe "when save as draft" do
+    let (:user) { before_create_and_log_in }
+    context "下書き保存" do
+      let (:correct_params) { article_params(user.id, attributes_for(:correct_article)) }
+
+      it "きちんと下書き保存できること" do
+        user
+        post "/ja/articles/draft", params: correct_params
+        expect(Article.first.isDraft).to be true
       end
     end
   end

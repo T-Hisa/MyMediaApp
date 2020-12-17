@@ -13,6 +13,4 @@ module ApplicationControllerHelper
     redirect_back fallback_location: path, flash: params
     @@error_messages = []
   end
-
-  module_function :cause_some_error, :redirect_with_error
 end
