@@ -11,8 +11,8 @@
     `docker-compose run web rails db:migrate`
   
 # Database initialization
-  ~ Next, execute the foolowing command to generate databases for developing. ~
-    ~ `docker-compose run web rails db:seed` ~
+  ~Next, execute the foolowing command to generate databases for developing.~
+    ~`docker-compose run web rails db:seed`~
 
 # How to run the test suite
   Execute the following command.
