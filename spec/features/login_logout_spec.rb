@@ -1,6 +1,8 @@
 require 'rails_helper'
+require 'helpers/test_helper_spec'
 
 RSpec.feature "登録・サインイン・サインアウト", type: :feature do
+  include TestHelper
   feature '日本語のみ調査' do
     scenario 'ユーザー登録後、きちんとマイページにリダイレクトされていること' do
       visit '/ja/users/new'
@@ -28,16 +30,11 @@ RSpec.feature "登録・サインイン・サインアウト", type: :feature do
       end
     end
   
-    context 'テスト前に、ユーザを作成し、ログインしておく' do
+    context 'テスト前にユーザを作成し、ログインしておく' do
       background do
-        create(:sample_user)
-        visit '/ja/login'
-        fill_in 'Eメール', with: 'sample@sample.com'
-        fill_in 'パスワード', with: 'password'
-        fill_in 'パスワード(確認)', with: 'password'
-        click_on 'ログイン'
+        before_login
       end
-      scenario 'after logout, redirect to mypage' do
+      scenario 'after logout, redirect to article-list' do
         click_on 'ログアウト'
         expect(page).not_to have_text '記事作成'
         # expect()
