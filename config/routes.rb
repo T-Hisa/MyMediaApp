@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     # get '/articles', to: 'admin/articles#index'
   end
   namespace "api" do
-    resources :articles, only: %i[index]
+    resources :articles, only: %i[index show]
   end
   scope "/:locale" do
     post 'favorite', to: 'articles#favorite'
