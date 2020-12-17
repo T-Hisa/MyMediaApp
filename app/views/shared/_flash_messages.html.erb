@@ -12,5 +12,9 @@
   <script>
     toastr["info"]("<%= flash[:info] %>");
   </script>
-  
+<% end %>
+<% if flash[:warning].present? %>
+  <script>
+    toastr["warning"]("<%= flash[:warning] %>");
+  </script>
 <% end %>

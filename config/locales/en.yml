@@ -116,6 +116,8 @@ en:
     welcome: Welcom! %{name}
     save-false: Failed Saving.
     re-select-image: Please Reselect Uploading Image.
+    draft-not-image-caution: When draft, image can't be saved.
+    draft-not-image-caution: ※ Caution! When save as draft, image can't be saved.
     created-article: "Created Aricle 『%{title}』"
     deleted-article: "Deleted Article 『%{title}』"
     updated-article: "Updated Article 『%{title}』"

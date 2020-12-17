@@ -2,8 +2,8 @@ const { $ } = require("@rails/ujs");
 
 // 画像アップロード周り
 let files = [];
-let uploadingImageElement = $('#uploading-image')[0];
-uploadingImageElement.oninput = (e) => {
+let uploadingImageEl = $('#uploading-image')[0];
+uploadingImageEl.oninput = (e) => {
   // アップロードされたファイルを取得し、表示する
   let file = e.target.files[0];
   files.push(files);
@@ -45,4 +45,15 @@ let summaryEl = $('#article_summary')[0];
 summaryEl.onchange = (e) => {
   let summaryDraftEl = $('#article_summary')[1];
   summaryDraftEl.value = e.target.value;
+}
+let imageEl = $("#uploading-image")[0];
+imageEl.onchange = (e) => {
+  console.log(imageEl);
+  console.log(imageEl.value);
+  console.log(e);
+  console.log(e.target.files[0])
+  console.log(this);
+  
+  // imageDraftEl = $("#hidden-uploaded-image")[0];
+  // imageDraftEl.value = e.target.files[0];
 }

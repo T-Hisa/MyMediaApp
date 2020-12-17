@@ -32,14 +32,18 @@
     </button>
     <% end %>
     <% if @article.isDraft || @article.created_at.nil? %>
-      <%= form_with scope: :article, url: articles_draft_path do |f| %>
+      <%= form_with scope: :article, url: articles_draft_path, class: "draft-btn-wrapper" do |f| %>
         <%= f.hidden_field :user_id %>
         <%= f.hidden_field :title %>
         <%= f.hidden_field :content %>
         <%= f.hidden_field :summary %>
+        <%= image_tag "", id: "hidden-uploaded-image", class: "d-none" %>
         <button type="submit" id="submit-btn" class='btn btn-success user-modal-button'>
           <%= t('shared.save-draft') %>
         </button>
+        <div class="alert-warning mini-warning" role="alert">
+          <%= t('shared.draft-not-image-caution') %>
+        </div>
       <% end %> 
     <% end %>
   </div>

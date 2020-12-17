@@ -99,10 +99,17 @@ class ArticlesController < ApplicationController
   def create_article
     if @article.save
       @article.image.attach(image_params[:image])
-      flash[:success] = t('shared.created-article', title: @article.title)
-      redirect_to @article
+      flash = {
+        success: t('shared.created-article', title: @article.title)
+      }
+      flash[:warning] = t("shared.draft-not-image") if url_for.include?("draft")
+      redirect_to @article, flash: flash
     else
-      cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
+      if url_for.include?("draft")
+        cause_some_error(t('shared.save-false') + t('shared.draft-not-image-caution'))
+      else
+        cause_some_error(t('shared.save-false') + t('shared.re-select-image')) if image_params[:image]
+      end
       cause_some_error(@article.errors.full_messages)
       redirect_with_error({ "article": article_params })
     end

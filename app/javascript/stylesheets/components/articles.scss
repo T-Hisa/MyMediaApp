@@ -157,9 +157,22 @@
   display: flex;
   width: 50%;
   justify-content: space-evenly;
+
+  @media(max-width: 991px) {
+    width: 100%;
+  }
 }
 
 .article-edit-link {
   margin-left: 20px;
   min-width: 80px;
+}
+
+.draft-btn-wrapper {
+  display: flex;
+
+  .mini-warning {
+    font-size: 1px;
+    margin: auto auto auto 10px;
+  }
 }
