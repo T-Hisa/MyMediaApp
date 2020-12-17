@@ -38,15 +38,14 @@ class ApplicationController < ActionController::Base
   # end
   private
     def current_user
-      binding.pry
       unless @current_user
         if session[:user_id]
           @current_user = User.find_by(id: session[:user_id])
         elsif cookies[:user_id]
           @current_user = User.find_by(id: cookies.signed[:user_id])
-          @current_user = nil unless @current_user.authenticated?(cookies[:remember_token])
-          # 必要ないけど一応
-          session[:user_id] = cookies[:user_id]
+          if @current_user &.authenticated?(cookies[:remember_token])
+            session[:user_id] = cookies.signed[:user_id]
+          end
         end
       end
     end
