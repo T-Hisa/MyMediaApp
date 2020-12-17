@@ -16,6 +16,11 @@
   ~Next, execute the foolowing command to generate databases for developing.~
   
   ~`docker-compose run web rails db:seed`~
+  
+# How to start developing
+  By executing the following command, the server for developing starts.
+    
+    `docker-compose up`
 
 # How to run the test suite
   Execute the following command.
@@ -36,13 +41,15 @@ There are two ways to acquire articles type of json.
   
   The query parameters are as below.
    1. `target` parameter -> for selecting column you want to get. Default value is `*`.
-   2. `order_target` parameter -> for selecting column which sorts the obtaining params. Default value is `id`.
+   2. `order_target` parameter -> for selecting column which selects sort target of the obtaining params. Default value is `id`.
    3. `order_type` parameter -> for selecting column setting sort criteria. Default value is `desc`.
    
   When using query, enter http request as below.
+  
         `http://aaaaa.monster/api/articles?target=title&order_target=created_at`
         
   2. For getting special article(knowing the `id`), visit following url.
+  
       `http://aaaaa.monster/api/article/#{id}`
    
   
