@@ -22,10 +22,10 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_PASSWORD: root
       - image: circleci/mysql:5.7
-        # environment:
-        #   MYSQL_USER: root
-        #   MYSQL_ROOT_PASSWORD: root
-        #   MYSQL_DATABASE: db
+        environment:
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: db
     # working_directory: ~/SampleMediaApp
     steps:
       - checkout
@@ -35,9 +35,9 @@ jobs:
       - run: ls /home/circleci
       - run: ls
       - run: yarn install --check-files
-      # - run:
-      #     name: Wait for DB
-      #     command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run:
           name: setup bundler target path
           command: bundle config --local path vendor/bundle
