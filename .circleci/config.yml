@@ -26,11 +26,12 @@ jobs:
         environment:
           DB_HOST: 127.0.0.1
           DB_PASSWORD: root
-    working_directory: ~/MyMediaApp
+    # working_directory: ~/SampleMediaApp
     steps:
       - checkout
       - restore_cache:
           key: SampleMedia_Cache
+      - run: echo $PWD
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
