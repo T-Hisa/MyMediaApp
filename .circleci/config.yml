@@ -60,6 +60,9 @@ jobs:
       - restore_cache:
           key: Sample_Cache_{{ checksum "Gemfile.lock" }}
       - run:
+          name: setup bundler target path
+          command: bundle config --local path vendor/bundle
+      - run:
           name: deploy app by capistrano
           command: bundle exec cap production deploy
 workflows:
