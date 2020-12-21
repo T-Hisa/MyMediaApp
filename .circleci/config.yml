@@ -5,12 +5,15 @@ jobs:
       - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
-      # 2回目以降高速に行うため、キャッシュに保存したものを取り出す。ただ、Gemfileを変更した際に不具合が生じるかもなので、key: {{ checksum "Gemfile-lock"}}
+      # 2回目以降高速に行うため、キャッシュに保存したものを取り出す。ただ、Gemfileを変更した際に前回使用したものでは生じるかもなので、
+      # ファイル名・ファイルの中身に応じてハッシュ値を算出する、 checksum 構文を利用している。
       - restore_cache:
           key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+      # 初回・Gemfile変更時にはこのコマンドを使用して環境を整える。
       - run:
           name: install Gemfile
           command: bundle install --path vendor/bundle
+      # 上記のコマンド結果をキャッシュに保存する。ちなみに、キャッシュ名が既存のものと同じ場合は、実行されない。
       - save_cache:
           # key: Sample_Cache
           key: Sample_Cache_{{ checksum "Gemfile.lock" }}
