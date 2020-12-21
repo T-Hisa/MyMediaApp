@@ -1,8 +1,14 @@
 version: 2.1
-jobs:
-  build:
+executors:
+  ruby-executor:
     docker:
       - image: circleci/ruby:2.7.1-node-browsers
+        environment:
+          DB_HOST: 127.0.0.1
+          DB_PASSWORD: root
+jobs:
+  build:
+    executor: ruby-executor
     steps:
       - checkout
       - restore_cache:
@@ -10,17 +16,13 @@ jobs:
       - run:
           name: install Gemfile
           command: bundle install --path vendor/bundle
-      - run: echo $PWD
       - save_cache:
           key: Sample_Cache
           paths:
             - ./vendor/bundle
   test:
+    executor: ruby-executor
     docker:
-      - image: circleci/ruby:2.7.1-node-browsers
-        environment:
-          DB_HOST: 127.0.0.1
-          DB_PASSWORD: root
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
@@ -31,7 +33,7 @@ jobs:
       - restore_cache:
           key: Sample_Cache
       - run:
-          name: if do not execute this, an error happens.
+          name: if do not execute this, an error occurs.
           command: yarn install --check-files
       - run:
           name: Wait for DB
@@ -48,8 +50,7 @@ jobs:
           name: implement test
           command: bundle exec rspec ./spec/
   deploy:
-    docker:
-      - image: circleci/ruby:2.7.1-node-browsers
+    executor: ruby-executor
     steps:
       - checkout
       - restore_cache:
