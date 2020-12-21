@@ -8,7 +8,7 @@ jobs:
       # 2回目以降高速に行うため、キャッシュに保存したものを取り出す。ただ、Gemfileを変更した際に前回使用したものでは生じるかもなので、
       # ファイル名・ファイルの中身に応じてハッシュ値を算出する、 checksum 構文を利用している。
       - restore_cache:
-          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+          key: Sample_Cache_{{ checksum "Gemfile" }}
       # 初回・Gemfile変更時にはこのコマンドを使用して環境を整える。
       - run:
           name: install Gemfile
@@ -16,7 +16,7 @@ jobs:
       # 上記のコマンド結果をキャッシュに保存する。ちなみに、キャッシュ名が既存のものと同じ場合は、実行されない。
       - save_cache:
           # key: Sample_Cache
-          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+          key: Sample_Cache_{{ checksum "Gemfile" }}
           paths:
             - ./vendor/bundle
   test:
@@ -32,14 +32,17 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+          key: Sample_Cache_{{ checksum "Gemfile" }}
           # key: Sample_Cache
+      # このコマンドを実行しないと、"Your Yarn packages are out of date! Please ... " というエラーが出るので実行
       - run:
           name: if do not execute this, an error occurs.
           command: yarn install --check-files
+      # DBの立ち上げを待つ。120秒経っても起動しない場合は、test ジョブを強制終了させる。
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      # bundlerの path設定を vendor/bundle にする
       - run:
           name: setup bundler target path
           command: bundle config --local path vendor/bundle
@@ -58,7 +61,6 @@ jobs:
       - checkout
       - restore_cache:
           key: Sample_Cache_{{ checksum "Gemfile.lock" }}
-          # key: Sample_Cache
       - run:
           name: deploy app by capistrano
           command: bundle exec cap production deploy
