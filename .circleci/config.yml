@@ -46,8 +46,8 @@ jobs:
       - restore_cache:
           key: SampleMedia_Cache
       - run:
-          name: deploy app by capistrano
-          command: bundle exec cap production deploy
+        name: deploy app by capistrano
+        command: bundle exec cap production deploy
 workflows:
   version: 2.1
   test-deploy:
