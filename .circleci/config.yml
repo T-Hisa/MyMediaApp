@@ -2,8 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.1
-      # - image: circleci/ruby:2.7.1-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
       - run:
@@ -13,8 +12,6 @@ jobs:
       - save_cache:
           key: Sample_Cache
           paths:
-            # - Gemfile
-            # - Gemfile.lock
             - ./vendor/bundle
   test:
     docker:
@@ -23,8 +20,7 @@ jobs:
       #     MYSQL_DATABASE: db
       #     MYSQL_USER: root
       #     MYSQL_ROOT_PASSWORD: root
-      - image: circleci/ruby:2.7.1
-      # - image: circleci/ruby:2.7.1-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
         environment:
           DB_HOST: 127.0.0.1
           DB_PASSWORD: root
@@ -49,8 +45,7 @@ jobs:
           command: bundle exec rspec ./spec/
   deploy:
     docker:
-      - image: circleci/ruby:2.7.1
-      # - image: circleci/ruby:2.7.1-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
       - restore_cache:
