@@ -16,11 +16,11 @@ jobs:
             - Gemfile.lock
   test:
     docker:
-      # - image: circleci/mysql:5.7
-      #   environment:
-      #     MYSQL_DATABASE: db
-      #     MYSQL_USER: root
-      #     MYSQL_ROOT_PASSWORD: root
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_DATABASE: db
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
       - image: circleci/ruby:2.7.1
       # - image: circleci/ruby:2.7.1-node-browsers
         environment:
