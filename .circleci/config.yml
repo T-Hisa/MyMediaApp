@@ -5,12 +5,12 @@ jobs:
       - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
+      - restore_cache:
+          key: Sample_Cache
       - run:
           name: install Gemfile
           command: bundle install --path vendor/bundle
       - run: echo $PWD
-      - restore_cache:
-          key: Sample_Cache
       - save_cache:
           key: Sample_Cache
           paths:
