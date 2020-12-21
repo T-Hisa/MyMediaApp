@@ -8,14 +8,14 @@ jobs:
       # 2回目以降高速に行うため、キャッシュに保存したものを取り出す。ただ、Gemfileを変更した際に前回使用したものでは生じるかもなので、
       # ファイル名・ファイルの中身に応じてハッシュ値を算出する、 checksum 構文を利用している。
       - restore_cache:
-          key: Sample_Cache_{{ checksum "Gemfile" }}
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
       # 初回・Gemfile変更時にはこのコマンドを使用して環境を整える。
       - run:
           name: install Gemfile
           command: bundle install --path vendor/bundle
       # 上記のコマンド結果をキャッシュに保存する。ちなみに、キャッシュ名が既存のものと同じ場合は、実行されない。
       - save_cache:
-          key: Sample_Cache_{{ checksum "Gemfile" }}
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
   test:
@@ -31,7 +31,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: Sample_Cache_{{ checksum "Gemfile" }}
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
       # このコマンドを実行しないと、"Your Yarn packages are out of date! Please ... " というエラーが出るので実行
       - run:
           name: if do not execute this, an error occurs.
@@ -58,7 +58,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: Sample_Cache_{{ checksum "Gemfile" }}
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
       - run:
           name: deploy app by capistrano
           command: bundle exec cap production deploy
