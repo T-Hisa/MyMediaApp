@@ -9,6 +9,7 @@ jobs:
       - run:
           name: install Gemfile
           command: bundle install --path vendor/bundle
+      - run: echo $PWD
       - save_cache:
           key: Sample_Cache
           paths:
