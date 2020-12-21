@@ -21,11 +21,11 @@ jobs:
         environment:
           DB_HOST: 127.0.0.1
           DB_PASSWORD: root
-      # - image: circleci/mysql:5.7
-      #   environment:
-      #     MYSQL_USER: root
-      #     MYSQL_ROOT_PASSWORD: root
-      #     MYSQL_DATABASE: db
+      - image: circleci/mysql:5.7
+        # environment:
+        #   MYSQL_USER: root
+        #   MYSQL_ROOT_PASSWORD: root
+        #   MYSQL_DATABASE: db
     # working_directory: ~/SampleMediaApp
     steps:
       - checkout
