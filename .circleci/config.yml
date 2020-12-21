@@ -1,32 +1,71 @@
 version: 2.1
-executors:
-  ruby-executor:
+# executors:
+#   ruby-executor:
+#     docker:
+#       - image: circleci/ruby:2.7.1
+#         environment:
+#           DB_HOST: 127.0.0.1
+jobs:
+  build:
     docker:
       - image: circleci/ruby:2.7.1
-jobs:
+    steps:
+      - checkout
+      - run:
+        name: install Gemfile
+        command: bundle install
+      - save_cache:
+        key: SampleMedia_Cache
+        paths:
+          - Gemfile
+          - Gemfile.lock
   test:
     docker:
-      - image: circleci/mysql:5.7.22
+      - image: circleci/mysql:5.7
+        # name: 他のJOBからアクセスするときに必要な名前。デフォルトはlocalhost。
         environment:
           MYSQL_DATABASE: db
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: root
-    executor: ruby-executor
+      - image: circleci/ruby:2.7.1
+        environment:
+          DB_HOST: 127.0.0.1
+          DB_PASSWORD: root
+    working_directory: ~/MyMediaApp
+    # executor: ruby-executor
     steps:
       - checkout
+      # - run:
+      #   name: install Gemfile
+      #   command: bundle install # --path vendor/bundle
+      # - save_cache:
+      #   key: SampleMedia_Cache
+      #   paths: 
+      #     - Gemfile
+      #     - Gemfile.lock
+          # - vendor/bundle
+      - restore_cache:
+        key: SampleMedia_Cache
+      - run: 
+        name: Wait for DB
+        command: dockersize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run:
-          name: install Gemfile
-          command: bundle update && bundle install
+        name: Set up DB
+        command: bundle exec rails db:migrate
       - run:
-          name: sample-test
-          command: bundle exec rspec ./spec/
+        name: implement test
+        command: bundle exec rspec ./spec/
   deploy:
-    executor: ruby-executor
+    docker:
+      - image: circleci/ruby:2.7.1
+    # executor: ruby-executor
     steps:
       - checkout
-      - run:
-          name: install Gemfile
-          command: bundle update && bundle install
+      - restore_cache:
+        key: SampleMedia_Cache
+      # - run:
+      #     name: install Gemfile
+      #     command: bundle update && bundle install
       - run:
           name: deploy app by capistrano
           command: bundle exec cap production deploy
@@ -34,10 +73,13 @@ workflows:
   version: 2.1
   test-deploy:
     jobs:
-      - test
+      - build
+      - test:
+        requires:
+          - build
       - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
+        requires:
+          - test
+        filters:
+          branches:
+            only: master

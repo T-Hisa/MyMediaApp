@@ -13,9 +13,10 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: <%= ENV["RAILS_DB_PASSWORD"] %>
-  host: db
+  username: <%= ENV.fetch("DB_USER") { "root" } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { "password" } %>
+  host: <%= ENV.fetch("DB_HOST") { "db" } %>
+  
 
 development:
   <<: *default
@@ -50,5 +51,5 @@ test:
 production:
   <<: *default
   database: <%= ENV["WEB_IP"] %>
-  username: <%= ENV["RAILS_DB_USER_PRO"] %>
-  password: <%= ENV["RAILS_DB_PASSWORD_PRO"] %>
+  username: <%= ENV["DB_USER_PRO"] %>
+  password: <%= ENV["DB_PASSWORD_PRO"] %>
