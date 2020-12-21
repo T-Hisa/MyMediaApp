@@ -21,6 +21,9 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_PASSWORD: root
       - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
     steps:
       - checkout
       - restore_cache:
