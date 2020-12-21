@@ -2,8 +2,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      # - image: circleci/ruby:2.7.1
-      - image: circleci/ruby:2.7.1-node-browsers
+      - image: circleci/ruby:2.7.1
+      # - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
       - run:
@@ -16,7 +16,13 @@ jobs:
             - Gemfile.lock
   test:
     docker:
+      # - image: circleci/mysql:5.7
+      #   environment:
+      #     MYSQL_DATABASE: db
+      #     MYSQL_USER: root
+      #     MYSQL_ROOT_PASSWORD: root
       - image: circleci/ruby:2.7.1
+      # - image: circleci/ruby:2.7.1-node-browsers
         environment:
           DB_HOST: 127.0.0.1
           DB_PASSWORD: root
@@ -25,10 +31,9 @@ jobs:
       - checkout
       - restore_cache:
           key: SampleMedia_Cache
-      # - run:
-      #     name: Wait for DB
-      #     command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
-      - run: echo $PWD
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run:
           name: Set up DB
           command: bundle exec rails db:migrate
@@ -38,6 +43,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/ruby:2.7.1
+      # - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
       - restore_cache:
