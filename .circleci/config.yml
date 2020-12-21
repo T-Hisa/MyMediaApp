@@ -10,7 +10,7 @@ jobs:
           command: bundle install --path vendor/bundle
       - run: echo $PWD
       - restore_cache:
-        key: Sample_Cache
+          key: Sample_Cache
       - save_cache:
           key: Sample_Cache
           paths:
