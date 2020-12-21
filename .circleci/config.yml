@@ -5,13 +5,15 @@ jobs:
       - image: circleci/ruby:2.7.1-node-browsers
     steps:
       - checkout
+      # 2回目以降高速に行うため、キャッシュに保存したものを取り出す。ただ、Gemfileを変更した際に不具合が生じるかもなので、key: {{ checksum "Gemfile-lock"}}
       - restore_cache:
-          key: Sample_Cache
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
       - run:
           name: install Gemfile
           command: bundle install --path vendor/bundle
       - save_cache:
-          key: Sample_Cache
+          # key: Sample_Cache
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
   test:
@@ -27,7 +29,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: Sample_Cache
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+          # key: Sample_Cache
       - run:
           name: if do not execute this, an error occurs.
           command: yarn install --check-files
@@ -51,7 +54,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: Sample_Cache
+          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+          # key: Sample_Cache
       - run:
           name: deploy app by capistrano
           command: bundle exec cap production deploy
