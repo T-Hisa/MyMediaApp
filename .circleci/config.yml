@@ -26,15 +26,13 @@ jobs:
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: db
-    # working_directory: ~/SampleMediaApp
     steps:
       - checkout
       - restore_cache:
           key: Sample_Cache
-      - run: echo $PWD
-      - run: ls /home/circleci
-      - run: ls
-      - run: yarn install --check-files
+      - run:
+          name: if do not execute this, an error happens.
+          command: yarn install --check-files
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
@@ -43,7 +41,9 @@ jobs:
           command: bundle config --local path vendor/bundle
       - run:
           name: Set up DB
-          command: bundle exec rails db:migrate
+          command: |
+            bundle exec rake db:create
+            bundle exec rails db:migrate
       - run:
           name: implement test
           command: bundle exec rspec ./spec/
