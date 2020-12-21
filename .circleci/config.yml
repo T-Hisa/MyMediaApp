@@ -8,12 +8,13 @@ jobs:
       - checkout
       - run:
           name: install Gemfile
-          command: bundle install
+          command: bundle install --path vendor/bundle
       - save_cache:
           key: SampleMedia_Cache
           paths:
-            - Gemfile
-            - Gemfile.lock
+            # - Gemfile
+            # - Gemfile.lock
+            - vendor/bundle
   test:
     docker:
       # - image: circleci/mysql:5.7
