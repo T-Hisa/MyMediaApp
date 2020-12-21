@@ -15,7 +15,6 @@ jobs:
           command: bundle install --path vendor/bundle
       # 上記のコマンド結果をキャッシュに保存する。ちなみに、キャッシュ名が既存のものと同じ場合は、実行されない。
       - save_cache:
-          # key: Sample_Cache
           key: Sample_Cache_{{ checksum "Gemfile" }}
           paths:
             - ./vendor/bundle
@@ -33,7 +32,6 @@ jobs:
       - checkout
       - restore_cache:
           key: Sample_Cache_{{ checksum "Gemfile" }}
-          # key: Sample_Cache
       # このコマンドを実行しないと、"Your Yarn packages are out of date! Please ... " というエラーが出るので実行
       - run:
           name: if do not execute this, an error occurs.
@@ -60,7 +58,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: Sample_Cache_{{ checksum "Gemfile.lock" }}
+          key: Sample_Cache_{{ checksum "Gemfile" }}
       - run:
           name: deploy app by capistrano
           command: bundle exec cap production deploy
