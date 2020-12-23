@@ -14,7 +14,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 #     apt-get install -y yarn
 COPY ./my-key-10.pem ./my-key-4.pem ./my-key-5.pem /root/.ssh/
 WORKDIR /SampleMediaApp
-RUN yarn add jquery bootstrap popper.js toastr
+RUN yarn add jquery bootstrap popper.js toastr axios
+# RUN rails webpacker:install:vue
 COPY Gemfile /SampleMediaApp/Gemfile
 COPY Gemfile.lock /SampleMediaApp/Gemfile.lock
 RUN bundle install

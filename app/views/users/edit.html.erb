@@ -22,5 +22,5 @@
 <%= render 'only_name_modal' %>
 <%= render 'includes_password_modal' %>
 
-
+<%= content_tag :div, '', id: "sample", data: @dataset %>
 <%= javascript_pack_tag 'users/edit', 'data-turbolinks-track': 'reload' %>

@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     get 'mypage', to: 'users#mypage'
     patch 'update/password', to: 'users#password_update'
     resources :users, only: %i[new create edit update]
+    namespace "api" do
+      resources :users, only: %i[edit update]
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

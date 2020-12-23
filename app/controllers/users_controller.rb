@@ -38,6 +38,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    # render 'edit.js'
+    @dataset = {
+      user_id: @current_user.id,
+      locale: params[:locale]
+    }       
     @current_user.attributes = flash[:name] if flash[:name]
   end
 
