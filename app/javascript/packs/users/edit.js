@@ -1,4 +1,4 @@
-
+// js を通して、type="hidden" の input 要素のvalue 属性に値を代入していく。
 let name_field = document.getElementById("name");
 let hidden_name = document.getElementById("hidden_name");
 let hidden_name_2 = document.getElementById("hidden_name_2");
@@ -6,6 +6,7 @@ name_field.onchange = (focus) => {
   hidden_name.value = focus.target.value;
   hidden_name_2.value = focus.target.value;
 }
+
 let password = document.getElementById('password');
 let hidden_password = document.getElementById('hidden_password');
 password.onchange = (focus) => {
@@ -17,7 +18,7 @@ password_confirmation.onchange = (focus) => {
   hidden_password_confirmation.value = focus.target.value;
 }
 let current_password = document.getElementById('current_password');
-let hidden_current_passwordn= document.getElementById('hidden_current_password');
+let hidden_current_password= document.getElementById('hidden_current_password');
 current_password.onchange = (focus) => {
   hidden_current_password.value = focus.target.value;
 }
