@@ -17,7 +17,7 @@ password_confirmation.onchange = (focus) => {
   hidden_password_confirmation.value = focus.target.value;
 }
 let current_password = document.getElementById('current_password');
-let hidden_current_passwordn= document.getElementById('hidden_current_password');
+let hidden_current_password= document.getElementById('hidden_current_password');
 current_password.onchange = (focus) => {
   hidden_current_password.value = focus.target.value;
 }
@@ -28,3 +28,18 @@ name_field.onkeypress = (e) => {
   if (e.keyCode === 13) e.preventDefault();
 }
 hidden_current_password.value = current_password.value;
+
+
+import Vue from 'vue'
+import UserEdit from '../../components/users/edit.vue'
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+    render: h => h(UserEdit)
+  }).$mount()
+  document.body.appendChild(app.$el)
+  console.log(UserEdit)
+
+  console.log(app)
+  console.log(app.$el)
+})
