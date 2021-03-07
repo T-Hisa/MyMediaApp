@@ -6,13 +6,13 @@ let uploadingImageEl = $('#uploading-image')[0];
 uploadingImageEl.oninput = (e) => {
   // アップロードされたファイルを取得し、表示する
   let file = e.target.files[0];
-  files.push(files);
+  files.push(file);
   let blobUrl = window.URL.createObjectURL(file);
   let imgEl = $('#uploaded-image')[0];
   imgEl.src = blobUrl;
   let imageWrapper = $("#image-preview-wrapper")[0]
   imageWrapper.style.display = "block";
-  
+
   // 編集時、既に記事に画像が添付されている場合はその要素を削除する
   let savedImageWrapper = $('#saved-image-wrapper')[0];
   if (savedImageWrapper) {
@@ -26,7 +26,7 @@ submitEl.addEventListener('click', () => {
   if (files) {
     files.forEach((file) => {
       window.URL.revokeObjectURL(file);
-    }) 
+    })
   }
 })
 
@@ -53,7 +53,7 @@ imageEl.onchange = (e) => {
   console.log(e);
   console.log(e.target.files[0])
   console.log(this);
-  
+
   // imageDraftEl = $("#hidden-uploaded-image")[0];
   // imageDraftEl.value = e.target.files[0];
 }

@@ -1,9 +1,19 @@
 .bg-lightgreen {
   // background-color: #1abc9c;
   background-color: lightgreen;
-
 }
 
 #title {
-    font-family: 'Noto Serif JP', sans-serif;
+  font-family: "Noto Serif JP", sans-serif;
+}
+
+.header-nav-link {
+  color: rgba(0, 0, 0, 0.5);
+  margin: auto;
+
+  &:hover {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+    cursor: pointer;
+  }
 }

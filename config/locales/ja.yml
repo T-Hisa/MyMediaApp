@@ -71,8 +71,9 @@ ja:
     password: パスワード
     new-article: 記事作成
     article-list: 記事一覧
-    sign-up: サインアップ
-    sign-in: サインイン
+    sign-up: 登録
+    sign-in: ログイン
+    sign-in-link: ログインはこちら
     en: 英語
     ja: 日本語
     user-password-confirmation: ユーザー名とパスワードを変更します。よろしいですか？

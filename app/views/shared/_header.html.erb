@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-lightgreen">
-  <%= link_to 'SampleMediaApp', articles_path, id: 'title', class: 'navbar-brand' %>
+  <%= link_to 'MyMedia', articles_path, id: 'title', class: 'navbar-brand' %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,6 +32,8 @@
             <%= link_to t('shared.sign-in'),  login_path, class: "dropdown-item" %>
           </div>
         </li>
+        <%= link_to t('shared.sign-in-link'), login_path, class: "header-nav-link" %>
+        <!-- <a class="header-nav-link">ログインはこちら</a> -->
       <% end %>
     </ul>
     <div class="custom-nav-bar-wrapper dropdown">
