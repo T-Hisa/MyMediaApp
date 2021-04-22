@@ -32,7 +32,7 @@ There are two ways to acquire articles type of json.
 
   1. For getting article list, visit following url.
   
-      `http://aaaaa.monster/api/articles`
+      `http://aaaaaaa.monster/api/articles`
   
   And when you manipulating sql query, below params is valid for sql query.
   
@@ -47,11 +47,11 @@ There are two ways to acquire articles type of json.
    
   When using query, enter http request as below.
   
-   `http://aaaaa.monster/api/articles?target=title&order_target=created_at`
+   `http://aaaaaaa.monster/api/articles?target=title&order_target=created_at`
         
   2. For getting specified article(knowing the `id`), visit following url.
   
-   `http://aaaaa.monster/api/article/#{id}`
+   `http://aaaaaaa.monster/api/article/#{id}`
    
   
 # Deployment instructions
