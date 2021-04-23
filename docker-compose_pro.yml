@@ -10,6 +10,8 @@ services:
       DB_HOST: 10.0.2.151
       DB_PASSWORD_PRO: root
       DB_USER_PRO: root
-    command: bundle exec rails s -p 3000 -b '0.0.0.0' -e production
+      RAILS_SERVE_STATIC_FILES: true
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    # command: bundle exec rails s -p 3000 -b '0.0.0.0' -e production
     ports:
       - 3000:3000
