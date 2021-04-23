@@ -11,4 +11,5 @@ WORKDIR /myFirstPortfolio
 COPY Gemfile /myFirstPortfolio/Gemfile
 COPY Gemfile.lock /myFirstPortfolio/Gemfile.lock
 RUN bundle update && bundle install --without test development
+RUN yarn install
 COPY . /myFirstPortfolio
