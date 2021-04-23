@@ -1,11 +1,15 @@
 version: '3'
-services: 
+services:
   web:
     build:
       context: .
       dockerfile: Dockerfile_pro
     image: test-rails-image
     container_name: test-rails-container
+    environment:
+      DB_HOST: 10.0.2.151
+      DB_PASSWORD_PRO: root
+      DB_USER_PRO: root
     command: bundle exec rails s -p 3000 -b '0.0.0.0' -e production
     ports:
       - 3000:3000

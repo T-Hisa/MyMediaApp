@@ -1,5 +1,5 @@
 # capistranoのバージョン指定
-lock "~> 3.14.1"
+lock "~> 3.16.0"
 
 # アプリケーション名
 set :application, "myFirstPortfolio"

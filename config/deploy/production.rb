@@ -28,12 +28,12 @@ task deploy: :upload do
     execute "cp #{release_path}/.env-pro #{release_path}/.env;"
 
     container = capture "docker container ls -a -q -f name=test-rails-container"
-    if container.present?
+    if !container.empty?
       execute "docker stop test-rails-container"
       execute "docker rm test-rails-container"
     end
     image = capture "docker image ls -q test-rails-image"
-    if image.present?
+    if !image.empty?
       execute "docker rmi test-rails-image"
     end
 
