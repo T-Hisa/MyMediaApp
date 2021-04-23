@@ -17,7 +17,7 @@ WORKDIR /SampleMediaApp
 RUN yarn add jquery bootstrap popper.js toastr
 COPY Gemfile /SampleMediaApp/Gemfile
 COPY Gemfile.lock /SampleMediaApp/Gemfile.lock
-RUN bundle install
+RUN bundle update && bundle install
 COPY . /SampleMediaApp
 
 

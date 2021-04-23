@@ -1,4 +1,5 @@
-set :ip, "46.51.225.108"
+# set :ip, "46.51.225.108"
+set :ip, "35.72.220.187"
 
 # EC2のIPアドレス、ユーザ名、サーバのロール、使用するsshキーのPATHを記述
 server "#{fetch :ip}",
@@ -27,16 +28,17 @@ task deploy: :upload do
     execute "cp #{release_path}/.env-pro #{release_path}/.env;"
 
     container = capture "docker container ls -a -q -f name=test-rails-container"
-    if !container.empty?
+    if container.present?
       execute "docker stop test-rails-container"
       execute "docker rm test-rails-container"
     end
     image = capture "docker image ls -q test-rails-image"
-    if !image.empty?
+    if image.present?
       execute "docker rmi test-rails-image"
     end
 
     execute "docker-compose -f #{release_path}/docker-compose_pro.yml up -d"
+    # execute "docker-compose up -d"
   end
 end
 
