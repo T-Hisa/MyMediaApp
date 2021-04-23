@@ -16,7 +16,6 @@ default: &default
   username: <%= ENV.fetch("DB_USER") { "root" } %>
   password: <%= ENV.fetch("DB_PASSWORD") { "password" } %>
   host: <%= ENV.fetch("DB_HOST") { "db" } %>
-  
 
 development:
   <<: *default
@@ -50,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV["WEB_IP"] %>
+  database: <%= ENV.fetch("DB_NAME_PRO") { "app_production" } %>
   username: <%= ENV["DB_USER_PRO"] %>
   password: <%= ENV["DB_PASSWORD_PRO"] %>
