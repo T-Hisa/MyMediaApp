@@ -27,17 +27,17 @@ task deploy: :upload do
     execute "sudo service docker start"
     execute "cp #{release_path}/.env-pro #{release_path}/.env;"
 
-    container = capture "docker container ls -a -q -f name=test-rails-container"
-    if !container.empty?
-      execute "docker stop test-rails-container"
-      execute "docker rm test-rails-container"
-    end
-    image = capture "docker image ls -q test-rails-image"
-    if !image.empty?
-      execute "docker rmi test-rails-image"
-    end
+    # container = capture "docker container ls -a -q -f name=test-rails-container"
+    # if !container.empty?
+    #   execute "docker stop test-rails-container"
+    #   execute "docker rm test-rails-container"
+    # end
+    # image = capture "docker image ls -q test-rails-image"
+    # if !image.empty?
+    #   execute "docker rmi test-rails-image"
+    # end
 
-    execute "docker-compose -f #{release_path}/docker-compose_pro.yml up -d"
+    # execute "docker-compose -f #{release_path}/docker-compose_pro.yml up -d"
     # execute "docker-compose up -d"
   end
 end
